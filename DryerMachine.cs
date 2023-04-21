@@ -50,9 +50,14 @@ public class DryerMachine : MonoBehaviour
             GameManager.pastaColor = 3;
             GameManager.pastaColorString = "Pasta buena 35B";
         }
-        if (user_temp * user_time > 28000f)
+        if ( 28000f < user_temp * user_time && user_temp * user_time <= 34000f)
         {
             GameManager.pastaColor = 4;
+            GameManager.pastaColorString = "Pasta Marron";
+        }
+        if (user_temp * user_time > 34000f)
+        {
+            GameManager.pastaColor = 5;
             GameManager.pastaColorString = "Pasta negra -10B ";
         }
     }
@@ -60,26 +65,30 @@ public class DryerMachine : MonoBehaviour
      public void Humidity()
     {
         //Humidity percentage
-        if ( 14400f <= user_temp * user_time && user_temp * user_time <= 15600f)
-        {
-            GameManager.pastaHumidity = 1;
-            GameManager.pastaHumidityString = "14% de Humedad";
-        }
-        if ( 15600f < user_temp * user_time && user_temp * user_time <= 19200f)
-        {
-            GameManager.pastaHumidity = 2;
-            GameManager.pastaHumidityString = "13,5% de Humedad";
-        }
-        if ( 19200f < user_temp * user_time && user_temp * user_time <= 20400f)
-        {
-            GameManager.pastaHumidity = 3;
-            GameManager.pastaHumidityString = "12,6% de Humedad";
-        }
-        if (user_temp * user_time > 30000f)
-        {
-            GameManager.pastaHumidity = 4;
-            GameManager.pastaHumidityString = "10% de Humedad";
-        }
+        float HumidityPecentage;
+        HumidityPercentage = -5 * Mathf.Log(0.0014f * user_time , 1.5f);
+        GameManager.pastaHumidityString = HumidityPecentage.ToString("F2");
+        
+        // if ( 14400f <= user_temp * user_time && user_temp * user_time <= 15600f)
+        // {
+        //     GameManager.pastaHumidity = 1;
+        //     GameManager.pastaHumidityString = "14% de Humedad";
+        // }
+        // if ( 15600f < user_temp * user_time && user_temp * user_time <= 19200f)
+        // {
+        //     GameManager.pastaHumidity = 2;
+        //     GameManager.pastaHumidityString = "13,5% de Humedad";
+        // }
+        // if ( 19200f < user_temp * user_time && user_temp * user_time <= 20400f)
+        // {
+        //     GameManager.pastaHumidity = 3;
+        //     GameManager.pastaHumidityString = "12,6% de Humedad";
+        // }
+        // if (user_temp * user_time > 30000f)
+        // {
+        //     GameManager.pastaHumidity = 4;
+        //     GameManager.pastaHumidityString = "10% de Humedad";
+        // }
     }
        public void Craking()
     {
