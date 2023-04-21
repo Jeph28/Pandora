@@ -190,7 +190,7 @@ public class ProximityActivate : MonoBehaviour
         }
 
     }
-
+        //Esto es una prueba para actualizar un cambio
     IEnumerator TransitionSwitchOff(float lerpDuration)
     {
         float timeElapsed = 0f;
