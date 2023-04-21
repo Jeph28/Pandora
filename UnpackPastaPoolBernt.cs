@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnpackPastaPoolBernt : MonoBehaviour
 {
     [SerializeField] private GameObject Pastaprefab;
-    [SerializeField] private int poolSize = 10;
+    [SerializeField] private int poolSize;
     [SerializeField] private List<GameObject> PastaList;
     private GameObject Pasta;
     private static UnpackPastaPoolBernt instance;

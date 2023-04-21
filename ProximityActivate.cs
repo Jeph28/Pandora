@@ -115,7 +115,21 @@ public class ProximityActivate : MonoBehaviour
         {
             if (GameManager.UnpackOn < 7.0f)
             {
+                //Case VeryRaw
                 if (GameManager.pastaColor == 1)
+                {
+                    yield return new WaitForSeconds(GameManager.user_time / 100f);
+
+                    if (Status)
+                    {
+                        GameObject unpackagedpasta = UnpackPastaPoolVeryRaw.Instance.RequestUnpackPastaVeryRaw();
+                        unpackagedpasta.transform.position = initialposition.transform.position;
+                    }
+
+                    yield return new WaitForSeconds(1.0f);
+                }
+                //Case Raw
+                if (GameManager.pastaColor == 2)
                 {
                     yield return new WaitForSeconds(GameManager.user_time / 100f);
 
@@ -127,7 +141,8 @@ public class ProximityActivate : MonoBehaviour
 
                     yield return new WaitForSeconds(1.0f);
                 }
-                if (GameManager.pastaColor == 2)
+                //Case Good
+                if (GameManager.pastaColor == 3)
                 {
                     yield return new WaitForSeconds(GameManager.user_time / 100f);
 
@@ -139,8 +154,8 @@ public class ProximityActivate : MonoBehaviour
 
                     yield return new WaitForSeconds(1.0f);
                 }
-
-                if (GameManager.pastaColor == 3)
+                //Case SemiBernt
+                if (GameManager.pastaColor == 4)
                 {
                     yield return new WaitForSeconds(GameManager.user_time / 100f);
 
@@ -152,8 +167,8 @@ public class ProximityActivate : MonoBehaviour
                    
                     yield return new WaitForSeconds(1.0f);
                 }
-
-                if (GameManager.pastaColor == 4)
+                //Case Bernt
+                if (GameManager.pastaColor == 5)
                 {
                     yield return new WaitForSeconds(GameManager.user_time / 100f);
 

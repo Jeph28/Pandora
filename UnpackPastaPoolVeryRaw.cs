@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnpackPastaPoolSemiBernt : MonoBehaviour
+public class UnpackPastaPoolVeryRaw : MonoBehaviour
 {
     [SerializeField] private GameObject Pastaprefab;
     [SerializeField] private int poolSize;
     [SerializeField] private List<GameObject> PastaList;
     private GameObject Pasta;
-    private static UnpackPastaPoolSemiBernt instance;
-    public static UnpackPastaPoolSemiBernt Instance { get { return instance; } }
+    private static UnpackPastaPoolVeryRaw instance;
+    public static UnpackPastaPoolVeryRaw Instance { get { return instance; } }
    
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class UnpackPastaPoolSemiBernt : MonoBehaviour
         }
     }
 
-    public GameObject RequestUnpackPastaSemiBernt()
+    public GameObject RequestUnpackPastaVeryRaw()
     {
         for (int i = 0; i < PastaList.Count; i++)
         {
@@ -55,6 +55,4 @@ public class UnpackPastaPoolSemiBernt : MonoBehaviour
         GameManager.UnpackOn++;
         return PastaList[PastaList.Count- 1];
     }
-    
-
 }

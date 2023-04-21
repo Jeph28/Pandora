@@ -65,9 +65,9 @@ public class DryerMachine : MonoBehaviour
      public void Humidity()
     {
         //Humidity percentage
-        float HumidityPecentage;
+        float HumidityPercentage;
         HumidityPercentage = -5 * Mathf.Log(0.0014f * user_time , 1.5f);
-        GameManager.pastaHumidityString = HumidityPecentage.ToString("F2");
+        GameManager.pastaHumidityString = HumidityPercentage.ToString("F2") + "%";
         
         // if ( 14400f <= user_temp * user_time && user_temp * user_time <= 15600f)
         // {
