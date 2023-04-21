@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Prueba de para hacer pull
     void Update()
     {
         timeTimer -= Time.deltaTime;
