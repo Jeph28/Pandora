@@ -8,6 +8,8 @@ public class PackingMachine : MonoBehaviour
     [SerializeField, Tooltip("Velocidad entre 20 a 50 bpm")] private int user_speed;
     private float Efficiency;
     private string EfficiencyStg;
+    private static PackingMachine instance;
+    public static PackingMachine Instance { get { return instance; } }
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,17 @@ public class PackingMachine : MonoBehaviour
     void Update()
     {
 
+    }
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Weight()
@@ -87,13 +100,13 @@ public class PackingMachine : MonoBehaviour
         }
     }
 
-    public void SwitchOn(InputAction.CallbackContext callbackContext)
-    {
-        if (GameManager.activeStatePacking && callbackContext.performed && GameManager.PackingMachine)
-        {
-            Weight();
-            EfficiencyMachine();
-            SpeedPrice();
-        }   
-    }
+    // public void SwitchOn(InputAction.CallbackContext callbackContext)
+    // {
+    //     if (GameManager.activeStatePacking && callbackContext.performed && GameManager.PackingMachine)
+    //     {
+    //         Weight();
+    //         EfficiencyMachine();
+    //         SpeedPrice();
+    //     }   
+    // }
 }

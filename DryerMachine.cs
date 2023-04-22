@@ -19,7 +19,6 @@ public class DryerMachine : MonoBehaviour
     private static DryerMachine instance;
     public static DryerMachine Instance { get { return instance; } }
     
-    //private float timeSwitch = 0f;
     private void Awake()
     {
         if (instance == null)

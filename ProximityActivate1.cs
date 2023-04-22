@@ -105,8 +105,12 @@ public class ProximityActivate1 : MonoBehaviour
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
                 Status = true;
-                StartCoroutine(PackingMachineOn());
                 GameManager.PackingMachine = Status;
+                PackingMachine.Instance.Weight();
+                PackingMachine.Instance.EfficiencyMachine();
+                PackingMachine.Instance.SpeedPrice();
+                StartCoroutine(PackingMachineOn());
+                
             }
             if (Status && (Time.time - timeSwitch) > 2.0f)
             {
@@ -124,16 +128,16 @@ public class ProximityActivate1 : MonoBehaviour
         yield return new WaitForSeconds(2f);
         while ((Status && GameManager.DryerMachine) || (Status && GameManager.UnpackOn > 0f))
         {
-            //yield return new WaitForSeconds(( 80f / GameManager.user_speed));
+            yield return new WaitForSeconds(( 80f / GameManager.user_speed));
             
             if (Status)
             {
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(0.5f);
                 GameObject packagedpasta = PackPastaPool.Instance.RequestPackPasta();
                 packagedpasta.transform.position = initialposition.transform.position;
                 GameManager.PastaScore ++;
             }
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
             animator.SetTrigger("statusPacking");
         }
         yield return null;

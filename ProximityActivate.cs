@@ -132,7 +132,7 @@ public class ProximityActivate : MonoBehaviour
                         unpackagedpasta.transform.position = initialposition.transform.position;
                     }
 
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(2.0f);
                 }
                 //Case Raw
                 if (GameManager.pastaColor == 2)
@@ -145,7 +145,7 @@ public class ProximityActivate : MonoBehaviour
                         unpackagedpasta.transform.position = initialposition.transform.position;
                     }
 
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(2.0f);
                 }
                 //Case Good
                 if (GameManager.pastaColor == 3)
@@ -158,7 +158,7 @@ public class ProximityActivate : MonoBehaviour
                         unpackagedpasta.transform.position = initialposition.transform.position;
                     }
 
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(2.0f);
                 }
                 //Case SemiBernt
                 if (GameManager.pastaColor == 4)
@@ -171,7 +171,7 @@ public class ProximityActivate : MonoBehaviour
                         unpackagedpasta.transform.position = initialposition.transform.position;
                     }
                    
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(2.0f);
                 }
                 //Case Bernt
                 if (GameManager.pastaColor == 5)
@@ -184,7 +184,7 @@ public class ProximityActivate : MonoBehaviour
                         unpackagedpasta.transform.position = initialposition.transform.position;
                     }
                     
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(2.0f);
                 }
                 yield return null;
             }
