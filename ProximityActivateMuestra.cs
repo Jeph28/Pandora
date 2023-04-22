@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 
 
-public class ProximityActivateOriginal  : MonoBehaviour
+public class ProximityActivateMuestra  : MonoBehaviour
 {
 
     public Transform distanceActivator, lookAtActivator;
