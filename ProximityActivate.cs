@@ -95,6 +95,12 @@ public class ProximityActivate : MonoBehaviour
                 Led.gameObject.GetComponent<Renderer>().material = Green;
                 Status = true;
                 GameManager.DryerMachine = true;
+                DryerMachine.Instance.Color();
+                DryerMachine.Instance.Humidity();
+                DryerMachine.Instance.Craking();
+                DryerMachine.Instance.Microbiological();
+                DryerMachine.Instance.EfficiencyMachine();
+                DryerMachine.Instance.TemperaturePrice();
                 StartCoroutine(DryerMachineOn());
             }
             if (Status && (Time.time - timeSwitch) > 2.0f)

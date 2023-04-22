@@ -18,7 +18,19 @@ public class DryerMachine : MonoBehaviour
     [SerializeField] private TMP_Text Moneytext;
     private static DryerMachine instance;
     public static DryerMachine Instance { get { return instance; } }
-
+    
+    //private float timeSwitch = 0f;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +46,7 @@ public class DryerMachine : MonoBehaviour
 
     public void Color()
     {
+        Debug.Log("Funciona");
         //Physical appearance
         if ( 14400f <= user_temp * user_time && user_temp * user_time <= 20000f)
         {
@@ -161,22 +174,22 @@ public class DryerMachine : MonoBehaviour
         }
     }
 
-    public void SwitchOn(InputAction.CallbackContext callbackContext)
-    {
-        // Se tienen 3 condiciones:
-        // 1) La primera es que para que se ejecute la accion debes estar viendo el anuncio del switch
-        // 2) Haber precionado el boton X
-        // 3) Que la maquina secadora este encendida
-        // De tal forma que solo se ejecute en el caso en el que se haya precionado el boton y estes efectivamente en la palanca
+    // public void SwitchOn(InputAction.CallbackContext callbackContext)
+    // {
+    //     // Se tienen 3 condiciones:
+    //     // 1) La primera es que para que se ejecute la accion debes estar viendo el anuncio del switch
+    //     // 2) Haber precionado el boton X
+    //     // 3) Que la maquina secadora este encendida
+    //     // De tal forma que solo se ejecute en el caso en el que se haya precionado el boton y estes efectivamente en la palanca
 
-        if (GameManager.activeStateDryer && callbackContext.performed && GameManager.DryerMachine)
-        {
-            Color();
-            Humidity();
-            Craking();
-            Microbiological();
-            EfficiencyMachine();
-            TemperaturePrice();
-        }
-    }
+    //     if (GameManager.activeStateDryer && callbackContext.performed && GameManager.DryerMachine)
+    //     {
+    //         Color();
+    //         Humidity();
+    //         Craking();
+    //         Microbiological();
+    //         EfficiencyMachine();
+    //         TemperaturePrice();
+    //     }
+    // }
 }
