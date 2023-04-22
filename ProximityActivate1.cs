@@ -19,7 +19,6 @@ public class ProximityActivate1 : MonoBehaviour
     private float timeSwitch = 0f;
     private Transform lookAtActivator;
     private Transform activator;
-    private bool lookAtCamera = true;
     private bool activeState = false;
     private Animator animator;
     bool Status = false;
@@ -28,7 +27,7 @@ public class ProximityActivate1 : MonoBehaviour
     private Quaternion start;
     private Quaternion target1;
     [SerializeField] private float lerpDuration;
-    
+    [SerializeField] private bool lookAtCamera;
     
     void Start()
     {

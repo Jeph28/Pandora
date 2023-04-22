@@ -14,7 +14,6 @@ public class ProximityActivate : MonoBehaviour
     [SerializeField] private Transform activator;
     private bool activeState;
     [SerializeField] private CanvasGroup target;
-    private bool lookAtCamera;
     [SerializeField] private GameObject SwitchM;
     private bool Status = false;
     [SerializeField] private GameObject Led;
@@ -24,6 +23,7 @@ public class ProximityActivate : MonoBehaviour
     [SerializeField] private GameObject initialposition;
     [SerializeField] private float lerpDuration;
     private float timeSwitch = 0f;
+    [SerializeField] private bool lookAtCamera;
     Quaternion originRotation, targetRotation;
     float alpha;
 
