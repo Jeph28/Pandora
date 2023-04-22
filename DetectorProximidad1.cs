@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using TMPro;
-using System;
 
-public class ProximityActiviteCheckPoint : MonoBehaviour
+
+public class DetectorProximidad1 : MonoBehaviour
 {
+
     public Transform distanceActivator, lookAtActivator;
     public float distance;
     public Transform activator;
@@ -81,23 +80,8 @@ public class ProximityActiviteCheckPoint : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
     }
-        //if (infoPanel != null)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Y))
-        //    {
-        //        enableInfoPanel = !enableInfoPanel;
-        //        infoPanel.alpha = Mathf.Lerp(infoPanel.alpha, Mathf.Clamp01(enableInfoPanel ? alpha : 0), Time.deltaTime * 10);
-        //    }
-        //}
+
+
+    
+
 }
-
-    // public void DestroyScript(InputAction.CallbackContext callbackContext)
-    // {
-    //     if (activeState && callbackContext.performed)
-    //     {
-    //         Changetext.text = "Aspecto fisico : " + GameManager.PastaState + "\n" + "Pasta Producida : " + GameManager.PastaScore.ToString() + "\n";
-    //         Result.SetActive(true);
-    //     }
-        
-    // }
-
