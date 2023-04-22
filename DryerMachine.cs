@@ -46,29 +46,29 @@ public class DryerMachine : MonoBehaviour
 
     public void Color()
     {
-        Debug.Log("Funciona");
+        float ColorValue = user_temp * user_time;
         //Physical appearance
-        if ( 14400f <= user_temp * user_time && user_temp * user_time <= 20000f)
+        if ( 14400f <= ColorValue && ColorValue <= 20000f)
         {
             GameManager.pastaColor = 1;
             GameManager.pastaColorString = "Pasta blanca 10B";
         }
-        if ( 20000f < user_temp * user_time && user_temp * user_time <= 25000f)
+        if ( 20000f < ColorValue && ColorValue <= 25000f)
         {
             GameManager.pastaColor = 2;
             GameManager.pastaColorString = "Pasta amarilla pollito 25B";
         }
-        if ( 25000f < user_temp * user_time && user_temp * user_time <= 28000f)
+        if ( 25000f < ColorValue && ColorValue <= 28000f)
         {
             GameManager.pastaColor = 3;
             GameManager.pastaColorString = "Pasta buena 35B";
         }
-        if ( 28000f < user_temp * user_time && user_temp * user_time <= 34000f)
+        if ( 28000f < ColorValue && ColorValue <= 34000f)
         {
             GameManager.pastaColor = 4;
             GameManager.pastaColorString = "Pasta Marron";
         }
-        if (user_temp * user_time > 34000f)
+        if (ColorValue > 34000f)
         {
             GameManager.pastaColor = 5;
             GameManager.pastaColorString = "Pasta negra -10B ";
@@ -80,28 +80,20 @@ public class DryerMachine : MonoBehaviour
         //Humidity percentage
         float HumidityPercentage;
         HumidityPercentage = -5 * Mathf.Log(0.0014f * user_time , 1.5f);
-        GameManager.pastaHumidityString = HumidityPercentage.ToString("F2") + "%";
+        GameManager.pastaHumidityPercentageString = HumidityPercentage.ToString("F2") + "%";
         
-        // if ( 14400f <= user_temp * user_time && user_temp * user_time <= 15600f)
-        // {
-        //     GameManager.pastaHumidity = 1;
-        //     GameManager.pastaHumidityString = "14% de Humedad";
-        // }
-        // if ( 15600f < user_temp * user_time && user_temp * user_time <= 19200f)
-        // {
-        //     GameManager.pastaHumidity = 2;
-        //     GameManager.pastaHumidityString = "13,5% de Humedad";
-        // }
-        // if ( 19200f < user_temp * user_time && user_temp * user_time <= 20400f)
-        // {
-        //     GameManager.pastaHumidity = 3;
-        //     GameManager.pastaHumidityString = "12,6% de Humedad";
-        // }
-        // if (user_temp * user_time > 30000f)
-        // {
-        //     GameManager.pastaHumidity = 4;
-        //     GameManager.pastaHumidityString = "10% de Humedad";
-        // }
+        if ( HumidityPercentage > 13.5f)
+        {
+            GameManager.pastaHumidityString = "Alto nivel de humedad";
+        }
+        if ( HumidityPercentage <= 13.5f && HumidityPercentage >= 12.6)
+        {
+            GameManager.pastaHumidityString = "Nivel normal de humedad";
+        }
+        if (HumidityPercentage < 12.6f)
+        {
+            GameManager.pastaHumidityString = "Bajo nivel de humedad";
+        }
     }
        public void Craking()
     {
@@ -173,7 +165,7 @@ public class DryerMachine : MonoBehaviour
             GameManager.Money -= cost;
         }
     }
-
+    // This is called in the ProximityActivity for best performance
     // public void SwitchOn(InputAction.CallbackContext callbackContext)
     // {
     //     // Se tienen 3 condiciones:

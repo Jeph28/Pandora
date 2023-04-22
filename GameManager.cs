@@ -11,6 +11,7 @@ public static class GameManager
     public static int pastaColor;
     public static string pastaColorString;
     public static int pastaHumidity;
+    public static string pastaHumidityPercentageString;
     public static string pastaHumidityString;
     public static int WeightDeviation;
     public static int user_temperature;
