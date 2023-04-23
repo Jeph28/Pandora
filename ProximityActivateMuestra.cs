@@ -81,6 +81,8 @@ public class ProximityActivateMuestra  : MonoBehaviour
                 targetRotation = originRotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
+
+        Changetext.text = "Contexto paja y mas... " + "\n" + "\n" + "Peso : " + GameManager.WeightDeviationString + "\n" + "Pastas Producidas : " + GameManager.PastaScore.ToString() + "\n" + "Ruptura Mecanica";
         //if (infoPanel != null)
         //{
         //    if (Input.GetKeyDown(KeyCode.Y))
@@ -95,7 +97,7 @@ public class ProximityActivateMuestra  : MonoBehaviour
     {
         if (activeState && callbackContext.performed)
         {
-            Changetext.text = "Aspecto fisico : " + GameManager.PastaState + "\n" + "Pasta Producida : " + GameManager.PastaScore.ToString() + "\n";
+            // Changetext.text = "Peso : " + GameManager.WeightDeviationString + "\n" + "Pasta Producida : " + GameManager.PastaScore.ToString() + "\n";
             Result.SetActive(true);
         }
         
