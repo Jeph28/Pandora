@@ -26,12 +26,14 @@ public class ProximityActivate : MonoBehaviour
     [SerializeField] private bool lookAtCamera;
     Quaternion originRotation, targetRotation;
     float alpha;
+    private int LimitFPS = 60;
 
     void Start()
     {
         originRotation = transform.rotation;
         alpha = activeState ? 1 : -1;
         if (activator == null) activator = Camera.main.transform;
+        Application.targetFrameRate = LimitFPS;
     }
 
     bool IsTargetNear()

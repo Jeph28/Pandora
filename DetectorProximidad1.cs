@@ -22,6 +22,7 @@ public class DetectorProximidad1 : MonoBehaviour
     bool changePrincipalText = true;
     [SerializeField] private GameObject Result;
     [SerializeField] private TMP_Text Changetext;
+    [SerializeField] private float timeCheckPoint;
 
 
     void Start()
@@ -91,14 +92,23 @@ public class DetectorProximidad1 : MonoBehaviour
             changePrincipalText = false;
         }
 
-        
+        // if (timeCheckPoint < 30f && )
+        // {
+        //     Changetext.text = "Contexto paja y mas... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+            
+        // }
+        // if (true)
+        // {
+            
+        // }
     }
     public void ResultCheckPoint(InputAction.CallbackContext callbackContext)
     {
+        // The last condition allow active a modal if there is Unpacked pasta
         if (activeState && callbackContext.performed && !changePrincipalText)
         {
-            Changetext.text = "Contexto paja y mas... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
             Result.SetActive(true);
+            timeCheckPoint = Time.time;
         }
         
     }
