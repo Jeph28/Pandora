@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        if (inputM.x > 0 || inputM.y > 0)
+        if (inputM.x != 0 || inputM.y != 0)
         {
             nextFootstep -= Time.deltaTime;
             if (nextFootstep <= 0) 
