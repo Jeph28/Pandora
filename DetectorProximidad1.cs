@@ -92,13 +92,13 @@ public class DetectorProximidad1 : MonoBehaviour
             changePrincipalText = false;
         }
 
-        if (Time.time - timeCheckPoint < 60f && changePrincipalText1 && timeWait > 0)
+        if (Time.time - timeCheckPoint < 60f && changePrincipalText1 && timeWait > 1)
         {
             timeWait -= Time.deltaTime;
             textCanva.text = "Espera  " + timeWait.ToString("F0") + "  para poder ver el Resultado";
         }
 
-        if (timeWait <= 0 && changePrincipalText2)
+        if (timeWait <= 1 && changePrincipalText2)
         {
             textCanva.text = "Ver los resultados del Lab con [Y]";
             changePrincipalText2 = false;
