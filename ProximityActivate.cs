@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+// using TMPro;
 
 
 
@@ -24,6 +25,7 @@ public class ProximityActivate : MonoBehaviour
     [SerializeField] private float lerpDuration;
     private float timeSwitch = 0f;
     [SerializeField] private bool lookAtCamera;
+    // [SerializeField] public TMP_Text MessageState2;
     Quaternion originRotation, targetRotation;
     float alpha;
 
@@ -110,6 +112,9 @@ public class ProximityActivate : MonoBehaviour
                 Led.gameObject.GetComponent<Renderer>().material = Grey;
                 Status = false; 
                 GameManager.DryerMachine = false;
+                //Change Panel Control message for "Matenimento no disponible"
+                // MessageState2.text = "\n" +"Mantenimiento preventivo de la secadora: No disponiblez" + "\n" + "\n" + "Mantenimiento preventivo de la empaquetadora: No disponible";
+
             }
         }         
     }
