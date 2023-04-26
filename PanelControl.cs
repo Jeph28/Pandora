@@ -13,7 +13,7 @@ public class PanelControl : MonoBehaviour
     [SerializeField] public TMP_Text MessageState2Dryer;
     [SerializeField] public TMP_Text MessageState2Packing;
     float MaintenanceTimeDryer = 10f;
-    float MaintenanceTimePacking = 20f;
+    float MaintenanceTimePacking = 15f;
     bool NeedsMaintenanceDryer = false;
     bool NeedsMaintenancePacking = false;
     
