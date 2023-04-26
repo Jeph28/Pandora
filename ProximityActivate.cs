@@ -97,6 +97,7 @@ public class ProximityActivate : MonoBehaviour
                 Led.gameObject.GetComponent<Renderer>().material = Green;
                 Status = true;
                 GameManager.DryerMachine = true;
+                GameManager.CountDownActivateDryer = true;
                 DryerMachine.Instance.Color();
                 DryerMachine.Instance.Humidity();
                 DryerMachine.Instance.Craking();

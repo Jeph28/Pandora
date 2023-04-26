@@ -105,6 +105,7 @@ public class ProximityActivate1 : MonoBehaviour
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
                 Status = true;
                 GameManager.PackingMachine = Status;
+                GameManager.CountDownActivatePacking = true;
                 PackingMachine.Instance.Weight();
                 PackingMachine.Instance.EfficiencyMachine();
                 PackingMachine.Instance.SpeedPrice();

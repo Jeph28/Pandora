@@ -25,6 +25,9 @@ public static class GameManager
     public static string DryerMachineEfficiencyString;
     public static string PackingMachineEfficiencyString;
     public static string WeightDeviationString;
-    public static bool PanelControlState2 = false;
     public static bool PanelControlState1 = true;
+    public static bool PanelControlState2 = false;
+    public static bool PanelControlState3 = false;
+    public static bool CountDownActivateDryer = false;
+    public static bool CountDownActivatePacking = false;
 }
