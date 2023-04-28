@@ -7,7 +7,6 @@ using System;
 public class Switch2 : MonoBehaviour
 {   
     [SerializeField] private Transform distanceActivator;
-    [SerializeField] private float distance;
     [SerializeField] private GameObject Worker;
     [SerializeField] private CanvasGroup target;
     [SerializeField] private GameObject SwitchM;
@@ -27,6 +26,8 @@ public class Switch2 : MonoBehaviour
     private Quaternion start;
     private Quaternion target1;
     [SerializeField] private float lerpDuration;
+    [SerializeField] private float distance;
+
     [SerializeField] private bool lookAtCamera;
     
     void Start()

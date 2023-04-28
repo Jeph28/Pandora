@@ -8,15 +8,11 @@ using TMPro;
 public class CheckPoint : MonoBehaviour
 {
 
-    public Transform distanceActivator, lookAtActivator;
-    public float distance;
-    public Transform activator;
-    public bool activeState = false;
+    public Transform distanceActivator; 
+    private Transform lookAtActivator, activator;
+    private bool activeState = false;
     public CanvasGroup target;
-    public bool lookAtCamera = true;
-    public bool enableInfoPanel = false;
     float alpha;
-    public CanvasGroup infoPanel;
     [SerializeField] private TMP_Text textCanva;
     Quaternion originRotation, targetRotation;
     bool changePrincipalText = true;
@@ -24,8 +20,11 @@ public class CheckPoint : MonoBehaviour
     bool changePrincipalText2 = true;
     [SerializeField] private GameObject Result;
     [SerializeField] private TMP_Text Changetext;
-    [SerializeField] private float timeCheckPoint;
-    float timeWait = 60;
+    private float timeCheckPoint;
+    [SerializeField] float timeWait = 60;
+    public float distance;
+
+    public bool lookAtCamera = true;
 
 
     void Start()
@@ -69,7 +68,6 @@ public class CheckPoint : MonoBehaviour
             {
                 alpha = -1;
                 activeState = false;
-                enableInfoPanel = false;
                 Result.SetActive(false);
             }
         }

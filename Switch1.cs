@@ -11,7 +11,6 @@ public class Switch1 : MonoBehaviour
 {
     [SerializeField] private Transform distanceActivator;
     private Transform lookAtActivator;
-    [SerializeField] private float distance;
     private Transform activator;
     private bool activeState;
     [SerializeField] private CanvasGroup target;
@@ -24,9 +23,10 @@ public class Switch1 : MonoBehaviour
     [SerializeField] private GameObject initialposition;
     [SerializeField] private float lerpDuration;
     private float timeSwitch = 0f;
-    [SerializeField] private bool lookAtCamera;
-    // [SerializeField] public TMP_Text MessageState2;
+    [SerializeField] private float distance;
     Quaternion originRotation, targetRotation;
+    [SerializeField] private bool lookAtCamera;
+
     float alpha;
 
     void Start()

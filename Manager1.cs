@@ -10,10 +10,10 @@ public class Manager1 : MonoBehaviour
 
     [SerializeField] private Transform distanceActivator; 
     private Transform lookAtActivator;
-    public float distance;
     private Transform activator;
     private bool activeState = false;
     public CanvasGroup target;
+    public float distance;
     public bool lookAtCamera = true;
     float alpha;
     Quaternion originRotation, targetRotation;

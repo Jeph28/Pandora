@@ -8,16 +8,15 @@ using TMPro;
 public class CheckPoint2 : MonoBehaviour
 {
 
-    public Transform distanceActivator, lookAtActivator;
-    public float distance;
-    public Transform activator;
-    public bool activeState = false;
+    public Transform distanceActivator;
+    private Transform activator, lookAtActivator;
+    private bool activeState = false;
     public CanvasGroup target;
-    public bool lookAtCamera = true;
-    public bool enableInfoPanel = false;
     [SerializeField] private TMP_Text Changetext;
-    //public GameObject infoIcon;
     [SerializeField] private GameObject Result;
+    public float distance;
+
+    public bool lookAtCamera = true;
 
     float alpha;
     //public CanvasGroup infoPanel;
@@ -57,7 +56,6 @@ public class CheckPoint2 : MonoBehaviour
             {
                 alpha = 1;
                 activeState = true;
-                enableInfoPanel = true;
             }
         }
         else
@@ -66,7 +64,6 @@ public class CheckPoint2 : MonoBehaviour
             {
                 alpha = -1;
                 activeState = false;
-                enableInfoPanel = false;
                 Result.SetActive(false);
             }
         }
@@ -83,21 +80,12 @@ public class CheckPoint2 : MonoBehaviour
         }
 
         Changetext.text = "Contexto paja y mas... " + "\n" + "\n" + "Desviacion del Peso : " + GameManager.WeightDeviationString + "\n" + "Pastas Producidas : " + GameManager.PastaScore.ToString() + "\n" + "Ruptura Mecanica";
-        //if (infoPanel != null)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Y))
-        //    {
-        //        enableInfoPanel = !enableInfoPanel;
-        //        infoPanel.alpha = Mathf.Lerp(infoPanel.alpha, Mathf.Clamp01(enableInfoPanel ? alpha : 0), Time.deltaTime * 10);
-        //    }
-        //}
     }
 
     public void DestroyScript(InputAction.CallbackContext callbackContext)
     {
         if (activeState && callbackContext.performed)
         {
-            // Changetext.text = "Peso : " + GameManager.WeightDeviationString + "\n" + "Pasta Producida : " + GameManager.PastaScore.ToString() + "\n";
             Result.SetActive(true);
         }
         

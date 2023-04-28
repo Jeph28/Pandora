@@ -12,10 +12,12 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private GameObject State3;
     [SerializeField] public TMP_Text MessageState2Dryer;
     [SerializeField] public TMP_Text MessageState2Packing;
-    float MaintenanceTimeDryer = 10f;
-    float MaintenanceTimePacking = 15f;
+    [SerializeField] private CanvasGroup Target;
+    [SerializeField] float MaintenanceTimeDryer = 10f;
+    [SerializeField] float MaintenanceTimePacking = 15f;
     bool NeedsMaintenanceDryer = false;
     bool NeedsMaintenancePacking = false;
+    float alpha;
     
 
     // Start is called before the first frame update
@@ -27,6 +29,17 @@ public class PanelControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.activeStateDryer || GameManager.activeStatePacking)
+        {
+            alpha = -1;
+        }
+        else
+        {
+            alpha = 1;
+        }
+
+        Target.alpha = Mathf.Clamp01(Target.alpha + alpha * Time.deltaTime);
+        
         if (GameManager.CountDownActivateDryer && MaintenanceTimeDryer > 1)
         {
         MaintenanceTimeDryer -= Time.deltaTime;
@@ -81,8 +94,7 @@ public class PanelControl : MonoBehaviour
                 GameManager.PanelControlState2 = false;
                 GameManager.PanelControlState1 = true;
             }
-        }
-        
+        }  
     }
 
     IEnumerator SpamIcon()

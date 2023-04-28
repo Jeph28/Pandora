@@ -6,18 +6,14 @@ using UnityEngine;
 public class SwitchOutService : MonoBehaviour
 {
 
-    public Transform distanceActivator, lookAtActivator;
-    public float distance;
-    public Transform activator;
-    public bool activeState = false;
+    public Transform distanceActivator;
+    private Transform activator, lookAtActivator;
+    private bool activeState = false;
     public CanvasGroup target;
-    public bool lookAtCamera = true;
-    public bool enableInfoPanel = false;
     float alpha;
-    public CanvasGroup infoPanel;
     Quaternion originRotation, targetRotation;
-    
-    public GameObject pasta;
+    public float distance;
+    public bool lookAtCamera = true;
 
 
     void Start()
@@ -62,7 +58,6 @@ public class SwitchOutService : MonoBehaviour
             {
                 alpha = -1;
                 activeState = false;
-                enableInfoPanel = false;
             }
         }
         target.alpha = Mathf.Clamp01(target.alpha + alpha * Time.deltaTime);
