@@ -12,7 +12,7 @@ public class Switch1 : MonoBehaviour
     [SerializeField] private Transform distanceActivator;
     private Transform lookAtActivator;
     [SerializeField] private float distance;
-    [SerializeField] private Transform activator;
+    private Transform activator;
     private bool activeState;
     [SerializeField] private CanvasGroup target;
     [SerializeField] private GameObject SwitchM;
