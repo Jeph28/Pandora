@@ -129,7 +129,7 @@ public class Switch2 : MonoBehaviour
         yield return new WaitForSeconds(2f);
         while ((Status && GameManager.DryerMachine) || (Status && GameManager.UnpackOn > 0f))
         {
-            yield return new WaitForSeconds(( 80f / GameManager.user_speed));
+            yield return new WaitForSeconds(( 40f / GameManager.user_speed));
             
             if (Status)
             {
