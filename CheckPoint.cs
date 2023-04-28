@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
 
 
-public class DetectorProximidad : MonoBehaviour
+public class CheckPoint : MonoBehaviour
 {
 
     public Transform distanceActivator, lookAtActivator;
@@ -15,9 +17,15 @@ public class DetectorProximidad : MonoBehaviour
     public bool enableInfoPanel = false;
     float alpha;
     public CanvasGroup infoPanel;
+    [SerializeField] private TMP_Text textCanva;
     Quaternion originRotation, targetRotation;
-    
-    public GameObject pasta;
+    bool changePrincipalText = true;
+    bool changePrincipalText1 = false;
+    bool changePrincipalText2 = true;
+    [SerializeField] private GameObject Result;
+    [SerializeField] private TMP_Text Changetext;
+    [SerializeField] private float timeCheckPoint;
+    float timeWait = 60;
 
 
     void Start()
@@ -53,8 +61,7 @@ public class DetectorProximidad : MonoBehaviour
             {
                 alpha = 1;
                 activeState = true;
-                
-            }
+                }
         }
         else
         {
@@ -63,6 +70,7 @@ public class DetectorProximidad : MonoBehaviour
                 alpha = -1;
                 activeState = false;
                 enableInfoPanel = false;
+                Result.SetActive(false);
             }
         }
         target.alpha = Mathf.Clamp01(target.alpha + alpha * Time.deltaTime);
@@ -71,16 +79,46 @@ public class DetectorProximidad : MonoBehaviour
         
         if (lookAtCamera)
         {
-            
-
             if (activeState)
                 targetRotation = Quaternion.LookRotation(activator.position - transform.position);
             else
                 targetRotation = originRotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
+
+        if (GameManager.UnpackOn > 0f && changePrincipalText )
+        {
+            textCanva.text = "Tomar una muestra con [Y]";
+            changePrincipalText = false;
+        }
+
+        if (Time.time - timeCheckPoint < 60f && changePrincipalText1 && timeWait > 1)
+        {
+            timeWait -= Time.deltaTime;
+            textCanva.text = "Espera  " + timeWait.ToString("F0") + "  para poder ver el Resultado";
+        }
+
+        if (timeWait <= 1 && changePrincipalText2)
+        {
+            textCanva.text = "Ver los resultados del Lab con [Y]";
+            changePrincipalText2 = false;
+        }
     }
 
+    public void ResultCheckPoint(InputAction.CallbackContext callbackContext)
+    {
+        // The last condition allow active a modal if there is Unpacked pasta
+        if (activeState && callbackContext.performed && !changePrincipalText)
+        {
+            changePrincipalText1 = true;
+            timeCheckPoint = Time.time;
+            if (!changePrincipalText2)
+            {
+                Changetext.text = "Contexto paja y mas... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+                Result.SetActive(true); 
+            }
+        }
+    }
 
     
 
