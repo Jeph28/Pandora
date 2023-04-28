@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 
 
-public class DetectorProximidad1 : MonoBehaviour
+public class Manager1 : MonoBehaviour
 {
 
     public Transform distanceActivator, lookAtActivator;

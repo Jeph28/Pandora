@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 
 
-public class Muestra  : MonoBehaviour
+public class CheckPoint2 : MonoBehaviour
 {
 
     public Transform distanceActivator, lookAtActivator;
