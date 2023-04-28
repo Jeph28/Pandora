@@ -7,7 +7,7 @@ using System;
 
 
 
-public class ProximityActivate : MonoBehaviour
+public class Switch1 : MonoBehaviour
 {
     [SerializeField] private Transform distanceActivator;
     private Transform lookAtActivator;

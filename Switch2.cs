@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class ProximityActivate1 : MonoBehaviour
+public class Switch2 : MonoBehaviour
 {   
     [SerializeField] private Transform distanceActivator;
     [SerializeField] private float distance;
