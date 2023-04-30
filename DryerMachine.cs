@@ -46,8 +46,14 @@ public class DryerMachine : MonoBehaviour
     public void Color()
     {
         float ColorValue = user_temp * user_time;
+
+        if (GameManager.RawMaterial == 2)
+        {
+            ColorValue = ColorValue * 0.8f;
+        }
+
         //Physical appearance
-        if ( 14400f <= ColorValue && ColorValue <= 20000f)
+        if ( ColorValue <= 20000f)
         {
             GameManager.pastaColor = 1;
             GameManager.pastaColorString = "Pasta blanca 10B";
@@ -81,6 +87,12 @@ public class DryerMachine : MonoBehaviour
         //Humidity percentage
         float HumidityPercentage;
         HumidityPercentage = -5 * Mathf.Log(0.0014f * user_time , 1.5f);
+
+        if (GameManager.RawMaterial == 2)
+        {
+            HumidityPercentage = HumidityPercentage * 0.9f;
+        }
+
         GameManager.pastaHumidityPercentageString = HumidityPercentage.ToString("F2") + "%";
         GameManager.pastaHumidityList.Add(HumidityPercentage);
         
