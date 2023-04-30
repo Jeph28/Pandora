@@ -48,7 +48,7 @@ public class Manager1 : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear())
+            if (IsTargetNear() && !GameManager.DryerMachine)
             {
                 alpha = 1;
                 activeState = true;
@@ -56,7 +56,7 @@ public class Manager1 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear())
+            if (!IsTargetNear() || GameManager.DryerMachine)
             {
                 alpha = -1;
                 activeState = false;

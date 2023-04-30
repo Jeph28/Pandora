@@ -43,7 +43,7 @@ public class Manager2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!activeState)
+        if (!activeState && !GameManager.PackingMachine)
         {
             if (IsTargetNear())
             {
@@ -53,12 +53,10 @@ public class Manager2 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear())
+            if (!IsTargetNear() || GameManager.PackingMachine)
             {
                 alpha = -1;
                 activeState = false;
-                // enableInfoPanel = false;
-                // Result.SetActive(false);
             }
         }
         target.alpha = Mathf.Clamp01(target.alpha + alpha * Time.deltaTime);
