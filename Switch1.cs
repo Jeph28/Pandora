@@ -121,6 +121,7 @@ public class Switch1 : MonoBehaviour
     IEnumerator DryerMachineOn()
     {
         yield return new WaitForSeconds(2f);
+        
         while (Status)
         {
             if (GameManager.UnpackOn < 7.0f)
