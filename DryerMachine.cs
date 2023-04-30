@@ -72,6 +72,8 @@ public class DryerMachine : MonoBehaviour
             GameManager.pastaColor = 5;
             GameManager.pastaColorString = "Pasta negra -10B ";
         }
+
+        GameManager.pastaColorList.Add(GameManager.pastaColor);
     }
 
      public void Humidity()
@@ -80,6 +82,7 @@ public class DryerMachine : MonoBehaviour
         float HumidityPercentage;
         HumidityPercentage = -5 * Mathf.Log(0.0014f * user_time , 1.5f);
         GameManager.pastaHumidityPercentageString = HumidityPercentage.ToString("F2") + "%";
+        GameManager.pastaHumidityList.Add(HumidityPercentage);
         
         if ( HumidityPercentage > 13.5f)
         {
@@ -96,7 +99,7 @@ public class DryerMachine : MonoBehaviour
     }
        public void Craking()
     {
-        if (user_temp * user_time >= 32400f)
+        if (user_temp * user_time >= 30000f)
         {
             GameManager.Craking = true;
             GameManager.pastaCrakingString = "Si";
@@ -106,6 +109,8 @@ public class DryerMachine : MonoBehaviour
             GameManager.Craking = false;
             GameManager.pastaCrakingString = "No";
         }
+
+        GameManager.pastaCrakingList.Add(GameManager.pastaCrakingString);
     }
 
     public void Microbiological()
@@ -120,6 +125,8 @@ public class DryerMachine : MonoBehaviour
             GameManager.Microorganisms = false;
             GameManager.pastaMicroorganismsString = "No";
         }
+
+        GameManager.pastaMicroorganismsList.Add(GameManager.pastaMicroorganismsString);
     }
 
     public void EfficiencyMachine()
@@ -142,6 +149,8 @@ public class DryerMachine : MonoBehaviour
             EfficiencyStg = Efficiency.ToString("F2");
             GameManager.DryerMachineEfficiencyString = EfficiencyStg;
         }
+
+        GameManager.DryerMachineEfficiencyList.Add(Efficiency);
     }
 
     public void TemperaturePrice()
@@ -164,23 +173,4 @@ public class DryerMachine : MonoBehaviour
             GameManager.Money -= cost;
         }
     }
-    // This is called in the ProximityActivity for best performance
-    // public void SwitchOn(InputAction.CallbackContext callbackContext)
-    // {
-    //     // Se tienen 3 condiciones:
-    //     // 1) La primera es que para que se ejecute la accion debes estar viendo el anuncio del switch
-    //     // 2) Haber precionado el boton X
-    //     // 3) Que la maquina secadora este encendida
-    //     // De tal forma que solo se ejecute en el caso en el que se haya precionado el boton y estes efectivamente en la palanca
-
-    //     if (GameManager.activeStateDryer && callbackContext.performed && GameManager.DryerMachine)
-    //     {
-    //         Color();
-    //         Humidity();
-    //         Craking();
-    //         Microbiological();
-    //         EfficiencyMachine();
-    //         TemperaturePrice();
-    //     }
-    // }
 }

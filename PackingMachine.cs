@@ -54,6 +54,8 @@ public class PackingMachine : MonoBehaviour
             GameManager.WeightDeviation = 2;
             GameManager.WeightDeviationString = "2% Mas";
         }
+
+        GameManager.pastaWeightList.Add(GameManager.WeightDeviation);
     }
 
     public void EfficiencyMachine()
@@ -77,6 +79,8 @@ public class PackingMachine : MonoBehaviour
             EfficiencyStg = Efficiency.ToString("F2");
             GameManager.PackingMachineEfficiencyString = EfficiencyStg;
         }
+
+        GameManager.PackingMachineEfficiencyList.Add(Efficiency);
     }
 
     public void SpeedPrice()
@@ -99,14 +103,4 @@ public class PackingMachine : MonoBehaviour
             GameManager.Money -= cost;
         }
     }
-
-    // public void SwitchOn(InputAction.CallbackContext callbackContext)
-    // {
-    //     if (GameManager.activeStatePacking && callbackContext.performed && GameManager.PackingMachine)
-    //     {
-    //         Weight();
-    //         EfficiencyMachine();
-    //         SpeedPrice();
-    //     }   
-    // }
 }

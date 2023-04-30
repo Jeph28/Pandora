@@ -98,6 +98,7 @@ public class Switch1 : MonoBehaviour
                 Status = true;
                 GameManager.DryerMachine = true;
                 GameManager.CountDownActivateDryer = true;
+                GameManager.Batch ++;
                 DryerMachine.Instance.Color();
                 DryerMachine.Instance.Humidity();
                 DryerMachine.Instance.Craking();
@@ -113,9 +114,6 @@ public class Switch1 : MonoBehaviour
                 Led.gameObject.GetComponent<Renderer>().material = Grey;
                 Status = false; 
                 GameManager.DryerMachine = false;
-                //Change Panel Control message for "Matenimento no disponible"
-                // MessageState2.text = "\n" +"Mantenimiento preventivo de la secadora: No disponiblez" + "\n" + "\n" + "Mantenimiento preventivo de la empaquetadora: No disponible";
-
             }
         }         
     }
