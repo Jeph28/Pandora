@@ -14,8 +14,10 @@ public class Manager1 : MonoBehaviour
     private bool activeState = false;
     public CanvasGroup target;
     public float distance;
+    [SerializeField] public TMP_Text MessageDryer;
     public bool lookAtCamera = true;
     float alpha;
+
     Quaternion originRotation, targetRotation;
 
 
@@ -48,7 +50,7 @@ public class Manager1 : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear() && !GameManager.DryerMachine)
+            if (IsTargetNear() && !GameManager.DryerMachine && !GameManager.FailureDryer)
             {
                 alpha = 1;
                 activeState = true;
@@ -71,6 +73,11 @@ public class Manager1 : MonoBehaviour
             else
                 targetRotation = originRotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        }
+
+        if (GameManager.NeedsMaintenanceDryer)
+        {
+            MessageDryer.text = "Pulsa [Y] para hacer mantenimiento";
         }  
     }
 }

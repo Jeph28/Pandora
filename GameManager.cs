@@ -39,4 +39,11 @@ public static class GameManager
     public static bool PanelControlState3 = false;
     public static bool CountDownActivateDryer = false;
     public static bool CountDownActivatePacking = false;
+    public static bool NeedsMaintenanceDryer = false;
+    public static int RawMaterial = 2;
+    public static float Acidity;
+    public static float Protein;
+    public static float Ash;
+    public static bool FailureDryer = false;
+    public static bool FailurePacking = false;
 }

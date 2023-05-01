@@ -56,7 +56,7 @@ public class Switch1 : MonoBehaviour
 
     void Update()
     {
-        if (!activeState)
+        if (!activeState && !GameManager.FailureDryer)
         {
             if (IsTargetNear())
             {

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class EffectMachine : MonoBehaviour
+public class EffectPackingMachine : MonoBehaviour
 {
     [SerializeField] private GameObject Fire;
     [SerializeField] private GameObject Shower;
@@ -24,10 +25,7 @@ public class EffectMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Time.time >= 10f && Time.time <= 11f)
-        //{ 
-        //    //StartCoroutine("Failure");
-        //}
+        
     }
 
     IEnumerator Failure()

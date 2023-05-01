@@ -15,8 +15,8 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private CanvasGroup Target;
     [SerializeField] float MaintenanceTimeDryer = 10f;
     [SerializeField] float MaintenanceTimePacking = 15f;
-    bool NeedsMaintenanceDryer = false;
     bool NeedsMaintenancePacking = false;
+    bool FailureIcon = false;
     float alpha;
     
 
@@ -52,10 +52,10 @@ public class PanelControl : MonoBehaviour
         MessageState2Packing.text = "Mantenimiento preventivo de la empaquetadora en: " + MaintenanceTimePacking.ToString("F0");
         }
 
-        if (MaintenanceTimeDryer <= 1 && !NeedsMaintenanceDryer)
+        if (MaintenanceTimeDryer <= 1 && !GameManager.NeedsMaintenanceDryer)
         {
             MessageState2Dryer.text = "¡La Secadora requiere mantenimiento!";
-            NeedsMaintenanceDryer = true;
+            GameManager.NeedsMaintenanceDryer = true;
 
             if (!GameManager.PanelControlState2)
             {
@@ -72,6 +72,12 @@ public class PanelControl : MonoBehaviour
             {
                 StartCoroutine(SpamIcon());
             }
+        }
+
+        if (GameManager.FailureDryer && !GameManager.PanelControlState2 && !FailureIcon)
+        {
+            StartCoroutine(SpamIcon());
+            FailureIcon = true;
         }
     }
 
