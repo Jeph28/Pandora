@@ -112,7 +112,7 @@ public class CheckPoint : MonoBehaviour
             timeCheckPoint = Time.time;
             if (!changePrincipalText2)
             {
-                Changetext.text = "Contexto paja y mas... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+                Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
                 Result.SetActive(true); 
             }
         }
