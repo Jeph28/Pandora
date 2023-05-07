@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Manager2 : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Manager2 : MonoBehaviour
     private bool activeState = false;
     public CanvasGroup target;
     public float distance;
+    [SerializeField] private GameObject PackingMenu;
     public bool lookAtCamera = true;
     float alpha;
     Quaternion originRotation, targetRotation;
@@ -68,6 +70,17 @@ public class Manager2 : MonoBehaviour
             else
                 targetRotation = originRotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        }
+    }
+
+    public void PackingMachine(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed && GameManager.MessagePacking == 1 && activeState)
+        {
+            PackingMenu.SetActive(true);
+            GameManager.PackingMenu = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true; 
         }
     }
 }
