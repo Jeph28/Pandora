@@ -40,6 +40,7 @@ public static class GameManager
     public static bool CountDownActivateDryer = false;
     public static bool CountDownActivatePacking = false;
     public static bool NeedsMaintenanceDryer = false;
+    public static bool NeedsMaintenancePacking = false;
     public static bool DryerMenu;
     public static bool PackingMenu;
     public static int MessageDryer = 1;

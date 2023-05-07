@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 
 public class DryerMachine : MonoBehaviour
 {
-    [SerializeField, Tooltip("Temperatura entre 80 y 110 grados")][Range(80, 110)] private int user_temp;
-    [SerializeField, Tooltip("Timepo entre 180 y 360 minutos")][Range(180, 360)] private int user_time;
     private float Efficiency;
     private string EfficiencyStg;
     [SerializeField] private GameObject pastaPenne;
@@ -169,19 +167,19 @@ public class DryerMachine : MonoBehaviour
     {
         if (GameManager.user_temperature <= 90f)
         {
-            float cost = 50f * user_temp - 3500f;
+            float cost = 50f * GameManager.user_temperature - 3500f;
             GameManager.Money -= cost;
         }
 
         if (GameManager.user_temperature > 90f && GameManager.user_temperature <= 100)
         {
-            float cost = 100f * user_temp - 8000f;
+            float cost = 100f * GameManager.user_temperature - 8000f;
             GameManager.Money -= cost;
         }
 
         if (GameManager.user_temperature > 100f)
         {
-            float cost = 125f * user_temp - 10500f;
+            float cost = 125f * GameManager.user_temperature - 10500f;
             GameManager.Money -= cost;
         }
     }

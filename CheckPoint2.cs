@@ -79,7 +79,7 @@ public class CheckPoint2 : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
 
-        Changetext.text = "Contexto... " + "\n" + "\n" + "Desviacion del Peso : " + GameManager.WeightDeviationString + "\n" + "Pastas Producidas : " + GameManager.PastaScore.ToString() + "\n" + "Ruptura Mecanica";
+        Changetext.text = "Contexto... " + "\n" + "\n" + "Desviacion del Peso : " + GameManager.WeightDeviationString + "\n" + "Pastas Producidas : " + GameManager.PastaScore.ToString() + "\n" + "Ruptura Mecanica : 1";
     }
 
     public void DestroyScript(InputAction.CallbackContext callbackContext)

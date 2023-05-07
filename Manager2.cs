@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Manager2 : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Manager2 : MonoBehaviour
     public CanvasGroup target;
     public float distance;
     [SerializeField] private GameObject PackingMenu;
+    [SerializeField] public TMP_Text MessagePacking;
     public bool lookAtCamera = true;
     float alpha;
     Quaternion originRotation, targetRotation;
@@ -70,6 +72,12 @@ public class Manager2 : MonoBehaviour
             else
                 targetRotation = originRotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        }
+
+        if (GameManager.NeedsMaintenancePacking)
+        {
+            MessagePacking.text = "Presiona [Y] para hacer mantenimiento";
+            GameManager.MessagePacking = 2;
         }
     }
 

@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PackingMachine : MonoBehaviour
 {
-    [SerializeField, Tooltip("Velocidad entre 20 a 50 bpm")] private int user_speed;
     private float Efficiency;
     private string EfficiencyStg;
     private static PackingMachine instance;
@@ -36,21 +35,18 @@ public class PackingMachine : MonoBehaviour
 
     public void Weight()
     {
-        if (user_speed <= 30f)
+        if (GameManager.user_speed <= 30f)
         {
-            GameManager.user_speed = user_speed; 
             GameManager.WeightDeviation = -1;
             GameManager.WeightDeviationString = "1% Menos";
         }
-        if (user_speed > 30f && user_speed <= 40f)
+        if (GameManager.user_speed > 30f && GameManager.user_speed <= 40f)
         {
-            GameManager.user_speed = user_speed;
             GameManager.WeightDeviation = 1;
             GameManager.WeightDeviationString = "1% Mas";
         }
-        if (user_speed > 40f)
+        if (GameManager.user_speed > 40f)
         {
-            GameManager.user_speed = user_speed;
             GameManager.WeightDeviation = 2;
             GameManager.WeightDeviationString = "2% Mas";
         }
@@ -60,20 +56,20 @@ public class PackingMachine : MonoBehaviour
 
     public void EfficiencyMachine()
     {
-        if (user_speed <= 30f)
+        if (GameManager.user_speed <= 30f)
         {
             Efficiency = Random.Range(0.7f, 0.8f);
             EfficiencyStg = Efficiency.ToString("F2");
             GameManager.PackingMachineEfficiencyString = EfficiencyStg;
 
         }
-        if (user_speed > 30f && user_speed <= 40)
+        if (GameManager.user_speed > 30f && GameManager.user_speed <= 40)
         {
             Efficiency = Random.Range(0.6f, 0.7f);
             EfficiencyStg = Efficiency.ToString("F2");
             GameManager.PackingMachineEfficiencyString = EfficiencyStg;
         }
-        if (user_speed > 40f)
+        if (GameManager.user_speed > 40f)
         {
             Efficiency = Random.Range(0.4f, 0.6f);
             EfficiencyStg = Efficiency.ToString("F2");
