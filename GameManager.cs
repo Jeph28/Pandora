@@ -19,9 +19,9 @@ public static class GameManager
     public static string pastaHumidityString;
     public static int WeightDeviation;
     public static List<float> pastaWeightList = new List<float>();
-    public static int user_temperature;
-    public static int user_time;
-    public static int user_speed;
+    public static float user_temperature;
+    public static float user_time;
+    public static float user_speed;
     public static string PastaState;
     public static bool Craking = false;
     public static List<string> pastaCrakingList = new List<string>();
@@ -42,7 +42,7 @@ public static class GameManager
     public static bool NeedsMaintenanceDryer = false;
     public static bool DryerMenu;
     public static int MessageDryer = 1;
-    public static int RawMaterial = 2;
+    public static int RawMaterial = 1;
     public static float Acidity;
     public static float Protein;
     public static float Ash;

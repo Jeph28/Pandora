@@ -45,7 +45,7 @@ public class DryerMachine : MonoBehaviour
 
     public void Color()
     {
-        float ColorValue = user_temp * user_time;
+        float ColorValue = GameManager.user_temperature * GameManager.user_time;
 
         if (GameManager.RawMaterial == 2)
         {
@@ -86,7 +86,7 @@ public class DryerMachine : MonoBehaviour
     {
         //Humidity percentage
         float HumidityPercentage;
-        HumidityPercentage = -5 * Mathf.Log(0.0014f * user_time , 1.5f);
+        HumidityPercentage = -5 * Mathf.Log(0.0014f * GameManager.user_time , 1.5f);
 
         if (GameManager.RawMaterial == 2)
         {
@@ -111,7 +111,7 @@ public class DryerMachine : MonoBehaviour
     }
        public void Craking()
     {
-        if (user_temp * user_time >= 30000f)
+        if (GameManager.user_temperature * GameManager.user_time >= 30000f)
         {
             GameManager.Craking = true;
             GameManager.pastaCrakingString = "Si";
@@ -127,7 +127,7 @@ public class DryerMachine : MonoBehaviour
 
     public void Microbiological()
     {
-        if (user_temp <= 85f && user_time >= 350f)
+        if (GameManager.user_temperature <= 85f && GameManager.user_time >= 350f)
         {
             GameManager.Microorganisms = true;
             GameManager.pastaMicroorganismsString = "Si";
@@ -143,19 +143,19 @@ public class DryerMachine : MonoBehaviour
 
     public void EfficiencyMachine()
     {
-        if (user_time <= 240f)
+        if (GameManager.user_time <= 240f)
         {
             Efficiency = Random.Range(0.7f,0.8f);
             EfficiencyStg = Efficiency.ToString("F2");
             GameManager.DryerMachineEfficiencyString = EfficiencyStg;
         }
-        if (user_time > 240f && user_time <= 300)
+        if (GameManager.user_time > 240f && GameManager.user_time <= 300)
         {
             Efficiency = Random.Range(0.6f, 0.7f);
             EfficiencyStg = Efficiency.ToString("F2");
             GameManager.DryerMachineEfficiencyString = EfficiencyStg;
         }
-        if (user_time > 300f)
+        if (GameManager.user_time > 300f)
         {
             Efficiency = Random.Range(0.4f, 0.6f);
             EfficiencyStg = Efficiency.ToString("F2");
@@ -167,19 +167,19 @@ public class DryerMachine : MonoBehaviour
 
     public void TemperaturePrice()
     {
-        if (user_temp <= 90f)
+        if (GameManager.user_temperature <= 90f)
         {
             float cost = 50f * user_temp - 3500f;
             GameManager.Money -= cost;
         }
 
-        if (user_temp > 90f && user_temp <= 100)
+        if (GameManager.user_temperature > 90f && GameManager.user_temperature <= 100)
         {
             float cost = 100f * user_temp - 8000f;
             GameManager.Money -= cost;
         }
 
-        if (user_temp > 100f)
+        if (GameManager.user_temperature > 100f)
         {
             float cost = 125f * user_temp - 10500f;
             GameManager.Money -= cost;
