@@ -39,9 +39,12 @@ public class PlayerController : MonoBehaviour
         //Move body
         inputM = playerInput.actions["Move"].ReadValue<Vector2>();
         Vector3 motion = transform.right * inputM.x + transform.forward * inputM.y;
-        controller.Move(motion * speed * Time.deltaTime);
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        if (!GameManager.DryerMenu)
+        {
+            controller.Move(motion * speed * Time.deltaTime);
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+        }        
 
         if (inputM.x != 0 || inputM.y != 0)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class Manager1 : MonoBehaviour
@@ -14,7 +15,10 @@ public class Manager1 : MonoBehaviour
     private bool activeState = false;
     public CanvasGroup target;
     public float distance;
+    [SerializeField] private GameObject DryerMenu;
     [SerializeField] public TMP_Text MessageDryer;
+    //  MessageDryer = 1 "Presiona [Y] para configurar la secaodra"
+    //  MessageDryer = 2 "Pulsa [Y] para hacer mantenimiento"
     public bool lookAtCamera = true;
     float alpha;
 
@@ -77,7 +81,19 @@ public class Manager1 : MonoBehaviour
 
         if (GameManager.NeedsMaintenanceDryer)
         {
-            MessageDryer.text = "Pulsa [Y] para hacer mantenimiento";
+            MessageDryer.text = "Presiona [Y] para hacer mantenimiento";
+            GameManager.MessageDryer = 2;
         }  
+    }
+
+    public void DryerMachine(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed && GameManager.MessageDryer == 1 && activeState)
+        {
+            DryerMenu.SetActive(true);
+            GameManager.DryerMenu = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true; 
+        }
     }
 }

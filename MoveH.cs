@@ -17,7 +17,7 @@ public class MoveH : MonoBehaviour
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class MoveH : MonoBehaviour
         xRotacion -= input.y;
         xRotacion = Mathf.Clamp(xRotacion,-80,80);
         transform.localRotation = Quaternion.Euler(xRotacion,0,0);
-        if (input == Vector2.zero)
+        if (input == Vector2.zero && !GameManager.DryerMenu)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

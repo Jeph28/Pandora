@@ -40,6 +40,8 @@ public static class GameManager
     public static bool CountDownActivateDryer = false;
     public static bool CountDownActivatePacking = false;
     public static bool NeedsMaintenanceDryer = false;
+    public static bool DryerMenu;
+    public static int MessageDryer = 1;
     public static int RawMaterial = 2;
     public static float Acidity;
     public static float Protein;
