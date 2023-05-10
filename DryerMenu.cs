@@ -22,5 +22,9 @@ public class DryerMenu : MonoBehaviour
         GameManager.DryerMenu = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        GameManager.changePrincipalText1CheckPoint1 = true;
+        GameManager.changePrincipalText2CheckPoint1 = false;
+        GameManager.changePrincipalText3CheckPoint1 = true;
+        GameManager.timeWaitCheckPoint1 = 10;
     }
 }

@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class Manager1 : MonoBehaviour
     public CanvasGroup target;
     public float distance;
     [SerializeField] private GameObject DryerMenu;
+    [SerializeField] private GameObject MaintenanceDryerMenu;
+
     [SerializeField] public TMP_Text MessageDryer;
     //  MessageDryer = 1 "Presiona [Y] para configurar la secaodra"
     //  MessageDryer = 2 "Pulsa [Y] para hacer mantenimiento"
@@ -77,10 +80,11 @@ public class Manager1 : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
 
-        if (GameManager.NeedsMaintenanceDryer)
+        if (GameManager.NeedsMaintenanceDryer && GameManager.changeMessageMaintenanceDryer)
         {
             MessageDryer.text = "Presiona [Y] para hacer mantenimiento";
             GameManager.MessageDryer = 2;
+            GameManager.changeMessageMaintenanceDryer = false;
         }  
     }
 
@@ -90,6 +94,17 @@ public class Manager1 : MonoBehaviour
         {
             DryerMenu.SetActive(true);
             GameManager.DryerMenu = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true; 
+        }
+    }
+
+    public void MaintenanceDryerMachine(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed && GameManager.MessageDryer == 2 && activeState)
+        {
+            MaintenanceDryerMenu.SetActive(true);
+            GameManager.MaintenanceDryerMenu = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true; 
         }

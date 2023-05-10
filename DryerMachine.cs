@@ -109,7 +109,7 @@ public class DryerMachine : MonoBehaviour
     }
        public void Craking()
     {
-        if (GameManager.user_temperature * GameManager.user_time >= 30000f)
+        if (GameManager.user_temperature * GameManager.user_time >= 30000f || !GameManager.MaintenanceDryer)
         {
             GameManager.Craking = true;
             GameManager.pastaCrakingString = "Si";

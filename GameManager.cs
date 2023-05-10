@@ -19,9 +19,9 @@ public static class GameManager
     public static string pastaHumidityString;
     public static int WeightDeviation;
     public static List<float> pastaWeightList = new List<float>();
-    public static float user_temperature;
-    public static float user_time;
-    public static float user_speed;
+    public static float user_temperature = 80;
+    public static float user_time = 180;
+    public static float user_speed = 20;
     public static string PastaState;
     public static bool Craking = false;
     public static List<string> pastaCrakingList = new List<string>();
@@ -42,6 +42,7 @@ public static class GameManager
     public static bool NeedsMaintenanceDryer = false;
     public static bool NeedsMaintenancePacking = false;
     public static bool DryerMenu;
+    public static bool MaintenanceDryerMenu;
     public static bool PackingMenu;
     public static int MessageDryer = 1;
     public static int MessagePacking = 1;
@@ -51,4 +52,11 @@ public static class GameManager
     public static float Ash;
     public static bool FailureDryer = false;
     public static bool FailurePacking = false;
+    public static bool changePrincipalText1CheckPoint1 = true;
+    public static bool changePrincipalText2CheckPoint1 = false;
+    public static bool changePrincipalText3CheckPoint1 = true;
+    public static float timeWaitCheckPoint1 = 10;
+    public static bool MaintenanceDryer = false;
+    public static bool MaintenancePacking = false;
+    public static bool changeMessageMaintenanceDryer = true;
 }

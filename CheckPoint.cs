@@ -15,13 +15,9 @@ public class CheckPoint : MonoBehaviour
     float alpha;
     [SerializeField] private TMP_Text textCanva;
     Quaternion originRotation, targetRotation;
-    bool changePrincipalText = true;
-    bool changePrincipalText1 = false;
-    bool changePrincipalText2 = true;
     [SerializeField] private GameObject Result;
     [SerializeField] private TMP_Text Changetext;
     private float timeCheckPoint;
-    [SerializeField] float timeWait = 60;
     public float distance;
 
     public bool lookAtCamera = true;
@@ -84,33 +80,33 @@ public class CheckPoint : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
 
-        if (GameManager.UnpackOn > 0f && changePrincipalText )
+        if (GameManager.UnpackOn > 0f && GameManager.changePrincipalText1CheckPoint1)
         {
             textCanva.text = "Tomar una muestra con [Y]";
-            changePrincipalText = false;
+            GameManager.changePrincipalText1CheckPoint1 = false;
         }
 
-        if (Time.time - timeCheckPoint < 60f && changePrincipalText1 && timeWait > 1)
+        if (Time.time - timeCheckPoint < 60f && GameManager.changePrincipalText2CheckPoint1 && GameManager.timeWaitCheckPoint1 > 1)
         {
-            timeWait -= Time.deltaTime;
-            textCanva.text = "Espera  " + timeWait.ToString("F0") + "  para poder ver el Resultado";
+            GameManager.timeWaitCheckPoint1 -= Time.deltaTime;
+            textCanva.text = "Espera  " + GameManager.timeWaitCheckPoint1.ToString("F0") + "  para poder ver el Resultado";
         }
 
-        if (timeWait <= 1 && changePrincipalText2)
+        if (GameManager.timeWaitCheckPoint1 <= 1 && GameManager.changePrincipalText3CheckPoint1)
         {
             textCanva.text = "Ver los resultados del Lab con [Y]";
-            changePrincipalText2 = false;
+            GameManager.changePrincipalText3CheckPoint1 = false;
         }
     }
 
     public void ResultCheckPoint(InputAction.CallbackContext callbackContext)
     {
         // The last condition allow active a modal if there is Unpacked pasta
-        if (activeState && callbackContext.performed && !changePrincipalText)
+        if (activeState && callbackContext.performed && !GameManager.changePrincipalText1CheckPoint1)
         {
-            changePrincipalText1 = true;
+            GameManager.changePrincipalText2CheckPoint1 = true;
             timeCheckPoint = Time.time;
-            if (!changePrincipalText2)
+            if (!GameManager.changePrincipalText3CheckPoint1)
             {
                 Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
                 Result.SetActive(true); 
