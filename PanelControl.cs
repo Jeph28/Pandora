@@ -13,7 +13,6 @@ public class PanelControl : MonoBehaviour
     [SerializeField] public TMP_Text MessageState2Dryer;
     [SerializeField] public TMP_Text MessageState2Packing;
     [SerializeField] private CanvasGroup Target;
-    [SerializeField] float MaintenanceTimeDryer;
     [SerializeField] float MaintenanceTimePacking;
     bool FailureIcon = false;
     float alpha;
@@ -40,21 +39,21 @@ public class PanelControl : MonoBehaviour
         Target.alpha = Mathf.Clamp01(Target.alpha + alpha * Time.deltaTime);
         
         //CountDown Dryer
-        if (GameManager.CountDownActivateDryer && MaintenanceTimeDryer > 1)
+        if (GameManager.CountDownActivateDryer && GameManager.CountDownMaintenanceTimeDryer > 1)
         {
-        MaintenanceTimeDryer -= Time.deltaTime;
-        MessageState2Dryer.text = "Mantenimiento preventivo de la secadora en: " + MaintenanceTimeDryer.ToString("F0");
+        GameManager.CountDownMaintenanceTimeDryer -= Time.deltaTime;
+        MessageState2Dryer.text = "Mantenimiento preventivo de la secadora en: " + GameManager.CountDownMaintenanceTimeDryer.ToString("F0");
         }
 
-        //CountDown Packing
-         if (GameManager.CountDownActivatePacking && MaintenanceTimePacking > 1)
-        {
-        MaintenanceTimePacking -= Time.deltaTime;
-        MessageState2Packing.text = "Mantenimiento preventivo de la empaquetadora en: " + MaintenanceTimePacking.ToString("F0");
-        }
+        // //CountDown Packing
+        //  if (GameManager.CountDownActivatePacking && MaintenanceTimePacking > 1)
+        // {
+        // MaintenanceTimePacking -= Time.deltaTime;
+        // MessageState2Packing.text = "Mantenimiento preventivo de la empaquetadora en: " + MaintenanceTimePacking.ToString("F0");
+        // }
 
         //Need Maintenance Dryer Machine
-        if (MaintenanceTimeDryer <= 1 && !GameManager.NeedsMaintenanceDryer)
+        if (GameManager.CountDownMaintenanceTimeDryer <= 1 && !GameManager.NeedsMaintenanceDryer)
         {
             MessageState2Dryer.text = "¡La Secadora requiere mantenimiento!";
             GameManager.NeedsMaintenanceDryer = true;
@@ -65,17 +64,17 @@ public class PanelControl : MonoBehaviour
             }
         }
 
-        //Need Maintenance Packing Machine
-        if (MaintenanceTimePacking <= 1 && !GameManager.NeedsMaintenancePacking)
-        {
-            MessageState2Packing.text = "¡La Empaquetadora requiere mantenimiento!";
-            GameManager.NeedsMaintenancePacking = true;
+        // //Need Maintenance Packing Machine
+        // if (MaintenanceTimePacking <= 1 && !GameManager.NeedsMaintenancePacking)
+        // {
+        //     MessageState2Packing.text = "¡La Empaquetadora requiere mantenimiento!";
+        //     GameManager.NeedsMaintenancePacking = true;
 
-            if (!GameManager.PanelControlState2)
-            {
-                StartCoroutine(SpamIcon());
-            }
-        }
+        //     if (!GameManager.PanelControlState2)
+        //     {
+        //         StartCoroutine(SpamIcon());
+        //     }
+        // }
 
         if (GameManager.FailureDryer && !GameManager.PanelControlState2 && !FailureIcon)
         {

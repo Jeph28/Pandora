@@ -20,6 +20,7 @@ public class Manager1 : MonoBehaviour
     [SerializeField] public TMP_Text MessageDryer;
     //  MessageDryer = 1 "Presiona [Y] para configurar la secaodra"
     //  MessageDryer = 2 "Pulsa [Y] para hacer mantenimiento"
+    //  MessagerDyer = 3 "Espera x segundos"
     public bool lookAtCamera = true;
     float alpha;
 
@@ -85,7 +86,24 @@ public class Manager1 : MonoBehaviour
             MessageDryer.text = "Presiona [Y] para hacer mantenimiento";
             GameManager.MessageDryer = 2;
             GameManager.changeMessageMaintenanceDryer = false;
-        }  
+        }
+
+        //Maintenance time Dryer
+        if (GameManager.CountDownMaintenanceDryer && GameManager.MaintenanceTimeDryer > 1)
+        {
+        GameManager.MaintenanceTimeDryer -= Time.deltaTime;
+        MessageDryer.text = "Espera " + GameManager.MaintenanceTimeDryer.ToString("F0") + " segundos";
+        GameManager.MessageDryer = 3;
+        }
+
+        if (GameManager.MaintenanceTimeDryer <= 1 && !GameManager.ReadyMaintenanceDryer)
+        {
+            MessageDryer.text = "Presiona [Y] para configurar";
+            GameManager.ReadyMaintenanceDryer = true;
+            GameManager.MessageDryer = 1;
+            GameManager.CountDownMaintenanceTimeDryer = 15;
+            GameManager.NeedsMaintenanceDryer = false;
+        } 
     }
 
     public void DryerMachine(InputAction.CallbackContext callbackContext)
