@@ -12,6 +12,7 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private GameObject State3;
     [SerializeField] public TMP_Text MessageState2Dryer;
     [SerializeField] public TMP_Text MessageState2Packing;
+    [SerializeField] private TMP_Text textDryerMachine;
     [SerializeField] private CanvasGroup Target;
     [SerializeField] float MaintenanceTimePacking;
     bool FailureIcon = false;
@@ -57,11 +58,27 @@ public class PanelControl : MonoBehaviour
         {
             MessageState2Dryer.text = "¡La Secadora requiere mantenimiento!";
             GameManager.NeedsMaintenanceDryer = true;
+            GameManager.changeMessageMaintenanceDryer = true;
+            GameManager.OpportunityMaintenanceDryer = Time.time;
 
             if (!GameManager.PanelControlState2)
             {
                 StartCoroutine(SpamIcon());
             }
+        }
+
+        if (Time.time - GameManager.OpportunityMaintenanceDryer > 200 && GameManager.NeedsMaintenanceDryer)
+        {
+            GameManager.MaintenanceDryer = false;
+            GameManager.MessageDryer = 1;
+            GameManager.NeedsMaintenanceDryer = false;
+            textDryerMachine.text = "Presiona [Y] para configurar";
+            GameManager.CountDownMaintenanceTimeDryer = 15;
+        }
+
+        if (GameManager.MessageDryer == 3)
+        {
+            MessageState2Dryer.text = "Se le esta realizando mantenimiento a la secadora";
         }
 
         // //Need Maintenance Packing Machine
@@ -107,7 +124,7 @@ public class PanelControl : MonoBehaviour
 
     IEnumerator SpamIcon()
     {
-        while (!GameManager.PanelControlState2)
+        while (!GameManager.PanelControlState2 || !GameManager.NeedsMaintenanceDryer)
         {
             State3.SetActive(true);
             yield return new WaitForSeconds(0.25f);

@@ -16,6 +16,7 @@ public class Manager1 : MonoBehaviour
     public float distance;
     [SerializeField] private GameObject DryerMenu;
     [SerializeField] private GameObject MaintenanceDryerMenu;
+    [SerializeField] private TMP_Text textMaintenanceDryerMenu;
 
     [SerializeField] public TMP_Text MessageDryer;
     //  MessageDryer = 1 "Presiona [Y] para configurar la secaodra"
@@ -101,8 +102,10 @@ public class Manager1 : MonoBehaviour
             MessageDryer.text = "Presiona [Y] para configurar";
             GameManager.ReadyMaintenanceDryer = true;
             GameManager.MessageDryer = 1;
+            GameManager.MaintenanceDryer = false;
             GameManager.CountDownMaintenanceTimeDryer = 15;
             GameManager.NeedsMaintenanceDryer = false;
+            GameManager.CountDownMaintenanceDryer = false;
         } 
     }
 
@@ -121,7 +124,11 @@ public class Manager1 : MonoBehaviour
     {
         if (callbackContext.performed && GameManager.MessageDryer == 2 && activeState)
         {
+            GameManager.MaintenanceCostDryer = Random.Range(80, 120);
+            GameManager.MaintenanceTimeDryer = Random.Range(15, 20);
+            textMaintenanceDryerMenu.text = "Es momento de realizarle el mantenimiento preventivo programado al ventilador de la máquina secadora, esto tiene un costo de $" + GameManager.MaintenanceCostDryer.ToString("F0") + " y se demora un tiempo de " + GameManager.MaintenanceTimeDryer.ToString("F0") + " segundos, así que eres tu como Ingeniero Industrial el que tiene que decidir si realizarle el mantenimiento o no. Recuerda que todas tus decisiones afectarán a la calidad del producto terminado.";
             MaintenanceDryerMenu.SetActive(true);
+            GameManager.ReadyMaintenanceDryer = false;
             GameManager.MaintenanceDryerMenu = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true; 

@@ -55,7 +55,7 @@ public class Switch1 : MonoBehaviour
 
     void Update()
     {
-        if (!activeState && !GameManager.FailureDryer)
+        if (!activeState && !GameManager.FailureDryer && !GameManager.MaintenanceDryer)
         {
             if (IsTargetNear())
             {
@@ -66,7 +66,7 @@ public class Switch1 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear())
+            if (!IsTargetNear() || GameManager.MaintenanceDryer)
             {
                 alpha = -1;
                 activeState = false;
@@ -89,7 +89,7 @@ public class Switch1 : MonoBehaviour
     {
         if (activeState && callbackContext.performed)
         {
-            if (!Status && (Time.time - timeSwitch) > 2.0f)
+            if (!Status && (Time.time - timeSwitch) > 2.0f && !GameManager.MaintenanceDryer)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));

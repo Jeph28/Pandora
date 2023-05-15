@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Settings : MonoBehaviour
 {
@@ -19,5 +20,13 @@ public class Settings : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Quit(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            Application.Quit();
+        }
     }
 }
