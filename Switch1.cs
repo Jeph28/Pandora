@@ -89,7 +89,7 @@ public class Switch1 : MonoBehaviour
     {
         if (activeState && callbackContext.performed)
         {
-            if (!Status && (Time.time - timeSwitch) > 2.0f && !GameManager.MaintenanceDryer)
+            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenanceDryer)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
@@ -106,7 +106,7 @@ public class Switch1 : MonoBehaviour
                 DryerMachine.Instance.TemperaturePrice();
                 StartCoroutine(DryerMachineOn());
             }
-            if (Status && (Time.time - timeSwitch) > 2.0f)
+            if (Status && (Time.time - timeSwitch) > 3.0f)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOff(lerpDuration));

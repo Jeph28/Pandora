@@ -59,7 +59,7 @@ public class Switch2 : MonoBehaviour
 
     void Update()
     {
-        if (!activeState)
+        if (!activeState && !GameManager.FailurePacking && !GameManager.MaintenancePacking)
         {
             if (IsTargetNear())
             {
@@ -70,7 +70,7 @@ public class Switch2 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear())
+            if (!IsTargetNear() || GameManager.MaintenancePacking)
             {
                 alpha = -1;
                 activeState = false;
@@ -100,7 +100,7 @@ public class Switch2 : MonoBehaviour
         
         if (activeState && callbackContext.performed)
         {
-            if (!Status && (Time.time - timeSwitch) > 2.0f)
+            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenancePacking)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
@@ -113,7 +113,7 @@ public class Switch2 : MonoBehaviour
                 StartCoroutine(PackingMachineOn());
                 
             }
-            if (Status && (Time.time - timeSwitch) > 2.0f)
+            if (Status && (Time.time - timeSwitch) > 3.0f)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOff(lerpDuration));

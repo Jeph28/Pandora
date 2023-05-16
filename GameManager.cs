@@ -39,11 +39,13 @@ public static class GameManager
     public static bool PanelControlState3 = false;
     public static bool CountDownActivateDryer = false;
     public static bool CountDownMaintenanceDryer = false;
+    public static bool CountDownMaintenancePacking = false;
     public static bool CountDownActivatePacking = false;
     public static bool NeedsMaintenanceDryer = false;
     public static bool NeedsMaintenancePacking = false;
     public static bool DryerMenu;
     public static bool MaintenanceDryerMenu = false;
+    public static bool MaintenancePackingMenu = false;
     public static bool PackingMenu;
     public static int MessageDryer = 1;
     public static int MessagePacking = 1;
@@ -58,11 +60,19 @@ public static class GameManager
     public static bool changePrincipalText3CheckPoint1 = true;
     public static float timeWaitCheckPoint1 = 10;
     public static bool MaintenanceDryer = false;
-    public static float CountDownMaintenanceTimeDryer = 15;
-    public static float MaintenanceTimeDryer = 100;
-    public static int MaintenanceCostDryer;
-    public static bool ReadyMaintenanceDryer = false;
     public static bool MaintenancePacking = false;
+    public static float CountDownMaintenanceTimeDryer = 15;
+    public static float CountDownMaintenanceTimePacking = 15;
+    public static float MaintenanceTimeDryer = 10;
+    public static float MaintenanceTimePacking = 10;
+    public static int MaintenanceCostDryer;
+    public static int MaintenanceCostPacking;
+    public static bool ReadyMaintenanceDryer = false;
+    public static bool ReadyMaintenancePacking = false;
     public static bool changeMessageMaintenanceDryer = true;
+    public static bool changeMessageMaintenancePacking = true;
+
     public static float OpportunityMaintenanceDryer;
+    public static float OpportunityMaintenancePacking;
+
 }

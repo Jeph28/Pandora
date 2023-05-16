@@ -21,7 +21,7 @@ public class Manager1 : MonoBehaviour
     [SerializeField] public TMP_Text MessageDryer;
     //  MessageDryer = 1 "Presiona [Y] para configurar la secaodra"
     //  MessageDryer = 2 "Pulsa [Y] para hacer mantenimiento"
-    //  MessagerDyer = 3 "Espera x segundos"
+    //  MessageDyer = 3 "Espera x segundos"
     public bool lookAtCamera = true;
     float alpha;
 

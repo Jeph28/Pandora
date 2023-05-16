@@ -13,7 +13,12 @@ public class Manager2 : MonoBehaviour
     public CanvasGroup target;
     public float distance;
     [SerializeField] private GameObject PackingMenu;
+    [SerializeField] private GameObject MaintenancePackingMenu;
+    [SerializeField] private TMP_Text textMaintenancePackingMenu;
     [SerializeField] public TMP_Text MessagePacking;
+    //  MessagePacking = 1 "Presiona [Y] para configurar la empaquetadora"
+    //  MessagePacking = 2 "Pulsa [Y] para hacer mantenimiento"
+    //  MessagePacking = 3 "Espera x segundos"
     public bool lookAtCamera = true;
     float alpha;
     Quaternion originRotation, targetRotation;
@@ -74,11 +79,31 @@ public class Manager2 : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
 
-        if (GameManager.NeedsMaintenancePacking)
+        if (GameManager.NeedsMaintenancePacking && GameManager.changeMessageMaintenancePacking)
         {
             MessagePacking.text = "Presiona [Y] para hacer mantenimiento";
             GameManager.MessagePacking = 2;
+            GameManager.changeMessageMaintenancePacking = false;
         }
+
+        //Maintenance time Dryer
+        if (GameManager.CountDownMaintenancePacking && GameManager.MaintenanceTimePacking > 1)
+        {
+        GameManager.MaintenanceTimePacking -= Time.deltaTime;
+        MessagePacking.text = "Espera " + GameManager.MaintenanceTimePacking.ToString("F0") + " segundos";
+        GameManager.MessagePacking = 3;
+        }
+
+        if (GameManager.MaintenanceTimePacking <= 1 && !GameManager.ReadyMaintenancePacking)
+        {
+            MessagePacking.text = "Presiona [Y] para configurar";
+            GameManager.ReadyMaintenancePacking = true;
+            GameManager.MessagePacking = 1;
+            GameManager.MaintenancePacking = false;
+            GameManager.CountDownMaintenanceTimePacking = 15;
+            GameManager.NeedsMaintenancePacking = false;
+            GameManager.CountDownMaintenancePacking = false;
+        } 
     }
 
     public void PackingMachine(InputAction.CallbackContext callbackContext)
@@ -87,6 +112,21 @@ public class Manager2 : MonoBehaviour
         {
             PackingMenu.SetActive(true);
             GameManager.PackingMenu = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true; 
+        }
+    }
+
+    public void MaintenancePackingMachine(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed && GameManager.MessagePacking == 2 && activeState)
+        {
+            GameManager.MaintenanceCostPacking = Random.Range(80, 120);
+            GameManager.MaintenanceTimePacking = Random.Range(15, 20);
+            textMaintenancePackingMenu.text = "Es momento de realizarle el mantenimiento preventivo programado a los sellos de la máquina empaquetadora, esto tiene un costo de $" + GameManager.MaintenanceCostPacking.ToString("F0") + " y se demora un tiempo de " + GameManager.MaintenanceTimePacking.ToString("F0") + " segundos, así que eres tu como Ingeniero Industrial el que tiene que decidir si realizarle el mantenimiento o no. Recuerda que todas tus decisiones afectarán a la calidad del producto terminado.";
+            MaintenancePackingMenu.SetActive(true);
+            GameManager.ReadyMaintenancePacking = false;
+            GameManager.MaintenancePackingMenu = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true; 
         }

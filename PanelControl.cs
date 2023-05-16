@@ -13,8 +13,8 @@ public class PanelControl : MonoBehaviour
     [SerializeField] public TMP_Text MessageState2Dryer;
     [SerializeField] public TMP_Text MessageState2Packing;
     [SerializeField] private TMP_Text textDryerMachine;
+    [SerializeField] private TMP_Text textPackingMachine;
     [SerializeField] private CanvasGroup Target;
-    [SerializeField] float MaintenanceTimePacking;
     bool FailureIcon = false;
     float alpha;
     
@@ -46,12 +46,12 @@ public class PanelControl : MonoBehaviour
         MessageState2Dryer.text = "Mantenimiento preventivo de la secadora en: " + GameManager.CountDownMaintenanceTimeDryer.ToString("F0");
         }
 
-        // //CountDown Packing
-        //  if (GameManager.CountDownActivatePacking && MaintenanceTimePacking > 1)
-        // {
-        // MaintenanceTimePacking -= Time.deltaTime;
-        // MessageState2Packing.text = "Mantenimiento preventivo de la empaquetadora en: " + MaintenanceTimePacking.ToString("F0");
-        // }
+        //CountDown Packing
+         if (GameManager.CountDownActivatePacking && GameManager.CountDownMaintenanceTimePacking > 1)
+        {
+        GameManager.CountDownMaintenanceTimePacking -= Time.deltaTime;
+        MessageState2Packing.text = "Mantenimiento preventivo de la empaquetadora en: " + GameManager.CountDownMaintenanceTimePacking.ToString("F0");
+        }
 
         //Need Maintenance Dryer Machine
         if (GameManager.CountDownMaintenanceTimeDryer <= 1 && !GameManager.NeedsMaintenanceDryer)
@@ -67,6 +67,7 @@ public class PanelControl : MonoBehaviour
             }
         }
 
+        //Opportunity to do Maintenance Dryer Machine
         if (Time.time - GameManager.OpportunityMaintenanceDryer > 200 && GameManager.NeedsMaintenanceDryer)
         {
             GameManager.MaintenanceDryer = false;
@@ -81,19 +82,42 @@ public class PanelControl : MonoBehaviour
             MessageState2Dryer.text = "Se le esta realizando mantenimiento a la secadora";
         }
 
-        // //Need Maintenance Packing Machine
-        // if (MaintenanceTimePacking <= 1 && !GameManager.NeedsMaintenancePacking)
-        // {
-        //     MessageState2Packing.text = "¡La Empaquetadora requiere mantenimiento!";
-        //     GameManager.NeedsMaintenancePacking = true;
+        //Need Maintenance Packing Machine
+        if (GameManager.CountDownMaintenanceTimePacking <= 1 && !GameManager.NeedsMaintenancePacking)
+        {
+            MessageState2Packing.text = "¡La Empaquetadora requiere mantenimiento!";
+            GameManager.NeedsMaintenancePacking = true;
+            GameManager.changeMessageMaintenancePacking = true;
+            GameManager.OpportunityMaintenancePacking = Time.time;
 
-        //     if (!GameManager.PanelControlState2)
-        //     {
-        //         StartCoroutine(SpamIcon());
-        //     }
-        // }
+            if (!GameManager.PanelControlState2)
+            {
+                StartCoroutine(SpamIcon());
+            }
+        }
+
+        //Opportunity to do Maintenance Packing Machine
+        if (Time.time - GameManager.OpportunityMaintenancePacking > 20 && GameManager.NeedsMaintenancePacking)
+        {
+            GameManager.MaintenancePacking = false;
+            GameManager.MessagePacking = 1;
+            GameManager.NeedsMaintenancePacking = false;
+            textPackingMachine.text = "Presiona [Y] para configurar";
+            GameManager.CountDownMaintenanceTimePacking = 15;
+        }
+
+        if (GameManager.MessagePacking == 3)
+        {
+            MessageState2Packing.text = "Se le esta realizando mantenimiento a la empaquetadora";
+        }
 
         if (GameManager.FailureDryer && !GameManager.PanelControlState2 && !FailureIcon)
+        {
+            StartCoroutine(SpamIcon());
+            FailureIcon = true;
+        }
+
+        if (GameManager.FailurePacking && !GameManager.PanelControlState2 && !FailureIcon)
         {
             StartCoroutine(SpamIcon());
             FailureIcon = true;
@@ -124,7 +148,7 @@ public class PanelControl : MonoBehaviour
 
     IEnumerator SpamIcon()
     {
-        while (!GameManager.PanelControlState2 || !GameManager.NeedsMaintenanceDryer)
+        while (!GameManager.PanelControlState2 || !GameManager.NeedsMaintenanceDryer || !GameManager.NeedsMaintenancePacking)
         {
             State3.SetActive(true);
             yield return new WaitForSeconds(0.25f);
