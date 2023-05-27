@@ -59,6 +59,8 @@ public static class GameManager
     public static bool changePrincipalText2CheckPoint1 = false;
     public static bool changePrincipalText3CheckPoint1 = true;
     public static float timeWaitCheckPoint1 = 10;
+    public static float timeCheckPoint;
+    public static bool ContextCheckPoint;
     public static bool MaintenanceDryer = false;
     public static bool MaintenancePacking = false;
     public static float CountDownMaintenanceTimeDryer = 15;

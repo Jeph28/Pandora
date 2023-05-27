@@ -17,9 +17,9 @@ public class CheckPoint : MonoBehaviour
     Quaternion originRotation, targetRotation;
     [SerializeField] private GameObject Result;
     [SerializeField] private TMP_Text Changetext;
-    private float timeCheckPoint;
+    [SerializeField] private GameObject ContextCheckPoint;
+    // private float timeCheckPoint;
     public float distance;
-
     public bool lookAtCamera = true;
 
 
@@ -86,7 +86,7 @@ public class CheckPoint : MonoBehaviour
             GameManager.changePrincipalText1CheckPoint1 = false;
         }
 
-        if (Time.time - timeCheckPoint < 60f && GameManager.changePrincipalText2CheckPoint1 && GameManager.timeWaitCheckPoint1 > 1)
+        if (GameManager.changePrincipalText2CheckPoint1 && GameManager.timeWaitCheckPoint1 > 1)
         {
             GameManager.timeWaitCheckPoint1 -= Time.deltaTime;
             textCanva.text = "Espera  " + GameManager.timeWaitCheckPoint1.ToString("F0") + "  para poder ver el Resultado";
@@ -104,16 +104,28 @@ public class CheckPoint : MonoBehaviour
         // The last condition allow active a modal if there is Unpacked pasta
         if (activeState && callbackContext.performed && !GameManager.changePrincipalText1CheckPoint1)
         {
-            GameManager.changePrincipalText2CheckPoint1 = true;
-            timeCheckPoint = Time.time;
-            if (!GameManager.changePrincipalText3CheckPoint1)
-            {
-                Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
-                Result.SetActive(true); 
-            }
+            ContextCheckPoint.SetActive(true);
+            GameManager.ContextCheckPoint = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            // GameManager.changePrincipalText2CheckPoint1 = true;
+            // timeCheckPoint = Time.time;
+            // if (!GameManager.changePrincipalText3CheckPoint1)
+            // {
+            //     Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+            //     Result.SetActive(true); 
+            // }
         }
     }
-
+    public void Accept()
+    {
+        ContextCheckPoint.SetActive(false);
+        GameManager.ContextCheckPoint = false;
+        GameManager.timeCheckPoint = Time.time;
+        GameManager.changePrincipalText2CheckPoint1 = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     
 
 }
