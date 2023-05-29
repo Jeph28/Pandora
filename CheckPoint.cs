@@ -96,27 +96,33 @@ public class CheckPoint : MonoBehaviour
         {
             textCanva.text = "Ver los resultados del Lab con [Y]";
             GameManager.changePrincipalText3CheckPoint1 = false;
+            GameManager.changePrincipalText2CheckPoint1 = true;
+            
         }
     }
 
-    public void ResultCheckPoint(InputAction.CallbackContext callbackContext)
+    public void Context(InputAction.CallbackContext callbackContext)
     {
         // The last condition allow active a modal if there is Unpacked pasta
-        if (activeState && callbackContext.performed && !GameManager.changePrincipalText1CheckPoint1)
+        if (activeState && callbackContext.performed && !GameManager.changePrincipalText1CheckPoint1 && !GameManager.changePrincipalText2CheckPoint1)
         {
             ContextCheckPoint.SetActive(true);
             GameManager.ContextCheckPoint = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            // GameManager.changePrincipalText2CheckPoint1 = true;
-            // timeCheckPoint = Time.time;
-            // if (!GameManager.changePrincipalText3CheckPoint1)
-            // {
-            //     Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
-            //     Result.SetActive(true); 
-            // }
+            
         }
     }
+
+    public void ResultCheckPoint(InputAction.CallbackContext callbackContext)
+    {
+        if (!GameManager.changePrincipalText3CheckPoint1)
+        {
+            Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+            Result.SetActive(true); 
+        }
+    }
+
     public void Accept()
     {
         ContextCheckPoint.SetActive(false);

@@ -73,8 +73,6 @@ public static class GameManager
     public static bool ReadyMaintenancePacking = false;
     public static bool changeMessageMaintenanceDryer = true;
     public static bool changeMessageMaintenancePacking = true;
-
     public static float OpportunityMaintenanceDryer;
     public static float OpportunityMaintenancePacking;
-
 }
