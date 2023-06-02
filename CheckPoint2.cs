@@ -15,7 +15,7 @@ public class CheckPoint2 : MonoBehaviour
     [SerializeField] private TMP_Text Changetext;
     [SerializeField] private GameObject Result;
     public float distance;
-    string MoreLess = "\u00B1";
+    // string MoreLess = "\u00B1";
     public bool lookAtCamera = true;
 
     float alpha;
@@ -79,7 +79,7 @@ public class CheckPoint2 : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
 
-        Changetext.text = "Contexto... " + "\n" + "\n" + "Peso : " + GameManager.WeightDeviationString + MoreLess + "\n" + "Pastas Producidas : " + GameManager.PastaScore.ToString() + "\n" + "Ruptura Mecanica : 1";
+        Changetext.text = "Aqui va a ir un pequeno contexto para ofrecerle informacion importante al usuario que le permita entender mejor los valores reflejados abajo " + "\n" + "\n" + "Peso : 1 Kg con desviacion de " + GameManager.StdDevWeight.ToString() + "%" + "\n" + "\n"+ "Cantidad de pasta empaquetada : " + GameManager.PastaScore.ToString() + "\n" +"\n" + "Ruptura Mecanica : 1";
     }
 
     public void DestroyScript(InputAction.CallbackContext callbackContext)

@@ -17,8 +17,7 @@ public static class GameManager
     public static List<float> pastaHumidityList = new List<float>();
     public static string pastaHumidityPercentageString;
     public static string pastaHumidityString;
-    public static int WeightDeviation;
-    public static List<float> pastaWeightList = new List<float>();
+    public static List<float> pastaStdDevWeightList = new List<float>();
     public static float user_temperature = 80;
     public static float user_time = 180;
     public static float user_speed = 20;
@@ -33,7 +32,6 @@ public static class GameManager
     public static List<float> DryerMachineEfficiencyList = new List<float>();
     public static string PackingMachineEfficiencyString;
     public static List<float> PackingMachineEfficiencyList = new List<float>();
-    public static string WeightDeviationString;
     public static bool PanelControlState1 = true;
     public static bool PanelControlState2 = false;
     public static bool PanelControlState3 = false;
@@ -75,4 +73,6 @@ public static class GameManager
     public static bool changeMessageMaintenancePacking = true;
     public static float OpportunityMaintenanceDryer;
     public static float OpportunityMaintenancePacking;
+    public static float StdDevHumidity;
+    public static int StdDevWeight;
 }

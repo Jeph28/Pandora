@@ -37,21 +37,18 @@ public class PackingMachine : MonoBehaviour
     {
         if (GameManager.user_speed <= 30f)
         {
-            GameManager.WeightDeviation = -1;
-            GameManager.WeightDeviationString = "1% Menos";
+            GameManager.StdDevWeight = Random.Range(1, 3);
         }
         if (GameManager.user_speed > 30f && GameManager.user_speed <= 40f)
         {
-            GameManager.WeightDeviation = 1;
-            GameManager.WeightDeviationString = "1% Mas";
+            GameManager.StdDevWeight = Random.Range(2, 4);
         }
         if (GameManager.user_speed > 40f)
         {
-            GameManager.WeightDeviation = 2;
-            GameManager.WeightDeviationString = "2% Mas";
+            GameManager.StdDevWeight = Random.Range(3, 6);
         }
 
-        GameManager.pastaWeightList.Add(GameManager.WeightDeviation);
+        GameManager.pastaStdDevWeightList.Add(GameManager.StdDevWeight);
     }
 
     public void EfficiencyMachine()
