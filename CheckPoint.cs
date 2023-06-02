@@ -18,9 +18,11 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private GameObject Result;
     [SerializeField] private TMP_Text Changetext;
     [SerializeField] private GameObject ContextCheckPoint;
+    private bool ResultBool = false;
     // private float timeCheckPoint;
     public float distance;
     public bool lookAtCamera = true;
+    string MoreLess = "\u00B1";
 
 
     void Start()
@@ -65,6 +67,7 @@ public class CheckPoint : MonoBehaviour
                 alpha = -1;
                 activeState = false;
                 Result.SetActive(false);
+                ResultBool = false;
             }
         }
         target.alpha = Mathf.Clamp01(target.alpha + alpha * Time.deltaTime);
@@ -116,10 +119,16 @@ public class CheckPoint : MonoBehaviour
 
     public void ResultCheckPoint(InputAction.CallbackContext callbackContext)
     {
-        if (!GameManager.changePrincipalText3CheckPoint1)
+        if (ResultBool)
         {
-            Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
-            Result.SetActive(true); 
+            Result.SetActive(false);
+            ResultBool = false; 
+        }
+        else if (!GameManager.changePrincipalText3CheckPoint1 && activeState)
+        {
+            Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + " " + MoreLess +"\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+            Result.SetActive(true);
+            ResultBool = true;
         }
     }
 

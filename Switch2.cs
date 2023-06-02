@@ -126,10 +126,10 @@ public class Switch2 : MonoBehaviour
 
     IEnumerator PackingMachineOn()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         while ((Status && GameManager.DryerMachine) || (Status && GameManager.UnpackOn > 0f))
         {
-            yield return new WaitForSeconds(( 40f / GameManager.user_speed));
+            yield return new WaitForSeconds(( 50f / GameManager.user_speed));
             
             if (Status)
             {

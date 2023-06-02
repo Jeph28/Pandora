@@ -148,7 +148,7 @@ public class PanelControl : MonoBehaviour
 
     IEnumerator SpamIcon()
     {
-        while (!GameManager.PanelControlState2 || !GameManager.NeedsMaintenanceDryer || !GameManager.NeedsMaintenancePacking)
+        while (!GameManager.PanelControlState2)
         {
             State3.SetActive(true);
             yield return new WaitForSeconds(0.25f);
