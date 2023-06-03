@@ -75,4 +75,5 @@ public static class GameManager
     public static float OpportunityMaintenancePacking;
     public static float StdDevHumidity;
     public static int StdDevWeight;
+    public static int UnpackPastaScore = 0;
 }

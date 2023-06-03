@@ -47,12 +47,14 @@ public class UnpackPastaPoolRaw : MonoBehaviour
             {
                 PastaList[i].SetActive(true);
                 GameManager.UnpackOn++;
+                GameManager.UnpackPastaScore++;
                 return PastaList[i];
             }
         }
         AddPastaToPool(1);
         PastaList[PastaList.Count- 1].SetActive(true);
         GameManager.UnpackOn++;
+        GameManager.UnpackPastaScore++;
         return PastaList[PastaList.Count- 1];
     }
     

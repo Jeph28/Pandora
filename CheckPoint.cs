@@ -102,6 +102,9 @@ public class CheckPoint : MonoBehaviour
             GameManager.changePrincipalText2CheckPoint1 = true;
             
         }
+
+        Changetext.text = "Aqui va a ir un pequeno contexto para ofrecerle informacion importante al usuario que le permita entender mejor los valores reflejados abajo " + "\n" + "\n" + "Cantidad producida : " + GameManager.UnpackPastaScore + "\n" + "\n" + "Promedio de la Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "\n" + "Desviacion de la Humedad : " + MoreLess +" 2%" + "\n" + "\n"+ "Color : " + GameManager.pastaColorString + "\n" + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+
     }
 
     public void Context(InputAction.CallbackContext callbackContext)
@@ -126,7 +129,6 @@ public class CheckPoint : MonoBehaviour
         }
         else if (!GameManager.changePrincipalText3CheckPoint1 && activeState)
         {
-            Changetext.text = "Contexto... " + "\n" + "\n" + "Humedad : " + GameManager.pastaHumidityPercentageString + " " + MoreLess +"\n" + "Color : " + GameManager.pastaColorString + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
             Result.SetActive(true);
             ResultBool = true;
         }
