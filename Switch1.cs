@@ -66,7 +66,7 @@ public class Switch1 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.MaintenanceDryer)
+            if (!IsTargetNear() || GameManager.MaintenanceDryer || GameManager.RawMaterial == 0)
             {
                 alpha = -1;
                 activeState = false;

@@ -47,7 +47,7 @@ public static class GameManager
     public static bool PackingMenu;
     public static int MessageDryer = 1;
     public static int MessagePacking = 1;
-    public static int RawMaterial = 1;
+    public static int RawMaterial = 0;
     public static float Acidity;
     public static float Protein;
     public static float Ash;
@@ -76,4 +76,5 @@ public static class GameManager
     public static float StdDevHumidity;
     public static int StdDevWeight;
     public static int UnpackPastaScore = 0;
+    public static bool RawMaterialMenu = false;
 }

@@ -70,7 +70,7 @@ public class Switch2 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.MaintenancePacking)
+            if (!IsTargetNear() || GameManager.MaintenancePacking || GameManager.RawMaterial == 0)
             {
                 alpha = -1;
                 activeState = false;

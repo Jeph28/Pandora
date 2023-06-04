@@ -8,7 +8,7 @@ public class MoveH : MonoBehaviour
     private PlayerInput playerInput;
     private Vector2 input;
     public Transform playerBody;
-    private float xRotacion = 0f;
+    private float xRotacion = 24;
     public float Sensibility;
     public float mouseSensitivity;
 
@@ -29,7 +29,7 @@ public class MoveH : MonoBehaviour
         xRotacion -= input.y;
         xRotacion = Mathf.Clamp(xRotacion,-80,80);
         transform.localRotation = Quaternion.Euler(xRotacion,0,0);
-        if (input == Vector2.zero && !GameManager.DryerMenu && !GameManager.PackingMenu && !GameManager.MaintenanceDryerMenu && !GameManager.MaintenancePackingMenu && !GameManager.ContextCheckPoint)
+        if (input == Vector2.zero && !GameManager.DryerMenu && !GameManager.PackingMenu && !GameManager.MaintenanceDryerMenu && !GameManager.MaintenancePackingMenu && !GameManager.ContextCheckPoint && !GameManager.RawMaterialMenu)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

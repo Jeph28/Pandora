@@ -94,18 +94,19 @@ public class DryerMachine : MonoBehaviour
         GameManager.pastaHumidityPercentageString = HumidityPercentage.ToString("F2") + "%";
         GameManager.pastaHumidityList.Add(HumidityPercentage);
         
-        if ( HumidityPercentage > 13.5f)
-        {
-            GameManager.pastaHumidityString = "Alto nivel de humedad";
-        }
-        if ( HumidityPercentage <= 13.5f && HumidityPercentage >= 12.6)
-        {
-            GameManager.pastaHumidityString = "Nivel normal de humedad";
-        }
-        if (HumidityPercentage < 12.6f)
-        {
-            GameManager.pastaHumidityString = "Bajo nivel de humedad";
-        }
+        //Humidity Analysis
+        // if ( HumidityPercentage > 13.5f)
+        // {
+        //     GameManager.pastaHumidityString = "Alto nivel de humedad";
+        // }
+        // if ( HumidityPercentage <= 13.5f && HumidityPercentage >= 12.6)
+        // {
+        //     GameManager.pastaHumidityString = "Nivel normal de humedad";
+        // }
+        // if (HumidityPercentage < 12.6f)
+        // {
+        //     GameManager.pastaHumidityString = "Bajo nivel de humedad";
+        // }
     }
        public void Craking()
     {

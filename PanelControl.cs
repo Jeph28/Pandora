@@ -15,6 +15,7 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private TMP_Text textDryerMachine;
     [SerializeField] private TMP_Text textPackingMachine;
     [SerializeField] private CanvasGroup Target;
+    private bool InitialState = true;
     bool FailureIcon = false;
     float alpha;
     
@@ -51,6 +52,13 @@ public class PanelControl : MonoBehaviour
         {
         GameManager.CountDownMaintenanceTimePacking -= Time.deltaTime;
         MessageState2Packing.text = "Mantenimiento preventivo de la empaquetadora en: " + GameManager.CountDownMaintenanceTimePacking.ToString("F0");
+        }
+
+        //Initial state 
+        if (InitialState)
+        {
+            StartCoroutine(SpamIcon());
+            InitialState = false;
         }
 
         //Need Maintenance Dryer Machine
