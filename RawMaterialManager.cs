@@ -50,7 +50,7 @@ public class RawMaterialManager : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear())
+            if (IsTargetNear() && GameManager.RawMaterial == 0)
             {
                 alpha = 1;
                 activeState = true;
@@ -58,7 +58,7 @@ public class RawMaterialManager : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear())
+            if (!IsTargetNear() || GameManager.RawMaterial != 0)
             {
                 alpha = -1;
                 activeState = false;

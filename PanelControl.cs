@@ -76,13 +76,13 @@ public class PanelControl : MonoBehaviour
         }
 
         //Opportunity to do Maintenance Dryer Machine
-        if (Time.time - GameManager.OpportunityMaintenanceDryer > 200 && GameManager.NeedsMaintenanceDryer)
+        if (Time.time - GameManager.OpportunityMaintenanceDryer > GameManager.MaintenanceExpirationDryer && GameManager.NeedsMaintenanceDryer)
         {
             GameManager.MaintenanceDryer = false;
             GameManager.MessageDryer = 1;
             GameManager.NeedsMaintenanceDryer = false;
             textDryerMachine.text = "Presiona [Y] para configurar";
-            GameManager.CountDownMaintenanceTimeDryer = 15;
+            GameManager.CountDownMaintenanceTimeDryer = GameManager.timeBetweenMaintenanceDryer;
         }
 
         if (GameManager.MessageDryer == 3)
@@ -105,13 +105,13 @@ public class PanelControl : MonoBehaviour
         }
 
         //Opportunity to do Maintenance Packing Machine
-        if (Time.time - GameManager.OpportunityMaintenancePacking > 20 && GameManager.NeedsMaintenancePacking)
+        if (Time.time - GameManager.OpportunityMaintenancePacking > GameManager.MaintenanceExpirationPacking && GameManager.NeedsMaintenancePacking)
         {
             GameManager.MaintenancePacking = false;
             GameManager.MessagePacking = 1;
             GameManager.NeedsMaintenancePacking = false;
             textPackingMachine.text = "Presiona [Y] para configurar";
-            GameManager.CountDownMaintenanceTimePacking = 15;
+            GameManager.CountDownMaintenanceTimePacking = GameManager.timeBetweenMaintenancePacking;
         }
 
         if (GameManager.MessagePacking == 3)

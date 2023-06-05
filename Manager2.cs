@@ -100,7 +100,7 @@ public class Manager2 : MonoBehaviour
             GameManager.ReadyMaintenancePacking = true;
             GameManager.MessagePacking = 1;
             GameManager.MaintenancePacking = false;
-            GameManager.CountDownMaintenanceTimePacking = 15;
+            GameManager.CountDownMaintenanceTimePacking = GameManager.timeBetweenMaintenancePacking;
             GameManager.NeedsMaintenancePacking = false;
             GameManager.CountDownMaintenancePacking = false;
         } 

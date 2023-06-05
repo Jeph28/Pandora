@@ -103,7 +103,7 @@ public class CheckPoint : MonoBehaviour
             
         }
 
-        Changetext.text = "Aqui va a ir un pequeno contexto para ofrecerle informacion importante al usuario que le permita entender mejor los valores reflejados abajo " + "\n" + "\n" + "Cantidad producida : " + GameManager.UnpackPastaScore + "\n" + "\n" + "Promedio de la Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "\n" + "Desviacion de la Humedad : " + MoreLess +" 2%" + "\n" + "\n"+ "Color : " + GameManager.pastaColorString + "\n" + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+        Changetext.text = "Aqui va a ir un pequeno contexto para ofrecerle informacion importante al usuario que le permita entender mejor los valores reflejados abajo " + "\n" + "\n" + "Cantidad producida : " + GameManager.UnpackPastaScore + "\n" + "\n" + "Promedio de la Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "\n" + "Desviacion de la Humedad : " + MoreLess + " " + GameManager.StdDevHumidity + "%" + "\n" + "\n"+ "Color : " + GameManager.pastaColorString + "\n" + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
 
     }
 

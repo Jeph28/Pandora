@@ -103,7 +103,7 @@ public class Manager1 : MonoBehaviour
             GameManager.ReadyMaintenanceDryer = true;
             GameManager.MessageDryer = 1;
             GameManager.MaintenanceDryer = false;
-            GameManager.CountDownMaintenanceTimeDryer = 15;
+            GameManager.CountDownMaintenanceTimeDryer = GameManager.timeBetweenMaintenanceDryer;
             GameManager.NeedsMaintenanceDryer = false;
             GameManager.CountDownMaintenanceDryer = false;
         } 
