@@ -25,6 +25,8 @@ public class Switch1 : MonoBehaviour
     [SerializeField] private float distance;
     Quaternion originRotation, targetRotation;
     [SerializeField] private bool lookAtCamera;
+    private Animator animator;
+    [SerializeField] private GameObject Worker;
 
     float alpha;
 
@@ -33,6 +35,7 @@ public class Switch1 : MonoBehaviour
         originRotation = transform.rotation;
         alpha = activeState ? 1 : -1;
         if (activator == null) activator = Camera.main.transform;
+        animator = Worker.GetComponent<Animator>();
     }
 
     bool IsTargetNear()
@@ -55,9 +58,9 @@ public class Switch1 : MonoBehaviour
 
     void Update()
     {
-        if (!activeState && !GameManager.FailureDryer && !GameManager.MaintenanceDryer)
+        if (!activeState)
         {
-            if (IsTargetNear())
+            if (IsTargetNear() && !GameManager.FailureDryer && !GameManager.MaintenanceDryer)
             {
                 alpha = 1;
                 activeState = true; 
@@ -89,7 +92,7 @@ public class Switch1 : MonoBehaviour
     {
         if (activeState && callbackContext.performed)
         {
-            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenanceDryer)
+            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenanceDryer && !GameManager.DryerMenu && !GameManager.MaintenanceDryerMenu)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
@@ -123,7 +126,7 @@ public class Switch1 : MonoBehaviour
         
         while (Status)
         {
-            if (GameManager.UnpackOn < 7.0f)
+            if (GameManager.UnpackOn < 7.0f && !GameManager.MaintenanceDryer)
             {
                 //Case VeryRaw
                 if (GameManager.pastaColor == 1)

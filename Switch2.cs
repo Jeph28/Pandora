@@ -100,7 +100,7 @@ public class Switch2 : MonoBehaviour
         
         if (activeState && callbackContext.performed)
         {
-            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenancePacking)
+            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenancePacking && !GameManager.PackingMenu && !GameManager.MaintenancePackingMenu)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));

@@ -22,25 +22,25 @@ public class RawMaterialMenu : MonoBehaviour
     public void CanadianWheat()
     {
         GameManager.RawMaterial = 1;
-        GameManager.Money -= 1800f;
+        GameManager.Money -= 2200f;
         GameManager.Acidity = 0.080f;
         GameManager.Ash = 1f;
         GameManager.Protein = 14f;
 
-        TextPanelControlDryer.text = "Mantenimiento preventivo de la secadora: No disponible";
-        TextPanelControlPicking.text = "Mantenimiento preventivo de la empaquetadora: No disponible";
+        TextPanelControlDryer.text = "\n" + "Dirigete a la linea de produccion y configura la secadora y empaquetadora";
+        // TextPanelControlPicking.text = "Mantenimiento preventivo de la empaquetadora: No disponible";
         BackToGame();
     }
     public void MexicanWheat()
     {
         GameManager.RawMaterial = 2;
-        GameManager.Money -= 2200f;
+        GameManager.Money -= 1800f;
         GameManager.Acidity = 0.070f;
         GameManager.Ash = 0.8f;
         GameManager.Protein = 12.8f;
 
-        TextPanelControlDryer.text = "Mantenimiento preventivo de la secadora: No disponible";
-        TextPanelControlPicking.text = "Mantenimiento preventivo de la empaquetadora: No disponible";
+        TextPanelControlDryer.text = "\n" + "\n" + "Dirigete a la linea de produccion y configura la secadora y empaquetadora";
+        // TextPanelControlPicking.text = "Mantenimiento preventivo de la empaquetadora: No disponible";
         BackToGame();
     }
     public void BackToGame()

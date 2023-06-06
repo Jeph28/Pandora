@@ -8,7 +8,7 @@ public class MoveH : MonoBehaviour
     private PlayerInput playerInput;
     private Vector2 input;
     public Transform playerBody;
-    private float xRotacion = 24;
+    private float xRotacion = 22.096f;
     public float Sensibility;
     public float mouseSensitivity;
 
