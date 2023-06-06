@@ -25,8 +25,6 @@ public class Switch1 : MonoBehaviour
     [SerializeField] private float distance;
     Quaternion originRotation, targetRotation;
     [SerializeField] private bool lookAtCamera;
-    private Animator animator;
-    [SerializeField] private GameObject Worker;
 
     float alpha;
 
