@@ -18,6 +18,8 @@ namespace Michsky.UI.Shift
         public bool usePercent = false;
         public bool showValue = true;
         public bool useRoundValue = false;
+        private bool FirstTime = true;
+
 
         Slider mainSlider;
         float saveValue;
@@ -64,6 +66,12 @@ namespace Michsky.UI.Shift
                     valueText.text = mainSlider.value.ToString("F1");
             }
             GameManager.user_time = Mathf.Round(mainSlider.value * 1.0f);
+
+            if (FirstTime)
+            {
+                GameManager.user_previousTime = GameManager.user_time;
+                FirstTime = false;
+            }
         }
     }
 }

@@ -12,12 +12,13 @@ namespace Michsky.UI.Shift
         [Header("Saving")]
         public bool enableSaving = false;
         public string sliderTag = "Tag Text";
-        public float defaultValue = 1;
+        public float defaultValue;
 
         [Header("Settings")]
         public bool usePercent = false;
         public bool showValue = true;
         public bool useRoundValue = false;
+        private bool FirstTemp = true;
 
         Slider mainSlider;
         float saveValue;
@@ -64,6 +65,12 @@ namespace Michsky.UI.Shift
                     valueText.text = mainSlider.value.ToString("F1");
             }
             GameManager.user_temperature = Mathf.Round(mainSlider.value * 1.0f);
+
+            if (FirstTemp)
+            {
+                GameManager.user_previousTemperature = GameManager.user_temperature;
+                FirstTemp = false;
+            }
         }
     }
 }

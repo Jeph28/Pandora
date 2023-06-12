@@ -97,13 +97,17 @@ public class Switch1 : MonoBehaviour
                 Status = true;
                 GameManager.DryerMachine = true;
                 GameManager.CountDownActivateDryer = true;
-                GameManager.Batch ++;
                 DryerMachine.Instance.Color();
                 DryerMachine.Instance.Humidity();
                 DryerMachine.Instance.Craking();
                 DryerMachine.Instance.Microbiological();
                 DryerMachine.Instance.EfficiencyMachine();
-                DryerMachine.Instance.TemperaturePrice();
+                if (GameManager.ChangeValueDryer || GameManager.Batch == 0)
+                {
+                    DryerMachine.Instance.TemperaturePrice();
+                    GameManager.ChangeValueDryer = false;
+                }
+                GameManager.Batch ++;
                 StartCoroutine(DryerMachineOn());
             }
             if (Status && (Time.time - timeSwitch) > 3.0f)

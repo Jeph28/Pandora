@@ -22,6 +22,7 @@ public class CheckPoint : MonoBehaviour
     // private float timeCheckPoint;
     public float distance;
     public bool lookAtCamera = true;
+    private bool ContextView = true;
     string MoreLess = "\u00B1";
 
 
@@ -112,11 +113,19 @@ public class CheckPoint : MonoBehaviour
         // The last condition allow active a modal if there is Unpacked pasta
         if (activeState && callbackContext.performed && !GameManager.changePrincipalText1CheckPoint1 && !GameManager.changePrincipalText2CheckPoint1)
         {
-            ContextCheckPoint.SetActive(true);
-            GameManager.ContextCheckPoint = true;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            
+            if (ContextView)
+            {
+                ContextCheckPoint.SetActive(true);
+                GameManager.ContextCheckPoint = true;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                ContextView = false;
+            }
+            else if(!ContextView)
+            {
+                GameManager.timeCheckPoint = Time.time;
+                GameManager.changePrincipalText2CheckPoint1 = true;
+            }
         }
     }
 

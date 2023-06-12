@@ -5,7 +5,7 @@ public static class GameManager
     public static float Money = 10000f;
     public static bool DryerMachine = false;
     public static bool PackingMachine = false;
-    public static int timeBetweenMaintenanceDryer = 20;
+    public static int timeBetweenMaintenanceDryer = 120;
     public static int timeBetweenMaintenancePacking = 120;
     public static int MaintenanceExpirationDryer = 60;
     public static int MaintenanceExpirationPacking = 60;
@@ -22,9 +22,14 @@ public static class GameManager
     public static string pastaHumidityPercentageString;
     // public static string pastaHumidityString;
     public static List<float> pastaStdDevWeightList = new List<float>();
+    public static float user_previousTemperature = 80;
     public static float user_temperature = 80;
     public static float user_time = 180;
+    public static float user_previousTime = 180;
     public static float user_speed = 20;
+    public static float user_previousSpeed = 20;
+    public static bool OffBottonCancel = false;
+    public static bool ChangeValueDryer = false;
     public static string PastaState;
     public static bool Craking = false;
     public static List<string> pastaCrakingList = new List<string>();
