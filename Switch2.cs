@@ -116,7 +116,6 @@ public class Switch2 : MonoBehaviour
                 }
                 GameManager.BatchPacking ++;
                 StartCoroutine(PackingMachineOn());
-                
             }
             if (Status && (Time.time - timeSwitch) > 3.0f)
             {
