@@ -10,7 +10,8 @@ public static class GameManager
     public static int MaintenanceExpirationDryer = 60;
     public static int MaintenanceExpirationPacking = 60;
     public static int PastaScore = 0;
-    public static int Batch = 0;
+    public static int BatchDryer = 0;
+    public static int BatchPacking = 0;
     public static bool activeStatePacking = false;
     public static bool activeStateDryer = false;
     public static int UnpackOn = 0;
@@ -28,8 +29,10 @@ public static class GameManager
     public static float user_previousTime = 180;
     public static float user_speed = 20;
     public static float user_previousSpeed = 20;
-    public static bool OffBottonCancel = false;
+    public static bool OffBottonCancelDryer = false;
+    public static bool OffBottonCancelPacking = false;
     public static bool ChangeValueDryer = false;
+    public static bool ChangeValuePacking = false;
     public static string PastaState;
     public static bool Craking = false;
     public static List<string> pastaCrakingList = new List<string>();
@@ -70,8 +73,8 @@ public static class GameManager
     public static bool ContextCheckPoint;
     public static bool MaintenanceDryer = false;
     public static bool MaintenancePacking = false;
-    public static float CountDownMaintenanceTimeDryer = GameManager.timeBetweenMaintenanceDryer;
-    public static float CountDownMaintenanceTimePacking = GameManager.timeBetweenMaintenancePacking;
+    public static float CountDownMaintenanceTimeDryer = timeBetweenMaintenanceDryer;
+    public static float CountDownMaintenanceTimePacking = timeBetweenMaintenancePacking;
     public static float MaintenanceTimeDryer = 10;
     public static float MaintenanceTimePacking = 10;
     public static int MaintenanceCostDryer;

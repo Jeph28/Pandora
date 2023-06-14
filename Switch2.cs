@@ -109,7 +109,12 @@ public class Switch2 : MonoBehaviour
                 GameManager.CountDownActivatePacking = true;
                 PackingMachine.Instance.Weight();
                 PackingMachine.Instance.EfficiencyMachine();
-                PackingMachine.Instance.SpeedPrice();
+                if (GameManager.ChangeValuePacking || GameManager.BatchPacking == 0)
+                {
+                    PackingMachine.Instance.SpeedPrice();
+                    GameManager.ChangeValuePacking = false;
+                }
+                GameManager.BatchPacking ++;
                 StartCoroutine(PackingMachineOn());
                 
             }

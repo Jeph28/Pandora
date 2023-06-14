@@ -18,6 +18,7 @@ namespace Michsky.UI.Shift
         public bool usePercent = false;
         public bool showValue = true;
         public bool useRoundValue = false;
+        private bool FirstTemp = true;
 
         Slider mainSlider;
         float saveValue;
@@ -64,6 +65,12 @@ namespace Michsky.UI.Shift
                     valueText.text = mainSlider.value.ToString("F1");
             }
             GameManager.user_speed = Mathf.Round(mainSlider.value * 1.0f);
+
+            if (FirstTemp)
+            {
+                GameManager.user_previousSpeed = GameManager.user_speed;
+                FirstTemp = false;
+            }
         }
     }
 }

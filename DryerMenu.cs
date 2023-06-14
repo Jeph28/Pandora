@@ -15,10 +15,10 @@ public class DryerMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((GameManager.user_previousTemperature != GameManager.user_temperature || GameManager.user_previousTime != GameManager.user_time) && GameManager.DryerMenu && !GameManager.OffBottonCancel)
+        if ((GameManager.user_previousTemperature != GameManager.user_temperature || GameManager.user_previousTime != GameManager.user_time) && GameManager.DryerMenu && !GameManager.OffBottonCancelDryer)
         {
             BottonCancel.SetActive(false);
-            GameManager.OffBottonCancel = true;
+            GameManager.OffBottonCancelDryer = true;
             GameManager.ChangeValueDryer = true;
 
         }
@@ -35,7 +35,7 @@ public class DryerMenu : MonoBehaviour
         GameManager.timeWaitCheckPoint1 = 10;
         GameManager.user_previousTemperature = GameManager.user_temperature;
         GameManager.user_previousTime = GameManager.user_time;
-        GameManager.OffBottonCancel = false;
+        GameManager.OffBottonCancelDryer = false;
         BottonCancel.SetActive(true);
     }
 
@@ -45,7 +45,7 @@ public class DryerMenu : MonoBehaviour
         GameManager.DryerMenu = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        GameManager.OffBottonCancel = false;
+        GameManager.OffBottonCancelDryer = false;
         BottonCancel.SetActive(true);
 
     }

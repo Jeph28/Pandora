@@ -102,12 +102,12 @@ public class Switch1 : MonoBehaviour
                 DryerMachine.Instance.Craking();
                 DryerMachine.Instance.Microbiological();
                 DryerMachine.Instance.EfficiencyMachine();
-                if (GameManager.ChangeValueDryer || GameManager.Batch == 0)
+                if (GameManager.ChangeValueDryer || GameManager.BatchDryer == 0)
                 {
                     DryerMachine.Instance.TemperaturePrice();
                     GameManager.ChangeValueDryer = false;
                 }
-                GameManager.Batch ++;
+                GameManager.BatchDryer ++;
                 StartCoroutine(DryerMachineOn());
             }
             if (Status && (Time.time - timeSwitch) > 3.0f)
