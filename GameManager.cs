@@ -68,9 +68,15 @@ public static class GameManager
     public static bool changePrincipalText1CheckPoint1 = true;
     public static bool changePrincipalText2CheckPoint1 = false;
     public static bool changePrincipalText3CheckPoint1 = true;
+    public static bool changePrincipalText1CheckPoint2 = true;
+    public static bool changePrincipalText2CheckPoint2 = false;
+    public static bool changePrincipalText3CheckPoint2 = true;
     public static float timeWaitCheckPoint1 = 10;
-    public static float timeCheckPoint;
-    public static bool ContextCheckPoint;
+    public static float timeWaitCheckPoint2 = 10;
+    public static float timeCheckPoint1;
+    public static float timeCheckPoint2;
+    public static bool ContextCheckPoint1;
+    public static bool ContextCheckPoint2;
     public static bool MaintenanceDryer = false;
     public static bool MaintenancePacking = false;
     public static float CountDownMaintenanceTimeDryer = timeBetweenMaintenanceDryer;

@@ -59,7 +59,7 @@ public class CheckPoint : MonoBehaviour
             {
                 alpha = 1;
                 activeState = true;
-                }
+            }
         }
         else
         {
@@ -101,11 +101,9 @@ public class CheckPoint : MonoBehaviour
             textCanva.text = "Ver los resultados del Lab con [Y]";
             GameManager.changePrincipalText3CheckPoint1 = false;
             GameManager.changePrincipalText2CheckPoint1 = true;
-            
         }
 
         Changetext.text = "Aqui va a ir un pequeno contexto para ofrecerle informacion importante al usuario que le permita entender mejor los valores reflejados abajo " + "\n" + "\n" + "Cantidad producida : " + GameManager.UnpackPastaScore + "\n" + "\n" + "Promedio de la Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "\n" + "Desviacion de la Humedad : " + MoreLess + " " + GameManager.StdDevHumidity + "%" + "\n" + "\n"+ "Color : " + GameManager.pastaColorString + "\n" + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
-
     }
 
     public void Context(InputAction.CallbackContext callbackContext)
@@ -116,14 +114,14 @@ public class CheckPoint : MonoBehaviour
             if (ContextView)
             {
                 ContextCheckPoint.SetActive(true);
-                GameManager.ContextCheckPoint = true;
+                GameManager.ContextCheckPoint1 = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 ContextView = false;
             }
             else if(!ContextView)
             {
-                GameManager.timeCheckPoint = Time.time;
+                GameManager.timeCheckPoint1 = Time.time;
                 GameManager.changePrincipalText2CheckPoint1 = true;
             }
         }
@@ -146,12 +144,10 @@ public class CheckPoint : MonoBehaviour
     public void Accept()
     {
         ContextCheckPoint.SetActive(false);
-        GameManager.ContextCheckPoint = false;
-        GameManager.timeCheckPoint = Time.time;
+        GameManager.ContextCheckPoint1 = false;
+        GameManager.timeCheckPoint1 = Time.time;
         GameManager.changePrincipalText2CheckPoint1 = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    
-
 }

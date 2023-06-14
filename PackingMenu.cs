@@ -28,6 +28,10 @@ public class PackingMenu : MonoBehaviour
         GameManager.PackingMenu = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        GameManager.changePrincipalText1CheckPoint2 = true;
+        GameManager.changePrincipalText2CheckPoint2 = false;
+        GameManager.changePrincipalText3CheckPoint2 = true;
+        GameManager.timeWaitCheckPoint2 = 10;
         GameManager.user_previousSpeed = GameManager.user_speed;
         GameManager.OffBottonCancelPacking = false;
         BottonCancel.SetActive(true);

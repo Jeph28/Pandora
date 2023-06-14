@@ -29,7 +29,7 @@ public class MoveH : MonoBehaviour
         xRotacion -= input.y;
         xRotacion = Mathf.Clamp(xRotacion,-80,80);
         transform.localRotation = Quaternion.Euler(xRotacion,0,0);
-        if (input == Vector2.zero && !GameManager.DryerMenu && !GameManager.PackingMenu && !GameManager.MaintenanceDryerMenu && !GameManager.MaintenancePackingMenu && !GameManager.ContextCheckPoint && !GameManager.RawMaterialMenu)
+        if (input == Vector2.zero && !GameManager.DryerMenu && !GameManager.PackingMenu && !GameManager.MaintenanceDryerMenu && !GameManager.MaintenancePackingMenu && !GameManager.ContextCheckPoint1 && !GameManager.ContextCheckPoint2 && !GameManager.RawMaterialMenu)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
