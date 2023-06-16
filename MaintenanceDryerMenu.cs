@@ -41,7 +41,7 @@ public class MaintenanceDryerMenu : MonoBehaviour
         GameManager.MessageDryer = 1;
         textDryerMachine.text = "Presiona [Y] para configurar";
         GameManager.NeedsMaintenanceDryer = false;
-        GameManager.CountDownMaintenanceTimeDryer = 15;
+        GameManager.CountDownMaintenanceTimeDryer = 50;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
