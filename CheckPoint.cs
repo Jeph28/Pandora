@@ -103,7 +103,7 @@ public class CheckPoint : MonoBehaviour
             GameManager.changePrincipalText2CheckPoint1 = true;
         }
 
-        Changetext.text = "Aqui va a ir un pequeno contexto para ofrecerle informacion importante al usuario que le permita entender mejor los valores reflejados abajo " + "\n" + "\n" + "Cantidad producida : " + GameManager.UnpackPastaScore + "\n" + "\n" + "Promedio de la Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "\n" + "Desviacion de la Humedad : " + MoreLess + " " + GameManager.StdDevHumidity + "%" + "\n" + "\n"+ "Color : " + GameManager.pastaColorString + "\n" + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad producida : " + GameManager.UnpackPastaScore + "\n" + "\n" + "Promedio de la Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "\n" + "Desviacion de la Humedad : " + MoreLess + " " + GameManager.StdDevHumidity + "%" + "\n" + "\n"+ "Color : " + GameManager.pastaColorString + "\n" + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
     }
 
     public void Context(InputAction.CallbackContext callbackContext)

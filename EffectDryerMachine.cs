@@ -13,18 +13,18 @@ public class EffectDryerMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Probabilidad de falla de un 30%
+        // // Probabilidad de falla de un 30%
 
-        int prop = Random.Range(1, 11);
-        if (prop <= 3) 
-        {
-            StartCoroutine("Failure");
+        // int prop = Random.Range(1, 11);
+        // if (prop <= 3) 
+        // {
+        //     StartCoroutine("Failure");
 
-        }
-        else
-        {
-            StartCoroutine("Failure");  
-        }
+        // }
+        // else
+        // {
+        //     StartCoroutine("Failure");  
+        // }
     }
 
     // Update is called once per frame

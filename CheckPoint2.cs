@@ -103,7 +103,7 @@ public class CheckPoint2 : MonoBehaviour
             GameManager.changePrincipalText2CheckPoint2 = true;
         }
 
-        Changetext.text = "Aqui va a ir un pequeno contexto para ofrecerle informacion importante al usuario que le permita entender mejor los valores reflejados abajo " + "\n" + "\n" + "Cantidad empaquetada : " + GameManager.PastaScore.ToString() + "\n" + "\n" + "Peso promedio : 1 Kg" + "\n" + "\n" + "Desviacion del peso : " + GameManager.StdDevWeight.ToString() + "%" + "\n" + "\n" + "Ruptura Mecanica : 1" + "\n" + "\n" + "Acidez : " + GameManager.Acidity + "%" + "\n" + "\n" + "Ceniza : " + GameManager.Ash + "%" + "\n" + "\n" + "Proteina : " + GameManager.Protein + "%";
+        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad empaquetada : " + GameManager.PastaScore.ToString() + "\n" + "\n" + "Peso promedio : 1 Kg" + "\n" + "\n" + "Desviacion del peso : " + GameManager.StdDevWeight.ToString() + "%" + "\n" + "\n" + "Ruptura Mecanica : 1" + "\n" + "\n" + "Acidez : " + GameManager.Acidity + "%" + "\n" + "\n" + "Ceniza : " + GameManager.Ash + "%" + "\n" + "\n" + "Proteina : " + GameManager.Protein + "%";
     }
 
     public void Context(InputAction.CallbackContext callbackContext)

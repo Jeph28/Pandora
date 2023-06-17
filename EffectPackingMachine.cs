@@ -12,20 +12,22 @@ public class EffectPackingMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Probabilidad de falla de un 30%
-
-        int prop = Random.Range(1, 11);
-        Debug.Log(prop);
-        if (prop <= 3) 
-        {
-            StartCoroutine("Failure");
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // if (true)
+        // {
+        //     // Probabilidad de falla de un 30%
+        //     int prop = Random.Range(1, 11);
+        //     Debug.Log(prop);
+        //     if (prop <= 3) 
+        //     {
+        //      StartCoroutine("Failure");
+        //     }  
+        // }
     }
 
     IEnumerator Failure()
