@@ -44,7 +44,7 @@ public class PanelControl : MonoBehaviour
         if (GameManager.CountDownActivateDryer && GameManager.CountDownMaintenanceTimeDryer > 1)
         {
         GameManager.CountDownMaintenanceTimeDryer -= Time.deltaTime;
-        MessageState2Dryer.text = "Mantenimiento preventivo de la secadora en: " + GameManager.CountDownMaintenanceTimeDryer.ToString("F0");
+        MessageState2Dryer.text = "\n" + "\n" + "Mantenimiento preventivo de la secadora en: " + GameManager.CountDownMaintenanceTimeDryer.ToString("F0");
         }
 
         //CountDown Packing
@@ -64,7 +64,7 @@ public class PanelControl : MonoBehaviour
         //Need Maintenance Dryer Machine
         if (GameManager.CountDownMaintenanceTimeDryer <= 1 && !GameManager.NeedsMaintenanceDryer)
         {
-            MessageState2Dryer.text = "¡La Secadora requiere mantenimiento!";
+            MessageState2Dryer.text = "\n" + "\n" + "¡La Secadora requiere mantenimiento!";
             GameManager.NeedsMaintenanceDryer = true;
             GameManager.changeMessageMaintenanceDryer = true;
             GameManager.OpportunityMaintenanceDryer = Time.time;
@@ -87,7 +87,7 @@ public class PanelControl : MonoBehaviour
 
         if (GameManager.MessageDryer == 3)
         {
-            MessageState2Dryer.text = "Se le esta realizando mantenimiento a la secadora";
+            MessageState2Dryer.text = "\n" + "\n" + "Se le esta realizando mantenimiento a la secadora";
         }
 
         //Need Maintenance Packing Machine

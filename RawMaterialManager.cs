@@ -74,36 +74,13 @@ public class RawMaterialManager : MonoBehaviour
                 targetRotation = originRotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
-
-        // if (GameManager.NeedsMaintenanceDryer && GameManager.changeMessageMaintenanceDryer)
-        // {
-        //     MessageDryer.text = "Presiona [Y] para hacer mantenimiento";
-        //     GameManager.MessageDryer = 2;
-        //     GameManager.changeMessageMaintenanceDryer = false;
-        // }
-
-        // //Maintenance time Dryer
-        // if (GameManager.CountDownMaintenanceDryer && GameManager.MaintenanceTimeDryer > 1)
-        // {
-        // GameManager.MaintenanceTimeDryer -= Time.deltaTime;
-        // MessageDryer.text = "Espera " + GameManager.MaintenanceTimeDryer.ToString("F0") + " segundos";
-        // GameManager.MessageDryer = 3;
-        // }
-
-        // if (GameManager.MaintenanceTimeDryer <= 1 && !GameManager.ReadyMaintenanceDryer)
-        // {
-        //     MessageDryer.text = "Presiona [Y] para configurar";
-        //     GameManager.ReadyMaintenanceDryer = true;
-        //     GameManager.MessageDryer = 1;
-        //     GameManager.MaintenanceDryer = false;
-        //     GameManager.CountDownMaintenanceTimeDryer = 15;
-        //     GameManager.NeedsMaintenanceDryer = false;
-        //     GameManager.CountDownMaintenanceDryer = false;
-        // } 
     }
 
     public void rawMaterialMenu(InputAction.CallbackContext callbackContext)
     {
+        if (Settings.Instance.IsGamePaused())
+            return;
+            
         if (callbackContext.performed && activeState)
         {
             RawMaterialMenu.SetActive(true);

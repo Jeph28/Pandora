@@ -21,6 +21,9 @@ public class RawMaterialMenu : MonoBehaviour
     }
     public void CanadianWheat()
     {
+        if (Settings.Instance.IsGamePaused())
+            return;
+
         GameManager.RawMaterial = 1;
         GameManager.Money -= 2200f;
         GameManager.Acidity = 0.080f;
@@ -33,6 +36,9 @@ public class RawMaterialMenu : MonoBehaviour
     }
     public void MexicanWheat()
     {
+        if (Settings.Instance.IsGamePaused())
+            return;
+            
         GameManager.RawMaterial = 2;
         GameManager.Money -= 1800f;
         GameManager.Acidity = 0.070f;

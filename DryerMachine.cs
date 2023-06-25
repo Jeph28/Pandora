@@ -54,27 +54,27 @@ public class DryerMachine : MonoBehaviour
         if ( ColorValue <= 20000f)
         {
             GameManager.pastaColor = 1;
-            GameManager.pastaColorString = "Pasta blanca 10B";
+            GameManager.pastaColorString = " 10B";
         }
         if ( 20000f < ColorValue && ColorValue <= 25000f)
         {
             GameManager.pastaColor = 2;
-            GameManager.pastaColorString = "Pasta amarilla pollito 25B";
+            GameManager.pastaColorString = " 25B";
         }
         if ( 25000f < ColorValue && ColorValue <= 28000f)
         {
             GameManager.pastaColor = 3;
-            GameManager.pastaColorString = "Pasta buena 35B";
+            GameManager.pastaColorString = " 35B";
         }
         if ( 28000f < ColorValue && ColorValue <= 34000f)
         {
             GameManager.pastaColor = 4;
-            GameManager.pastaColorString = "Pasta Marron";
+            GameManager.pastaColorString = " -5B";
         }
         if (ColorValue > 34000f)
         {
             GameManager.pastaColor = 5;
-            GameManager.pastaColorString = "Pasta negra -10B ";
+            GameManager.pastaColorString = " -10B";
         }
 
         GameManager.pastaColorList.Add(GameManager.pastaColor);

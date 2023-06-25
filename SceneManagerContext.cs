@@ -11,6 +11,11 @@ public class SceneManagerContext : MonoBehaviour
     [SerializeField] private GameObject Norm2;
     [SerializeField] private GameObject Norm3;
 
+    void Update()
+    {
+
+    }
+    
     //Context 1
     public void ChangeContext2()
     {
