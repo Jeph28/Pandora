@@ -83,6 +83,7 @@ public class PanelControl : MonoBehaviour
             GameManager.NeedsMaintenanceDryer = false;
             textDryerMachine.text = "Presiona [Y] para configurar";
             GameManager.CountDownMaintenanceTimeDryer = GameManager.timeBetweenMaintenanceDryer;
+            GameManager.MaintenanceCounterDryer ++;
         }
 
         if (GameManager.MessageDryer == 3)

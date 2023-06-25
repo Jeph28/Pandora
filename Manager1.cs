@@ -57,7 +57,7 @@ public class Manager1 : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear() && !GameManager.DryerMachine && !GameManager.FailureDryer)
+            if (IsTargetNear() && !GameManager.DryerMachine && !GameManager.FailureInProgressDryer)
             {
                 alpha = 1;
                 activeState = true;
@@ -65,7 +65,7 @@ public class Manager1 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.DryerMachine)
+            if (!IsTargetNear() || GameManager.DryerMachine || GameManager.FailureInProgressDryer)
             {
                 alpha = -1;
                 activeState = false;
@@ -87,6 +87,13 @@ public class Manager1 : MonoBehaviour
             MessageDryer.text = "Presiona [Y] para hacer mantenimiento";
             GameManager.MessageDryer = 2;
             GameManager.changeMessageMaintenanceDryer = false;
+            GameManager.MaintenanceCounterDryer ++;
+
+            if (GameManager.MaintenanceCounterDryer % 3 == 0 && !GameManager.FailureRestartDryer)
+            {
+                GameManager.FailureDryer = true;
+                GameManager.FailureRestartDryer = true;
+            }
         }
 
         //Maintenance time Dryer
@@ -106,7 +113,7 @@ public class Manager1 : MonoBehaviour
             GameManager.CountDownMaintenanceTimeDryer = GameManager.timeBetweenMaintenanceDryer;
             GameManager.NeedsMaintenanceDryer = false;
             GameManager.CountDownMaintenanceDryer = false;
-        } 
+        }
     }
 
     public void DryerMachine(InputAction.CallbackContext callbackContext)

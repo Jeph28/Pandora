@@ -5,7 +5,7 @@ public static class GameManager
     public static float Money = 10000f;
     public static bool DryerMachine = false;
     public static bool PackingMachine = false;
-    public static int timeBetweenMaintenanceDryer = 120;
+    public static int timeBetweenMaintenanceDryer = 10;
     public static int timeBetweenMaintenancePacking = 120;
     public static int MaintenanceExpirationDryer = 60;
     public static int MaintenanceExpirationPacking = 60;
@@ -79,6 +79,10 @@ public static class GameManager
     public static bool ContextCheckPoint2;
     public static bool MaintenanceDryer = false;
     public static bool MaintenancePacking = false;
+    public static int MaintenanceCounterDryer = 0;
+    public static int MaintenanceCounterPacking = 0;
+    public static bool FailureInProgressDryer = false;
+    public static bool FailureRestartDryer = false;
     public static float CountDownMaintenanceTimeDryer = timeBetweenMaintenanceDryer;
     public static float CountDownMaintenanceTimePacking = timeBetweenMaintenancePacking;
     public static float MaintenanceTimeDryer = 10;

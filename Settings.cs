@@ -32,13 +32,13 @@ public class Settings : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void Quit(InputAction.CallbackContext callbackContext)
-    {
-        if (callbackContext.performed)
-        {
-            Application.Quit();
-        }
-    }
+    // public void Quit(InputAction.CallbackContext callbackContext)
+    // {
+    //     if (callbackContext.performed)
+    //     {
+    //         Application.Quit();
+    //     }
+    // }
 
     public void Pause()
     {

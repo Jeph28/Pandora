@@ -57,7 +57,7 @@ public class Switch1 : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear() && !GameManager.FailureDryer && !GameManager.MaintenanceDryer)
+            if (IsTargetNear() && !GameManager.FailureInProgressDryer && !GameManager.MaintenanceDryer)
             {
                 alpha = 1;
                 activeState = true; 
@@ -66,7 +66,7 @@ public class Switch1 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.MaintenanceDryer || GameManager.RawMaterial == 0)
+            if (!IsTargetNear() || GameManager.MaintenanceDryer || GameManager.RawMaterial == 0 || GameManager.FailureInProgressDryer)
             {
                 alpha = -1;
                 activeState = false;
