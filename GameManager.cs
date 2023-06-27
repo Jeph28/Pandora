@@ -5,7 +5,7 @@ public static class GameManager
     public static float Money = 10000f;
     public static bool DryerMachine = false;
     public static bool PackingMachine = false;
-    public static int timeBetweenMaintenanceDryer = 10;
+    public static int timeBetweenMaintenanceDryer = 150;
     public static int timeBetweenMaintenancePacking = 120;
     public static int MaintenanceExpirationDryer = 60;
     public static int MaintenanceExpirationPacking = 60;

@@ -11,6 +11,9 @@ public class EffectDryerMachine : MonoBehaviour
     [SerializeField] public TMP_Text MessageState2Dryer;
     [SerializeField] private TMP_Text textDryerMachine;
     bool RestartDryer = false;
+    [SerializeField] private GameObject DryerMenu;
+    [SerializeField] private GameObject DryerMaintenanceMenu;
+
     
     // Start is called before the first frame update
     void Start()
@@ -26,8 +29,10 @@ public class EffectDryerMachine : MonoBehaviour
         {
             RestartDryer = true;
             int prop = Random.Range(1, 11);
-            if (prop <= 10) 
+            if (prop <= 5) 
             {
+                DryerMenu.SetActive(false);
+                DryerMaintenanceMenu.SetActive(false);
                 StartCoroutine("Failure");
             }
         }
@@ -37,7 +42,7 @@ public class EffectDryerMachine : MonoBehaviour
     {
         MessageState2Dryer.text = "\n" + "\n" + "La Maquina Secadora esta presentando fallas";
         GameManager.FailureInProgressDryer = true;
-        yield return new WaitForSeconds(8.0f);
+        yield return new WaitForSeconds(10.0f);
         Explosion.SetActive(true);
         yield return new WaitForSeconds(.25f);
         MessageState2Dryer.text = "\n" + "\n" + "La Maquina Secadora acaba de explotar";
@@ -65,7 +70,7 @@ public class EffectDryerMachine : MonoBehaviour
         GameManager.MessageDryer = 1;
         textDryerMachine.text = "Presiona [Y] para configurar";
         GameManager.NeedsMaintenanceDryer = false;
-        GameManager.CountDownMaintenanceTimeDryer = 10;
+        GameManager.CountDownMaintenanceTimeDryer = 150;
     }
     
 }

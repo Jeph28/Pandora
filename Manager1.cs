@@ -89,7 +89,7 @@ public class Manager1 : MonoBehaviour
             GameManager.changeMessageMaintenanceDryer = false;
             GameManager.MaintenanceCounterDryer ++;
 
-            if (GameManager.MaintenanceCounterDryer % 3 == 0 && !GameManager.FailureRestartDryer)
+            if (GameManager.MaintenanceCounterDryer == 2 && !GameManager.FailureRestartDryer)
             {
                 GameManager.FailureDryer = true;
                 GameManager.FailureRestartDryer = true;
