@@ -55,7 +55,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear())
+            if (IsTargetNear() && !GameManager.activeStateManager1 && !GameManager.activeStateManager2)
             {
                 alpha = 1;
                 activeState = true;
@@ -63,7 +63,7 @@ public class CheckPoint : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear())
+            if (!IsTargetNear() || GameManager.activeStateManager1 || GameManager.activeStateManager2)
             {
                 alpha = -1;
                 activeState = false;

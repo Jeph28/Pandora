@@ -44,6 +44,5 @@ public class MaintenanceDryerMenu : MonoBehaviour
         GameManager.CountDownMaintenanceTimeDryer = 150;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 }

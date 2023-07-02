@@ -14,6 +14,8 @@ public static class GameManager
     public static int BatchPacking = 0;
     public static bool activeStatePacking = false;
     public static bool activeStateDryer = false;
+    public static bool activeStateManager1 = false;
+    public static bool activeStateManager2 = false;
     public static int UnpackOn = 0;
     public static int pastaColor;
     public static List<int> pastaColorList = new List<int>();

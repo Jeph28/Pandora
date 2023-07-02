@@ -58,7 +58,8 @@ public class Manager2 : MonoBehaviour
             {
                 alpha = 1;
                 activeState = true;
-                }
+                GameManager.activeStateManager2 = activeState;
+            }
         }
         else
         {
@@ -66,6 +67,7 @@ public class Manager2 : MonoBehaviour
             {
                 alpha = -1;
                 activeState = false;
+                GameManager.activeStateManager2 = activeState;
             }
         }
         target.alpha = Mathf.Clamp01(target.alpha + alpha * Time.deltaTime);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 using System;
 
 public class Switch2 : MonoBehaviour
@@ -22,6 +23,7 @@ public class Switch2 : MonoBehaviour
     private Animator animator;
     bool Status = false;
     Quaternion originRotation, targetRotation;
+    [SerializeField] public TMP_Text MessageSwitch;
     float alpha;
     private Quaternion start;
     private Quaternion target1;
@@ -59,7 +61,7 @@ public class Switch2 : MonoBehaviour
 
     void Update()
     {
-        if (!activeState && !GameManager.FailurePacking && !GameManager.MaintenancePacking)
+        if (!activeState && !GameManager.FailurePacking && !GameManager.MaintenancePacking && GameManager.RawMaterial != 0)
         {
             if (IsTargetNear())
             {
@@ -115,12 +117,14 @@ public class Switch2 : MonoBehaviour
                     GameManager.ChangeValuePacking = false;
                 }
                 GameManager.BatchPacking ++;
+                MessageSwitch.text = "Presiona [X] para Apagar";
                 StartCoroutine(PackingMachineOn());
             }
             if (Status && (Time.time - timeSwitch) > 3.0f)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOff(lerpDuration));
+                MessageSwitch.text = "Presiona [X] para Encender";
                 Status = false;
                 GameManager.PackingMachine = Status;
              

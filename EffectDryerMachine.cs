@@ -32,7 +32,9 @@ public class EffectDryerMachine : MonoBehaviour
             if (prop <= 5) 
             {
                 DryerMenu.SetActive(false);
+                GameManager.DryerMenu = false;
                 DryerMaintenanceMenu.SetActive(false);
+                GameManager.MaintenanceDryerMenu = false;
                 StartCoroutine("Failure");
             }
         }

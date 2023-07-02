@@ -66,4 +66,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Sprint(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            speed = 7;
+        }
+        if (callbackContext.canceled)
+        {
+            speed = 5;
+        }
+    }
+
 }

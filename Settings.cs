@@ -72,11 +72,11 @@ public class Settings : MonoBehaviour
         }
     }
 
-    public void Restart()
-    {
-        UpdateGameState();
-        SceneManager.LoadScene("Game");
-    }
+    // public void Restart()
+    // {
+    //     UpdateGameState();
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    // }
 
     public void Exit() 
     {

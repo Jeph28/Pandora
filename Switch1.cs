@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 using System;
 
 
@@ -21,6 +22,7 @@ public class Switch1 : MonoBehaviour
     [SerializeField] private GameObject pasta;
     [SerializeField] private GameObject initialposition;
     [SerializeField] private float lerpDuration;
+    [SerializeField] public TMP_Text MessageSwitch;
     private float timeSwitch = 0f;
     [SerializeField] private float distance;
     Quaternion originRotation, targetRotation;
@@ -57,7 +59,7 @@ public class Switch1 : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear() && !GameManager.FailureInProgressDryer && !GameManager.MaintenanceDryer)
+            if (IsTargetNear() && !GameManager.FailureInProgressDryer && !GameManager.MaintenanceDryer && GameManager.RawMaterial != 0)
             {
                 alpha = 1;
                 activeState = true; 
@@ -108,12 +110,14 @@ public class Switch1 : MonoBehaviour
                     GameManager.ChangeValueDryer = false;
                 }
                 GameManager.BatchDryer ++;
+                MessageSwitch.text = "Presiona [X] para Apagar";
                 StartCoroutine(DryerMachineOn());
             }
             if (Status && (Time.time - timeSwitch) > 3.0f)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOff(lerpDuration));
+                MessageSwitch.text = "Presiona [X] para Encender";
                 Led.gameObject.GetComponent<Renderer>().material = Grey;
                 Status = false; 
                 GameManager.DryerMachine = false;
