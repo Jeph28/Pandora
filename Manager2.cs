@@ -110,6 +110,9 @@ public class Manager2 : MonoBehaviour
 
     public void PackingMachine(InputAction.CallbackContext callbackContext)
     {
+         if (Settings.Instance.IsGamePaused())
+            return;
+
         if (callbackContext.performed && GameManager.MessagePacking == 1 && activeState)
         {
             PackingMenu.SetActive(true);
@@ -121,6 +124,9 @@ public class Manager2 : MonoBehaviour
 
     public void MaintenancePackingMachine(InputAction.CallbackContext callbackContext)
     {
+         if (Settings.Instance.IsGamePaused())
+            return;
+            
         if (callbackContext.performed && GameManager.MessagePacking == 2 && activeState)
         {
             GameManager.MaintenanceCostPacking = Random.Range(80, 120);

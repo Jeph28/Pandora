@@ -93,7 +93,9 @@ public class Switch2 : MonoBehaviour
 
     public void Switch1(InputAction.CallbackContext callbackContext)
     {
-        
+         if (Settings.Instance.IsGamePaused())
+            return;
+            
         if (GameManager.DryerMachine && callbackContext.performed && Status)
         {
             StartCoroutine(PackingMachineOn());

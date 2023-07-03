@@ -120,6 +120,9 @@ public class Manager1 : MonoBehaviour
 
     public void DryerMachine(InputAction.CallbackContext callbackContext)
     {
+         if (Settings.Instance.IsGamePaused())
+            return;
+
         if (callbackContext.performed && GameManager.MessageDryer == 1 && activeState)
         {
             DryerMenu.SetActive(true);
@@ -131,6 +134,9 @@ public class Manager1 : MonoBehaviour
 
     public void MaintenanceDryerMachine(InputAction.CallbackContext callbackContext)
     {
+         if (Settings.Instance.IsGamePaused())
+            return;
+            
         if (callbackContext.performed && GameManager.MessageDryer == 2 && activeState)
         {
             GameManager.MaintenanceCostDryer = Random.Range(80, 120);

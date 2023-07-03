@@ -135,6 +135,9 @@ public class PanelControl : MonoBehaviour
 
     public void TransitionState(InputAction.CallbackContext callbackContext)
     {
+         if (Settings.Instance.IsGamePaused())
+            return;
+            
         if (callbackContext.performed)
         {
             if (!GameManager.PanelControlState2)

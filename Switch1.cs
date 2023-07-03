@@ -89,6 +89,9 @@ public class Switch1 : MonoBehaviour
 
     public void Switch(InputAction.CallbackContext callbackContext)
     {
+         if (Settings.Instance.IsGamePaused())
+            return;
+
         if (activeState && callbackContext.performed)
         {
             if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenanceDryer && !GameManager.DryerMenu && !GameManager.MaintenanceDryerMenu)

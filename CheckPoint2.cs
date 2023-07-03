@@ -108,6 +108,9 @@ public class CheckPoint2 : MonoBehaviour
 
     public void Context(InputAction.CallbackContext callbackContext)
     {
+         if (Settings.Instance.IsGamePaused())
+            return;
+
         // The last condition allow active a modal if there is Unpacked pasta
         if (activeState && callbackContext.performed && !GameManager.changePrincipalText1CheckPoint2 && !GameManager.changePrincipalText2CheckPoint2)
         {
@@ -129,6 +132,9 @@ public class CheckPoint2 : MonoBehaviour
 
     public void ResultCheckPoint2(InputAction.CallbackContext callbackContext)
     {
+         if (Settings.Instance.IsGamePaused())
+            return;
+            
         if (ResultBool)
         {
             Result.SetActive(false);

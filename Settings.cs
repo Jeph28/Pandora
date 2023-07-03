@@ -10,6 +10,13 @@ public class Settings : MonoBehaviour
     private bool isPaused = false;
     public GameObject PauseMenu;
     // Start is called before the first frame update
+    [SerializeField] private GameObject DryerMenu;
+    [SerializeField] private GameObject PackingMenu;
+    [SerializeField] private GameObject MaintenanceDryerMenu;
+    [SerializeField] private GameObject MaintenancePackingMenu;
+    [SerializeField] private GameObject ContextCheckPoint1;
+    [SerializeField] private GameObject ContextCheckPoint2;
+    [SerializeField] private GameObject RawMaterialMenu;
     private static Settings instance;
     public static Settings Instance { get { return instance; } }
    
@@ -51,6 +58,30 @@ public class Settings : MonoBehaviour
 
         if (isPaused)
         {
+            if (GameManager.DryerMenu || GameManager.PackingMenu || GameManager.MaintenanceDryerMenu || GameManager.MaintenancePackingMenu || GameManager.ContextCheckPoint1 || GameManager.ContextCheckPoint2 || GameManager.RawMaterialMenu)
+            {
+                DryerMenu.SetActive(false);
+                GameManager.DryerMenu = false;
+                
+                PackingMenu.SetActive(false);
+                GameManager.PackingMenu = false; 
+
+                MaintenanceDryerMenu.SetActive(false);
+                GameManager.MaintenanceDryerMenu = false;
+
+                MaintenancePackingMenu.SetActive(false);
+                GameManager.MaintenancePackingMenu = false;
+
+                ContextCheckPoint1.SetActive(false);
+                GameManager.ContextCheckPoint1 = false;
+
+                ContextCheckPoint2.SetActive(false);
+                GameManager.ContextCheckPoint2 = false;
+
+                RawMaterialMenu.SetActive(false);
+                GameManager.RawMaterialMenu = false;
+            }
+            
             PauseMenu.SetActive(true); 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
