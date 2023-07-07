@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class DryerMenu : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private GameObject DryerMenu1;
     public GameObject BottonCancel;
+    [SerializeField] private TMP_Text Context;
+
     void Start()
     {
     }
@@ -22,6 +25,8 @@ public class DryerMenu : MonoBehaviour
             GameManager.ChangeValueDryer = true;
 
         }
+
+        Context.text = "Desliza para elegir el valor correspondiente a la temperatura y el tiempo de secado, recuerda que cada decisión tomada afectará directamente la calidad del producto final, así que recuerda tomar tus decisiones pensando como un Ingeniero Industrial. Esto tendra un costo de " + "<b>" + DryerMachine.Instance.temperaturePriceInquiry().ToString("F0") + "$</b>";
     }
     public void Accept()
     {

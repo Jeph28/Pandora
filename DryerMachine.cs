@@ -14,6 +14,7 @@ public class DryerMachine : MonoBehaviour
     [SerializeField] private Material SemiBurntPasta;
     [SerializeField] private Material BurntPasta;
     [SerializeField] private TMP_Text Moneytext;
+    private float cost;
     private static DryerMachine instance;
     public static DryerMachine Instance { get { return instance; } }
     
@@ -182,5 +183,25 @@ public class DryerMachine : MonoBehaviour
             float cost = 125f * GameManager.user_temperature - 10500f;
             GameManager.Money -= cost;
         }
+    }
+
+    public float temperaturePriceInquiry()
+    {
+        if (GameManager.user_temperature <= 90f)
+        {
+            cost = 50f * GameManager.user_temperature - 3500f;
+        }
+
+        if (GameManager.user_temperature > 90f && GameManager.user_temperature <= 100)
+        {
+            cost = 100f * GameManager.user_temperature - 8000f;
+        }
+
+        if (GameManager.user_temperature > 100f)
+        {
+            cost = 125f * GameManager.user_temperature - 10500f;
+        }
+
+        return cost;
     }
 }

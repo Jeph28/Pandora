@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PackingMenu : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private GameObject PackingMenu1;
     public GameObject BottonCancel;
+    [SerializeField] private TMP_Text Context;
+
     void Start()
     {
     }
@@ -21,6 +24,8 @@ public class PackingMenu : MonoBehaviour
             GameManager.ChangeValuePacking = true;
 
         }
+
+        Context.text = "Desliza para elegir el valor correspondiente a la velocidad de empaquetado expresado en unidades por minuto, recuerda que cada decisión tomada afectará directamente la calidad del producto final, así que recuerda tomar tus decisiones pensando como un Ingeniero Industrial. Esto tendra un costo de " + "<b>" + PackingMachine.Instance.speedPriceInquiry().ToString() + "$</b>";
     }
     public void Accept()
     {

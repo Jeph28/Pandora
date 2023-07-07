@@ -7,6 +7,7 @@ public class PackingMachine : MonoBehaviour
 {
     private float Efficiency;
     private string EfficiencyStg;
+    private float cost;
     private static PackingMachine instance;
     public static PackingMachine Instance { get { return instance; } }
 
@@ -95,5 +96,25 @@ public class PackingMachine : MonoBehaviour
             float cost = 50f * GameManager.user_speed - 1000f;
             GameManager.Money -= cost;
         }
+    }
+
+    public float speedPriceInquiry()
+    {
+        if (GameManager.user_speed <= 30f)
+        {
+            cost = 15f * GameManager.user_speed - 50f;
+        }
+
+        if (GameManager.user_speed > 30f && GameManager.user_speed <= 40f)
+        {
+            cost = 45f * GameManager.user_speed - 800f;
+        }
+
+        if (GameManager.user_speed > 40f )
+        {
+            cost = 50f * GameManager.user_speed - 1000f;
+        }
+
+        return cost;
     }
 }
