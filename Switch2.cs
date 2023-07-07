@@ -96,11 +96,10 @@ public class Switch2 : MonoBehaviour
          if (Settings.Instance.IsGamePaused())
             return;
             
-        if (GameManager.DryerMachine && callbackContext.performed && Status)
+        if (GameManager.DryerMachine && callbackContext.performed && Status && GameManager.activeStateDryer)
         {
             StartCoroutine(PackingMachineOn());
         }
-        
         
         if (activeState && callbackContext.performed)
         {
@@ -129,26 +128,23 @@ public class Switch2 : MonoBehaviour
                 MessageSwitch.text = "Presiona [X] para Encender";
                 Status = false;
                 GameManager.PackingMachine = Status;
-             
             }
         }        
     }
 
     IEnumerator PackingMachineOn()
     {
-        yield return new WaitForSeconds(0.5f);
         while ((Status && GameManager.DryerMachine) || (Status && GameManager.UnpackOn > 0f))
         {
             yield return new WaitForSeconds(( 50f / GameManager.user_speed));
             
             if (Status)
             {
-                yield return new WaitForSeconds(0.5f);
                 GameObject packagedpasta = PackPastaPool.Instance.RequestPackPasta();
                 packagedpasta.transform.position = initialposition.transform.position;
                 GameManager.PastaScore ++;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(3f);
             animator.SetTrigger("statusPacking");
         }
         yield return null;
@@ -169,7 +165,6 @@ public class Switch2 : MonoBehaviour
             SwitchM.transform.rotation = Quaternion.Euler(-25f, 0f, 0f);
             yield return null;
         }
-       
     }
 
     IEnumerator TransitionSwitchOff(float lerpDuration)

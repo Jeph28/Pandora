@@ -16,6 +16,7 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private TMP_Text textCanva;
     Quaternion originRotation, targetRotation;
     [SerializeField] private GameObject Result;
+    [SerializeField] private GameObject ReferenceValuesScreen;
     [SerializeField] private TMP_Text Changetext;
     [SerializeField] private GameObject ContextCheckPoint;
     private bool ResultBool = false;
@@ -69,6 +70,10 @@ public class CheckPoint : MonoBehaviour
                 activeState = false;
                 Result.SetActive(false);
                 ResultBool = false;
+                if (GameManager.timeWaitCheckPoint1 <= 1)
+                {
+                    textCanva.text = "Ver los resultados del Lab con [Y]";
+                }
             }
         }
         target.alpha = Mathf.Clamp01(target.alpha + alpha * Time.deltaTime);
@@ -138,12 +143,27 @@ public class CheckPoint : MonoBehaviour
         if (ResultBool)
         {
             Result.SetActive(false);
-            ResultBool = false; 
+            ResultBool = false;
+            textCanva.text = "Ver los resultados del Lab con [Y]";
         }
         else if (!GameManager.changePrincipalText3CheckPoint1 && activeState)
         {
             Result.SetActive(true);
             ResultBool = true;
+            textCanva.text = "Manten [X] para ver los valores de referencia";
+        }
+    }
+
+    public void ReferenceValue(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed && activeState && ResultBool)
+        {
+            ReferenceValuesScreen.SetActive(true);
+        }
+        if (callbackContext.canceled)
+        {
+            ReferenceValuesScreen.SetActive(false);
+            
         }
     }
 

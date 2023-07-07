@@ -15,6 +15,7 @@ public class CheckPoint2 : MonoBehaviour
     [SerializeField] private TMP_Text textCanva;
     [SerializeField] private TMP_Text Changetext;
     [SerializeField] private GameObject Result;
+    [SerializeField] private GameObject ReferenceValuesScreen2;
     [SerializeField] private GameObject ContextCheckPoint;
     private bool ResultBool = false;
     public float distance;
@@ -70,6 +71,10 @@ public class CheckPoint2 : MonoBehaviour
                 activeState = false;
                 Result.SetActive(false);
                 ResultBool = false;
+                if (GameManager.timeWaitCheckPoint2 <= 1)
+                {
+                    textCanva.text = "Ver los resultados del Lab con [Y]";
+                }
             }
         }
 
@@ -138,12 +143,26 @@ public class CheckPoint2 : MonoBehaviour
         if (ResultBool)
         {
             Result.SetActive(false);
-            ResultBool = false; 
+            ResultBool = false;
+            textCanva.text = "Ver los resultados del Lab con [Y]";
         }
         else if (!GameManager.changePrincipalText3CheckPoint2 && activeState)
         {
             Result.SetActive(true);
             ResultBool = true;
+            textCanva.text = "Manten [X] para ver los valores de referencia";
+        }
+    }
+
+    public void ReferenceValue2(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed && activeState && ResultBool)
+        {
+            ReferenceValuesScreen2.SetActive(true);
+        }
+        if (callbackContext.canceled)
+        {
+            ReferenceValuesScreen2.SetActive(false);
         }
     }
 
