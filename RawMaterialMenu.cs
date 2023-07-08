@@ -30,7 +30,7 @@ public class RawMaterialMenu : MonoBehaviour
         GameManager.Ash = 1f;
         GameManager.Protein = 14f;
 
-        TextPanelControlDryer.text = "\n" + "Dirigete a la linea de produccion y configura la secadora y empaquetadora";
+        TextPanelControlDryer.text = "\n" + "Dirígete a la línea de producción y configura la secadora y empaquetadora, luego enciéndelas";
         // TextPanelControlPicking.text = "Mantenimiento preventivo de la empaquetadora: No disponible";
         BackToGame();
     }
@@ -45,7 +45,7 @@ public class RawMaterialMenu : MonoBehaviour
         GameManager.Ash = 0.8f;
         GameManager.Protein = 12.8f;
 
-        TextPanelControlDryer.text = "\n" + "\n" + "Dirigete a la linea de produccion y configura la secadora y empaquetadora";
+        TextPanelControlDryer.text = "\n" + "\n" + "Dirígete a la línea de producción y configura la secadora y empaquetadora, luego enciéndelas";
         // TextPanelControlPicking.text = "Mantenimiento preventivo de la empaquetadora: No disponible";
         BackToGame();
     }

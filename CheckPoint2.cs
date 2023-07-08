@@ -19,9 +19,10 @@ public class CheckPoint2 : MonoBehaviour
     [SerializeField] private GameObject ContextCheckPoint;
     private bool ResultBool = false;
     public float distance;
-    // string MoreLess = "\u00B1";
     public bool lookAtCamera = true;
     private bool ContextView = true;
+    private float MechanicalBreak;
+    private float MechanicalBreakPorcent;
 
     float alpha;
     //public CanvasGroup infoPanel;
@@ -32,7 +33,7 @@ public class CheckPoint2 : MonoBehaviour
         originRotation = transform.rotation;
         alpha = activeState ? 1 : -1;
         if (activator == null) activator = Camera.main.transform;
-        //infoIcon.SetActive(infoPanel != null);
+        MechanicalBreakPorcent = Random.Range(10f, 20f);
     }
 
     bool IsTargetNear()
@@ -108,7 +109,8 @@ public class CheckPoint2 : MonoBehaviour
             GameManager.changePrincipalText2CheckPoint2 = true;
         }
 
-        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad empaquetada : " + GameManager.PastaScore.ToString() + "\n" + "\n" + "Peso promedio : 1 Kg" + "\n" + "\n" + "Desviacion del peso : " + GameManager.StdDevWeight.ToString() + "%" + "\n" + "\n" + "Ruptura Mecanica : 1" + "\n" + "\n" + "Acidez : " + GameManager.Acidity + "%" + "\n" + "\n" + "Ceniza : " + GameManager.Ash + "%" + "\n" + "\n" + "Proteina : " + GameManager.Protein + "%";
+        MechanicalBreak = (GameManager.PastaScore * MechanicalBreakPorcent)/100;
+        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad empaquetada : " + GameManager.PastaScore.ToString() + "\n" + "\n" + "Peso promedio : 1 Kg" + "\n" + "\n" + "Desviacion del peso : " + GameManager.StdDevWeight.ToString() + "%" + "\n" + "\n" + "Ruptura Mecanica : " + Mathf.FloorToInt(MechanicalBreak)+ "\n" + "\n" + "Acidez : " + GameManager.Acidity + "%" + "\n" + "\n" + "Ceniza : " + GameManager.Ash + "%" + "\n" + "\n" + "Proteina : " + GameManager.Protein + "%";
     }
 
     public void Context(InputAction.CallbackContext callbackContext)
