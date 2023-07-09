@@ -57,7 +57,7 @@ public class Manager1 : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear() && !GameManager.DryerMachine && !GameManager.FailureInProgressDryer)
+            if (IsTargetNear() && !GameManager.DryerMachine && !GameManager.FailureInProgressDryer && !GameManager.FailureDryer)
             {
                 alpha = 1;
                 activeState = true;
@@ -66,7 +66,7 @@ public class Manager1 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.DryerMachine || GameManager.FailureInProgressDryer)
+            if (!IsTargetNear() || GameManager.DryerMachine || GameManager.FailureInProgressDryer || GameManager.FailureDryer)
             {
                 alpha = -1;
                 activeState = false;
@@ -75,14 +75,14 @@ public class Manager1 : MonoBehaviour
         }
         target.alpha = Mathf.Clamp01(target.alpha + alpha * Time.deltaTime);
         
-        if (lookAtCamera)
-        {
-            if (activeState)
-                targetRotation = Quaternion.LookRotation(activator.position - transform.position);
-            else
-                targetRotation = originRotation;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
-        }
+        // if (lookAtCamera)
+        // {
+        //     if (activeState)
+        //         targetRotation = Quaternion.LookRotation(activator.position - transform.position);
+        //     else
+        //         targetRotation = originRotation;
+        //     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        // }
 
         if (GameManager.NeedsMaintenanceDryer && GameManager.changeMessageMaintenanceDryer)
         {
@@ -91,11 +91,11 @@ public class Manager1 : MonoBehaviour
             GameManager.changeMessageMaintenanceDryer = false;
             GameManager.MaintenanceCounterDryer ++;
 
-            if (GameManager.MaintenanceCounterDryer == 2 && !GameManager.FailureRestartDryer)
-            {
-                GameManager.FailureDryer = true;
-                GameManager.FailureRestartDryer = true;
-            }
+            // if (GameManager.MaintenanceCounterDryer == 2 && !GameManager.FailureRestartDryer)
+            // {
+            //     GameManager.FailureDryer = true;
+            //     GameManager.FailureRestartDryer = true;
+            // }
         }
 
         //Maintenance time Dryer

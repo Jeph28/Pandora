@@ -10,27 +10,44 @@ public class EffectDryerMachine : MonoBehaviour
     [SerializeField] private GameObject Explosion;
     [SerializeField] public TMP_Text MessageState2Dryer;
     [SerializeField] private TMP_Text textDryerMachine;
-    bool RestartDryer = false;
+    // bool RestartDryer = false;
     [SerializeField] private GameObject DryerMenu;
     [SerializeField] private GameObject DryerMaintenanceMenu;
+    public Switch1 switch1;
+    public float failureRateExp; // Average failure rate in failures per unit of time
+    public float failureRatePoisson;
+    private float timeSinceLastFailure = 0f; // Time elapsed since last failure
+    private float timeBetweenFailure = 0f; // Time between failure
+    // private float lerpDuration = 3f;
 
     
     // Start is called before the first frame update
     void Start()
     {
-    
+        // timeBetweenFailure = GenerateTimeBetweenFailure();
+        timeBetweenFailure = GenerateTimeBetweenFailure();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Probabilidad de falla de un 30%
-        if (GameManager.FailureDryer && !RestartDryer)
+        timeSinceLastFailure += Time.deltaTime;
+
+        if (timeSinceLastFailure/60 >= timeBetweenFailure && !GameManager.FailureDryer)
         {
-            RestartDryer = true;
-            int prop = Random.Range(1, 11);
-            if (prop <= 5) 
+            timeBetweenFailure = GenerateTimeBetweenFailure();
+            if (GenerateFailureProbability())
             {
+                GameManager.FailureDryer = true;
+                if (switch1.Status)
+                {
+                    switch1.timeSwitch = Time.time;
+                    switch1.MessageSwitch.text = "Presiona [X] para Encender";
+                    GameManager.DryerMachine = false;
+                    StartCoroutine(TransitionSwitchOff(3f));
+                    switch1.Status = false;
+                }
+            
                 DryerMenu.SetActive(false);
                 GameManager.DryerMenu = false;
                 DryerMaintenanceMenu.SetActive(false);
@@ -42,8 +59,10 @@ public class EffectDryerMachine : MonoBehaviour
 
     IEnumerator Failure()
     {
+        GameManager.NeedsMaintenanceDryer = false;
+        GameManager.CountDownActivateDryer = false;
+        GameManager.CountDownMaintenanceTimeDryer = 150;
         MessageState2Dryer.text = "\n" + "\n" + "La Maquina Secadora esta presentando fallas";
-        GameManager.FailureInProgressDryer = true;
         yield return new WaitForSeconds(10.0f);
         Explosion.SetActive(true);
         yield return new WaitForSeconds(.25f);
@@ -59,8 +78,9 @@ public class EffectDryerMachine : MonoBehaviour
         Shower.SetActive(false);
         Explosion.SetActive(false);
         GameManager.Money -= 4000f;
-        GameManager.FailureInProgressDryer = false;
+        GameManager.CountDownActivateDryer = true;
         GameManager.FailureDryer = false;
+        timeSinceLastFailure = 0f;
         Restart();
         yield return null;
     }
@@ -74,5 +94,37 @@ public class EffectDryerMachine : MonoBehaviour
         GameManager.NeedsMaintenanceDryer = false;
         GameManager.CountDownMaintenanceTimeDryer = 150;
     }
+
+    private float GenerateTimeBetweenFailure()
+    {
+        return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / failureRateExp;
+    }
+
+    private bool GenerateFailureProbability()
+    {
+        //probability that K = 1
+        // float probabilityOfFailure = failureRatePoisson * (timeBetweenFailure) * Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
+        
+        //probability that K >= 1
+        float probabilityOfFailure = 1f - Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
+        Debug.Log(probabilityOfFailure);
+        return probabilityOfFailure > Random.Range(0f, 1f);
+    }
     
+    IEnumerator TransitionSwitchOff(float lerpDuration)
+    {
+        float timeElapsed = 0f;
+        if (switch1.Status)
+        {
+            while (timeElapsed < lerpDuration)
+            {
+                switch1.SwitchM.transform.rotation = Quaternion.Lerp(switch1.SwitchM.transform.rotation, Quaternion.Euler(35f, 0f, 0f), timeElapsed / lerpDuration);
+                timeElapsed += Time.deltaTime;
+                switch1.Led.gameObject.GetComponent<Renderer>().material = switch1.Grey;
+                yield return null;
+            }
+            switch1.SwitchM.transform.rotation = Quaternion.Euler(35f, 0f, 0f);
+            yield return null;
+        }
+    }
 }

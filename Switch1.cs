@@ -14,16 +14,17 @@ public class Switch1 : MonoBehaviour
     private Transform activator;
     private bool activeState;
     [SerializeField] private CanvasGroup target;
-    [SerializeField] private GameObject SwitchM;
-    private bool Status = false;
-    [SerializeField] private GameObject Led;
+    [SerializeField] public GameObject SwitchM;
+    public bool Status = false;
+    [SerializeField] public GameObject Led;
     [SerializeField] private Material Green;
-    [SerializeField] private Material Grey;
+    [SerializeField] public Material Grey;
     [SerializeField] private GameObject pasta;
     [SerializeField] private GameObject initialposition;
     [SerializeField] private float lerpDuration;
     [SerializeField] public TMP_Text MessageSwitch;
-    private float timeSwitch = 0f;
+    [SerializeField] private GameObject FailureDryer;
+    public float timeSwitch = 0f;
     [SerializeField] private float distance;
     Quaternion originRotation, targetRotation;
     [SerializeField] private bool lookAtCamera;
@@ -59,7 +60,7 @@ public class Switch1 : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear() && !GameManager.FailureInProgressDryer && !GameManager.MaintenanceDryer && GameManager.RawMaterial != 0)
+            if (IsTargetNear() && !GameManager.FailureDryer && !GameManager.MaintenanceDryer && GameManager.RawMaterial != 0)
             {
                 alpha = 1;
                 activeState = true; 
@@ -68,7 +69,7 @@ public class Switch1 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.MaintenanceDryer || GameManager.RawMaterial == 0 || GameManager.FailureInProgressDryer)
+            if (!IsTargetNear() || GameManager.MaintenanceDryer || GameManager.RawMaterial == 0 || GameManager.FailureDryer)
             {
                 alpha = -1;
                 activeState = false;
@@ -94,7 +95,7 @@ public class Switch1 : MonoBehaviour
 
         if (activeState && callbackContext.performed)
         {
-            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenanceDryer && !GameManager.DryerMenu && !GameManager.MaintenanceDryerMenu)
+            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenanceDryer && !GameManager.DryerMenu && !GameManager.MaintenanceDryerMenu && !GameManager.FailureDryer)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
@@ -107,10 +108,15 @@ public class Switch1 : MonoBehaviour
                 DryerMachine.Instance.Craking();
                 DryerMachine.Instance.Microbiological();
                 DryerMachine.Instance.EfficiencyMachine();
+
                 if (GameManager.ChangeValueDryer || GameManager.BatchDryer == 0)
                 {
                     DryerMachine.Instance.TemperaturePrice();
                     GameManager.ChangeValueDryer = false;
+                }
+                if (GameManager.BatchDryer == 0)
+                {
+                    FailureDryer.SetActive(true);
                 }
                 GameManager.BatchDryer ++;
                 MessageSwitch.text = "Presiona [X] para Apagar";
@@ -121,7 +127,6 @@ public class Switch1 : MonoBehaviour
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOff(lerpDuration));
                 MessageSwitch.text = "Presiona [X] para Encender";
-                Led.gameObject.GetComponent<Renderer>().material = Grey;
                 Status = false; 
                 GameManager.DryerMachine = false;
             }
