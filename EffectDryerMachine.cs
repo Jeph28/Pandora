@@ -54,6 +54,10 @@ public class EffectDryerMachine : MonoBehaviour
                 GameManager.MaintenanceDryerMenu = false;
                 StartCoroutine("Failure");
             }
+            else
+            {
+                timeSinceLastFailure = 0f;
+            }
         }
     }
 
@@ -106,8 +110,7 @@ public class EffectDryerMachine : MonoBehaviour
         // float probabilityOfFailure = failureRatePoisson * (timeBetweenFailure) * Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
         
         //probability that K >= 1
-        float probabilityOfFailure = 1f - Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
-        Debug.Log(probabilityOfFailure);
+        float probabilityOfFailure = 1f - Mathf.Exp(-failureRatePoisson * (timeSinceLastFailure));
         return probabilityOfFailure > Random.Range(0f, 1f);
     }
     
