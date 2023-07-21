@@ -74,7 +74,7 @@ public class CheckPoint2 : MonoBehaviour
                 ResultBool = false;
                 if (GameManager.timeWaitCheckPoint2 <= 1)
                 {
-                    textCanva.text = "Ver los resultados del Lab con [Y]";
+                    textCanva.text = "Ver los resultados del Laboratorio con [Y]";
                 }
             }
         }
@@ -92,7 +92,7 @@ public class CheckPoint2 : MonoBehaviour
 
         if (GameManager.PastaScore > 0f && GameManager.changePrincipalText1CheckPoint2)
         {
-            textCanva.text = "Tomar una muestra con [Y]";
+            textCanva.text = "Toma una muestra presionando [Y]";
             GameManager.changePrincipalText1CheckPoint2 = false;
         }
 
@@ -104,13 +104,13 @@ public class CheckPoint2 : MonoBehaviour
 
         if (GameManager.timeWaitCheckPoint2 <= 1 && GameManager.changePrincipalText3CheckPoint2)
         {
-            textCanva.text = "Ver los resultados del Lab con [Y]";
+            textCanva.text = "Ver los resultados del Laboratorio con [Y]";
             GameManager.changePrincipalText3CheckPoint2 = false;
             GameManager.changePrincipalText2CheckPoint2 = true;
         }
 
         MechanicalBreak = (GameManager.PastaScore * MechanicalBreakPorcent)/100;
-        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad empaquetada : " + GameManager.PastaScore.ToString() + "\n" + "\n" + "Peso promedio : 1 Kg" + "\n" + "\n" + "Desviacion del peso : " + GameManager.StdDevWeight.ToString() + "%" + "\n" + "\n" + "Ruptura Mecanica : " + Mathf.FloorToInt(MechanicalBreak)+ "\n" + "\n" + "Acidez : " + GameManager.Acidity + "%" + "\n" + "\n" + "Ceniza : " + GameManager.Ash + "%" + "\n" + "\n" + "Proteina : " + GameManager.Protein + "%";
+        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad empaquetada : " + GameManager.PastaScore.ToString() + "\n" + "\n" + "Peso promedio : 1 Kg" + "\n" + "\n" + "Desviacion del peso : " + GameManager.StdDevWeight.ToString() + "\n" + "\n" + "Ruptura Mecanica : " + Mathf.FloorToInt(MechanicalBreak)+ "\n" + "\n" + "Acidez : " + GameManager.Acidity + "%" + "\n" + "\n" + "Ceniza : " + GameManager.Ash + "%" + "\n" + "\n" + "Proteina : " + GameManager.Protein + "%";
     }
 
     public void Context(InputAction.CallbackContext callbackContext)
@@ -146,13 +146,13 @@ public class CheckPoint2 : MonoBehaviour
         {
             Result.SetActive(false);
             ResultBool = false;
-            textCanva.text = "Ver los resultados del Lab con [Y]";
+            textCanva.text = "Ver los resultados del Laboratorio con [Y]";
         }
         else if (!GameManager.changePrincipalText3CheckPoint2 && activeState)
         {
             Result.SetActive(true);
             ResultBool = true;
-            textCanva.text = "Manten [X] para ver los valores de referencia";
+            textCanva.text = "Manten presionado [X] para ver las referencias";
         }
     }
 

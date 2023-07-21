@@ -72,7 +72,7 @@ public class CheckPoint : MonoBehaviour
                 ResultBool = false;
                 if (GameManager.timeWaitCheckPoint1 <= 1)
                 {
-                    textCanva.text = "Ver los resultados del Lab con [Y]";
+                    textCanva.text = "Ver los resultados del Laboratorio con [Y]";
                 }
             }
         }
@@ -91,7 +91,7 @@ public class CheckPoint : MonoBehaviour
 
         if (GameManager.UnpackOn > 0f && GameManager.changePrincipalText1CheckPoint1)
         {
-            textCanva.text = "Tomar una muestra con [Y]";
+            textCanva.text = "Toma una muestra presionando [Y]";
             GameManager.changePrincipalText1CheckPoint1 = false;
         }
 
@@ -103,12 +103,12 @@ public class CheckPoint : MonoBehaviour
 
         if (GameManager.timeWaitCheckPoint1 <= 1 && GameManager.changePrincipalText3CheckPoint1)
         {
-            textCanva.text = "Ver los resultados del Lab con [Y]";
+            textCanva.text = "Ver los resultados del Laboratorio con [Y]";
             GameManager.changePrincipalText3CheckPoint1 = false;
             GameManager.changePrincipalText2CheckPoint1 = true;
         }
 
-        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad producida : " + GameManager.UnpackPastaScore + "\n" + "\n" + "Promedio de la Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "\n" + "Desviacion de la Humedad : " + MoreLess + " " + GameManager.StdDevHumidity + "%" + "\n" + "\n"+ "Color : " + GameManager.pastaColorString + "\n" + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
+        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad producida : " + GameManager.UnpackPastaScore + "\n" + "\n" + "Promedio de la Humedad : " + GameManager.pastaHumidityPercentageString + "\n" + "\n" + "Desviacion de la Humedad : " + MoreLess + " " + GameManager.StdDevHumidity + "\n" + "\n"+ "Color : " + GameManager.pastaColorString + "\n" + "\n" + "Craqueo : " + GameManager.pastaCrakingString + "\n" + "\n" + "Microorganismos : " + GameManager.pastaMicroorganismsString;
     }
 
     public void Context(InputAction.CallbackContext callbackContext)
@@ -144,13 +144,13 @@ public class CheckPoint : MonoBehaviour
         {
             Result.SetActive(false);
             ResultBool = false;
-            textCanva.text = "Ver los resultados del Lab con [Y]";
+            textCanva.text = "Ver los resultados del Laboratorio con [Y]";
         }
         else if (!GameManager.changePrincipalText3CheckPoint1 && activeState)
         {
             Result.SetActive(true);
             ResultBool = true;
-            textCanva.text = "Manten [X] para ver los valores de referencia";
+            textCanva.text = "Manten presionado [X] para ver las referencias";
         }
     }
 
