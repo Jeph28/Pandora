@@ -25,7 +25,6 @@ public class UnpackPastaPoolVeryRaw : MonoBehaviour
     private void Start()
     {
         AddPastaToPool(poolSize);
-
     }
     private void AddPastaToPool (int amount)
     {
@@ -46,6 +45,8 @@ public class UnpackPastaPoolVeryRaw : MonoBehaviour
             if (!PastaList[i].activeSelf)
             {
                 PastaList[i].SetActive(true);
+                DeleteUnpack deleteUnpack1 = PastaList[i].GetComponent<DeleteUnpack>();
+                deleteUnpack1.status = true;
                 GameManager.UnpackOn++;
                 GameManager.UnpackPastaScore++;
                 return PastaList[i];
@@ -53,6 +54,8 @@ public class UnpackPastaPoolVeryRaw : MonoBehaviour
         }
         AddPastaToPool(1);
         PastaList[PastaList.Count- 1].SetActive(true);
+        DeleteUnpack deleteUnpack2 = PastaList[PastaList.Count- 1].GetComponent<DeleteUnpack>();
+        deleteUnpack2.status = true;
         GameManager.UnpackOn++;
         GameManager.UnpackPastaScore++;
         return PastaList[PastaList.Count- 1];

@@ -17,6 +17,8 @@ public static class GameManager
     public static bool activeStateManager1 = false;
     public static bool activeStateManager2 = false;
     public static int UnpackOn = 0;
+    public static bool hasCollidedPackingMachine;
+    public static bool RequestUnpack = false;
     public static int pastaColor;
     public static List<int> pastaColorList = new List<int>();
     public static string pastaColorString;
@@ -46,8 +48,8 @@ public static class GameManager
     public static List<float> DryerMachineEfficiencyList = new List<float>();
     public static string PackingMachineEfficiencyString;
     public static List<float> PackingMachineEfficiencyList = new List<float>();
-    public static bool PanelControlState1 = true;
-    public static bool PanelControlState2 = false;
+    public static bool PanelControlState1 = false;
+    public static bool PanelControlState2 = true;
     public static bool PanelControlState3 = false;
     public static bool CountDownActivateDryer = false;
     public static bool CountDownMaintenanceDryer = false;

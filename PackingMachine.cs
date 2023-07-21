@@ -117,4 +117,13 @@ public class PackingMachine : MonoBehaviour
 
         return cost;
     }
+
+    void OnCollisionEnter(Collision collision) 
+    {
+        GameObject other = collision.gameObject;
+        if (other.tag == "unpackPasta")
+        {
+            GameManager.hasCollidedPackingMachine = true;
+        }
+    }
 }

@@ -110,7 +110,7 @@ public class EffectDryerMachine : MonoBehaviour
         // float probabilityOfFailure = failureRatePoisson * (timeBetweenFailure) * Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
         
         //probability that K >= 1
-        float probabilityOfFailure = 1f - Mathf.Exp(-failureRatePoisson * (timeSinceLastFailure));
+        float probabilityOfFailure = 1f - Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
         return probabilityOfFailure > Random.Range(0f, 1f);
     }
     

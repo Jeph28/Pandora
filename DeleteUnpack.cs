@@ -6,35 +6,38 @@ using System;
 
 public class DeleteUnpack : MonoBehaviour
 {
-   private bool collisionStatus = false;
+    private bool hasCollided = false;
+    public bool status = true;
 
     void OnCollisionEnter(Collision collision) 
     {
         GameObject other = collision.gameObject;
-        if (other.tag == "Packing Machine")
+        if (other.tag == "Packing Machine" && !hasCollided && status)
         {
-            StartCoroutine(Wait());
-            collisionStatus = true;
-
-        }
-    }
-
-    public void switch1(InputAction.CallbackContext callbackContext)
-    {
-        if (callbackContext.performed && GameManager.activeStatePacking && GameManager.PackingMachine && collisionStatus)
-        {
+            hasCollided = true;
             StartCoroutine(Wait());
         }
     }
 
     IEnumerator Wait() 
     {
-        yield return new WaitForSeconds(0.1f);
-        if (GameManager.PackingMachine)
+        while (true)
         {
-            gameObject.SetActive(false); 
-            GameManager.UnpackOn = GameManager.UnpackOn - 1;
-        } 
-        yield return null;
+            if (GameManager.RequestUnpack)
+            {
+                yield return new WaitForSeconds(0.1f);
+                GameManager.UnpackOn = GameManager.UnpackOn - 1;
+                GameManager.hasCollidedPackingMachine = false;
+                GameManager.RequestUnpack = false;
+                hasCollided = false;
+                status = false;
+                gameObject.SetActive(false);
+                yield return null;
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
     }
 }

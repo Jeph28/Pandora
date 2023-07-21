@@ -29,7 +29,6 @@ public class Switch2 : MonoBehaviour
     private Quaternion target1;
     [SerializeField] private float lerpDuration;
     [SerializeField] private float distance;
-
     [SerializeField] private bool lookAtCamera;
     
     void Start()
@@ -38,7 +37,6 @@ public class Switch2 : MonoBehaviour
         alpha = activeState ? 1 : -1;
         if (activator == null) activator = Camera.main.transform; 
         animator = Worker.GetComponent<Animator>();
-        
     }
 
     bool IsTargetNear()
@@ -95,12 +93,7 @@ public class Switch2 : MonoBehaviour
     {
          if (Settings.Instance.IsGamePaused())
             return;
-            
-        if (GameManager.DryerMachine && callbackContext.performed && Status && GameManager.activeStateDryer)
-        {
-            StartCoroutine(PackingMachineOn());
-        }
-        
+              
         if (activeState && callbackContext.performed)
         {
             if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenancePacking && !GameManager.PackingMenu && !GameManager.MaintenancePackingMenu)
@@ -134,18 +127,31 @@ public class Switch2 : MonoBehaviour
 
     IEnumerator PackingMachineOn()
     {
-        while ((Status && GameManager.DryerMachine) || (Status && GameManager.UnpackOn > 0f))
+        yield return new WaitForSeconds(2.5f);
+        while (Status)
         {
-            yield return new WaitForSeconds(( 50f / GameManager.user_speed));
-            
-            if (Status)
+            // Debug.Log(GameManager.hasCollidedPackingMachine);
+            // Debug.Log(GameManager.RequestUnpack);
+            if ((Status && GameManager.hasCollidedPackingMachine))
             {
-                GameObject packagedpasta = PackPastaPool.Instance.RequestPackPasta();
-                packagedpasta.transform.position = initialposition.transform.position;
-                GameManager.PastaScore ++;
+                GameManager.RequestUnpack = true;
+                yield return new WaitForSeconds(( 100f / GameManager.user_speed));
+
+                if (Status && !GameManager.RequestUnpack)   
+                {
+                    GameObject packagedpasta = PackPastaPool.Instance.RequestPackPasta();
+                    packagedpasta.transform.position = initialposition.transform.position;
+                    GameManager.PastaScore ++;
+                    animator.SetTrigger("statusPacking");
+                    yield return new WaitForSeconds(1f);
+                }
+                // yield return new WaitForSeconds(1f); 
             }
-            yield return new WaitForSeconds(3f);
-            animator.SetTrigger("statusPacking");
+            else
+            {
+               yield return new WaitForSeconds(1f);
+            //    Debug.Log("No entro a la condicion"); 
+            }
         }
         yield return null;
     }
@@ -181,6 +187,14 @@ public class Switch2 : MonoBehaviour
             }
             SwitchM.transform.rotation = Quaternion.Euler(35f, 0f, 0f);
             yield return null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "unpackPasta")
+        {
+            GameManager.hasCollidedPackingMachine = true;
         }
     }
 }

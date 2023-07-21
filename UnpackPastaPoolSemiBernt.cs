@@ -46,6 +46,8 @@ public class UnpackPastaPoolSemiBernt : MonoBehaviour
             if (!PastaList[i].activeSelf)
             {
                 PastaList[i].SetActive(true);
+                DeleteUnpack deleteUnpack1 = PastaList[i].GetComponent<DeleteUnpack>();
+                deleteUnpack1.status = true;
                 GameManager.UnpackOn++;
                 GameManager.UnpackPastaScore++;
                 return PastaList[i];
@@ -53,6 +55,8 @@ public class UnpackPastaPoolSemiBernt : MonoBehaviour
         }
         AddPastaToPool(1);
         PastaList[PastaList.Count- 1].SetActive(true);
+        DeleteUnpack deleteUnpack2 = PastaList[PastaList.Count- 1].GetComponent<DeleteUnpack>();
+        deleteUnpack2.status = true;
         GameManager.UnpackOn++;
         GameManager.UnpackPastaScore++;
         return PastaList[PastaList.Count- 1];

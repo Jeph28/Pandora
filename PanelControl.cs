@@ -15,7 +15,7 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private TMP_Text textDryerMachine;
     [SerializeField] private TMP_Text textPackingMachine;
     [SerializeField] private CanvasGroup Target;
-    private bool InitialState = true;
+    // private bool InitialState = true;
     bool FailureIcon = false;
     float alpha;
     
@@ -55,11 +55,11 @@ public class PanelControl : MonoBehaviour
         }
 
         //Initial state 
-        if (InitialState)
-        {
-            StartCoroutine(SpamIcon());
-            InitialState = false;
-        }
+        // if (InitialState)
+        // {
+        //     StartCoroutine(SpamIcon());
+        //     InitialState = false;
+        // }
 
         //Need Maintenance Dryer Machine
         if (GameManager.CountDownMaintenanceTimeDryer <= 1 && !GameManager.NeedsMaintenanceDryer)
