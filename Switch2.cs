@@ -10,18 +10,18 @@ public class Switch2 : MonoBehaviour
     [SerializeField] private Transform distanceActivator;
     [SerializeField] private GameObject Worker;
     [SerializeField] private CanvasGroup target;
-    [SerializeField] private GameObject SwitchM;
+    [SerializeField] public GameObject SwitchM;
     private Transform SwitchMOn;
-    [SerializeField] private GameObject Led;
+    [SerializeField] public GameObject Led;
     [SerializeField] private Material Green;
-    [SerializeField] private Material Grey;
+    [SerializeField] public Material Grey;
     [SerializeField] private GameObject initialposition;
-    private float timeSwitch = 0f;
+    public float timeSwitch = 0f;
     private Transform lookAtActivator;
     private Transform activator;
     private bool activeState = false;
     private Animator animator;
-    bool Status = false;
+    public PanelControl panelControl;
     Quaternion originRotation, targetRotation;
     [SerializeField] public TMP_Text MessageSwitch;
     float alpha;
@@ -29,6 +29,8 @@ public class Switch2 : MonoBehaviour
     private Quaternion target1;
     [SerializeField] private float lerpDuration;
     [SerializeField] private float distance;
+    [SerializeField] private GameObject FailurePacking;
+    public bool Status = false;
     [SerializeField] private bool lookAtCamera;
     
     void Start()
@@ -70,7 +72,7 @@ public class Switch2 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.MaintenancePacking || GameManager.RawMaterial == 0)
+            if (!IsTargetNear() || GameManager.MaintenancePacking || GameManager.RawMaterial == 0 || GameManager.FailurePacking)
             {
                 alpha = -1;
                 activeState = false;
@@ -89,14 +91,14 @@ public class Switch2 : MonoBehaviour
         }
     }
 
-    public void Switch1(InputAction.CallbackContext callbackContext)
+    public void switch2(InputAction.CallbackContext callbackContext)
     {
          if (Settings.Instance.IsGamePaused())
             return;
               
         if (activeState && callbackContext.performed)
         {
-            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenancePacking && !GameManager.PackingMenu && !GameManager.MaintenancePackingMenu)
+            if (!Status && (Time.time - timeSwitch) > 3.0f && !GameManager.MaintenancePacking && !GameManager.PackingMenu && !GameManager.MaintenancePackingMenu && !GameManager.FailurePacking)
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
@@ -109,6 +111,14 @@ public class Switch2 : MonoBehaviour
                 {
                     PackingMachine.Instance.SpeedPrice();
                     GameManager.ChangeValuePacking = false;
+                }
+                if (GameManager.BatchPacking == 0)
+                {
+                    FailurePacking.SetActive(true);
+                    if (GameManager.BatchDryer == 0)
+                    {
+                        panelControl.MessageState2Dryer.text = "\n" + "\n" + "Ahora ve a la Secadora configurarla y enciéndela";
+                    }
                 }
                 GameManager.BatchPacking ++;
                 MessageSwitch.text = "Presiona [X] para Apagar";
@@ -130,8 +140,6 @@ public class Switch2 : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         while (Status)
         {
-            // Debug.Log(GameManager.hasCollidedPackingMachine);
-            // Debug.Log(GameManager.RequestUnpack);
             if ((Status && GameManager.hasCollidedPackingMachine))
             {
                 GameManager.RequestUnpack = true;
@@ -145,12 +153,10 @@ public class Switch2 : MonoBehaviour
                     animator.SetTrigger("statusPacking");
                     yield return new WaitForSeconds(1f);
                 }
-                // yield return new WaitForSeconds(1f); 
             }
             else
             {
                yield return new WaitForSeconds(1f);
-            //    Debug.Log("No entro a la condicion"); 
             }
         }
         yield return null;

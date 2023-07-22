@@ -6,6 +6,7 @@ public class PastaHandDelete : MonoBehaviour
 {
     [SerializeField] private GameObject Worker;
     [SerializeField] private GameObject Pasta;
+    [SerializeField] private GameObject Pasta1;
     //private float PositionTrigger;
 
     // Start is called before the first frame update
@@ -28,9 +29,10 @@ public class PastaHandDelete : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f);
         Pasta.SetActive(true);
+        Pasta1.SetActive(false);
         yield return new WaitForSeconds(5.25f);
         Pasta.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         Worker.transform.position = new Vector3(0.23f, 0, 17.21f);
         Worker.transform.rotation = Quaternion.Euler(0, 0, 0);
     }

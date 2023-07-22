@@ -52,7 +52,7 @@ public class Manager2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!activeState && !GameManager.PackingMachine)
+        if (!activeState && !GameManager.PackingMachine && !GameManager.FailurePacking)
         {
             if (IsTargetNear())
             {
@@ -63,7 +63,7 @@ public class Manager2 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.PackingMachine)
+            if (!IsTargetNear() || GameManager.PackingMachine || GameManager.FailurePacking)
             {
                 alpha = -1;
                 activeState = false;

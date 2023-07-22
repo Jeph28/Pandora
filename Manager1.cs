@@ -57,7 +57,7 @@ public class Manager1 : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear() && !GameManager.DryerMachine && !GameManager.FailureInProgressDryer && !GameManager.FailureDryer)
+            if (IsTargetNear() && !GameManager.DryerMachine && !GameManager.FailureDryer)
             {
                 alpha = 1;
                 activeState = true;
@@ -66,7 +66,7 @@ public class Manager1 : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.DryerMachine || GameManager.FailureInProgressDryer || GameManager.FailureDryer)
+            if (!IsTargetNear() || GameManager.DryerMachine || GameManager.FailureDryer)
             {
                 alpha = -1;
                 activeState = false;
@@ -90,12 +90,6 @@ public class Manager1 : MonoBehaviour
             GameManager.MessageDryer = 2;
             GameManager.changeMessageMaintenanceDryer = false;
             GameManager.MaintenanceCounterDryer ++;
-
-            // if (GameManager.MaintenanceCounterDryer == 2 && !GameManager.FailureRestartDryer)
-            // {
-            //     GameManager.FailureDryer = true;
-            //     GameManager.FailureRestartDryer = true;
-            // }
         }
 
         //Maintenance time Dryer

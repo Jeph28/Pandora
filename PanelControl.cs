@@ -43,15 +43,15 @@ public class PanelControl : MonoBehaviour
         //CountDown Dryer
         if (GameManager.CountDownActivateDryer && GameManager.CountDownMaintenanceTimeDryer > 1)
         {
-        GameManager.CountDownMaintenanceTimeDryer -= Time.deltaTime;
-        MessageState2Dryer.text = "\n" + "\n" + "Mantenimiento preventivo de la secadora en: " + GameManager.CountDownMaintenanceTimeDryer.ToString("F0");
+            GameManager.CountDownMaintenanceTimeDryer -= Time.deltaTime;
+            MessageState2Dryer.text = "\n" + "\n" + "Mantenimiento preventivo de la secadora en: " + GameManager.CountDownMaintenanceTimeDryer.ToString("F0") + " sg";
         }
 
         //CountDown Packing
          if (GameManager.CountDownActivatePacking && GameManager.CountDownMaintenanceTimePacking > 1)
         {
-        GameManager.CountDownMaintenanceTimePacking -= Time.deltaTime;
-        MessageState2Packing.text = "Mantenimiento preventivo de la empaquetadora en: " + GameManager.CountDownMaintenanceTimePacking.ToString("F0");
+            GameManager.CountDownMaintenanceTimePacking -= Time.deltaTime;
+            MessageState2Packing.text = "Mantenimiento preventivo de la empaquetadora en: " + GameManager.CountDownMaintenanceTimePacking.ToString("F0") + " sg";
         }
 
         //Initial state 

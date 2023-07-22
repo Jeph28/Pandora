@@ -14,8 +14,8 @@ public class EffectDryerMachine : MonoBehaviour
     [SerializeField] private GameObject DryerMenu;
     [SerializeField] private GameObject DryerMaintenanceMenu;
     public Switch1 switch1;
-    public float failureRateExp; // Average failure rate in failures per unit of time
-    public float failureRatePoisson;
+    [SerializeField] private float failureRateExp; // Average failure rate in failures per unit of time
+    [SerializeField] private float failureRatePoisson;
     private float timeSinceLastFailure = 0f; // Time elapsed since last failure
     private float timeBetweenFailure = 0f; // Time between failure
     // private float lerpDuration = 3f;
@@ -24,7 +24,6 @@ public class EffectDryerMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // timeBetweenFailure = GenerateTimeBetweenFailure();
         timeBetweenFailure = GenerateTimeBetweenFailure();
     }
 

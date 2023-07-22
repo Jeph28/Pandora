@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
     public float gravity;
-    public float jumpHeight = 3f;
+    public float jumpHeight = 9.81f;
     private PlayerInput playerInput;
     public AudioClip footStepSound;
     public float footStepDelay; 
@@ -29,11 +29,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        // isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         // Gravity and Jump
-        if (isGrounded && velocity.y <0)
+        if (velocity.y <0)
         {
-            velocity.y = -3f;
+            velocity.y = -9.81f;
         }
 
         //Move body
@@ -77,5 +77,4 @@ public class PlayerController : MonoBehaviour
             speed = 5;
         }
     }
-
 }

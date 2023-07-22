@@ -15,7 +15,6 @@ public class Switch1 : MonoBehaviour
     private bool activeState;
     [SerializeField] private CanvasGroup target;
     [SerializeField] public GameObject SwitchM;
-    public bool Status = false;
     [SerializeField] public GameObject Led;
     [SerializeField] private Material Green;
     [SerializeField] public Material Grey;
@@ -25,9 +24,11 @@ public class Switch1 : MonoBehaviour
     [SerializeField] public TMP_Text MessageSwitch;
     [SerializeField] private GameObject FailureDryer;
     public float timeSwitch = 0f;
+    public PanelControl panelControl;
     [SerializeField] private float distance;
     Quaternion originRotation, targetRotation;
     [SerializeField] private bool lookAtCamera;
+    public bool Status = false;
 
     float alpha;
 
@@ -99,7 +100,6 @@ public class Switch1 : MonoBehaviour
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
-                Led.gameObject.GetComponent<Renderer>().material = Green;
                 Status = true;
                 GameManager.DryerMachine = true;
                 GameManager.CountDownActivateDryer = true;
@@ -117,6 +117,10 @@ public class Switch1 : MonoBehaviour
                 if (GameManager.BatchDryer == 0)
                 {
                     FailureDryer.SetActive(true);
+                    if (GameManager.BatchPacking == 0)
+                    {
+                        panelControl.MessageState2Packing.text = "Ahora ve a la Empaquetadora configurarla y enciéndela";
+                    }
                 }
                 GameManager.BatchDryer ++;
                 MessageSwitch.text = "Presiona [X] para Apagar";
@@ -139,7 +143,7 @@ public class Switch1 : MonoBehaviour
         
         while (Status)
         {
-            if (GameManager.UnpackOn < 7.0f && !GameManager.MaintenanceDryer)
+            if (GameManager.UnpackOn < 10.0f && !GameManager.MaintenanceDryer)
             {
                 //Case VeryRaw
                 if (GameManager.pastaColor == 1)

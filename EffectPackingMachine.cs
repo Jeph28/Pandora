@@ -8,41 +8,123 @@ public class EffectPackingMachine : MonoBehaviour
     [SerializeField] private GameObject Fire;
     [SerializeField] private GameObject Shower;
     [SerializeField] private GameObject Explosion;
+    [SerializeField] public TMP_Text MessageState2Packing;
+    [SerializeField] private TMP_Text textPackingMachine;
+    [SerializeField] private GameObject PackingMenu;
+    [SerializeField] private GameObject PackingMaintenanceMenu;
+    public Switch2 switch2;
+    [SerializeField] private float failureRateExp; // Average failure rate in failures per unit of time
+    [SerializeField] private float failureRatePoisson;
+    private float timeSinceLastFailure = 0f; // Time elapsed since last failure
+    private float timeBetweenFailure = 0f; // Time between failure
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        timeBetweenFailure = GenerateTimeBetweenFailure();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (true)
-        // {
-        //     // Probabilidad de falla de un 30%
-        //     int prop = Random.Range(1, 11);
-        //     Debug.Log(prop);
-        //     if (prop <= 3) 
-        //     {
-        //      StartCoroutine("Failure");
-        //     }  
-        // }
+        timeSinceLastFailure += Time.deltaTime;
+
+        if (timeSinceLastFailure/60 >= timeBetweenFailure && !GameManager.FailurePacking)
+        {
+            timeBetweenFailure = GenerateTimeBetweenFailure();
+            if (GenerateFailureProbability())
+            {
+                GameManager.FailurePacking = true;
+                if (switch2.Status)
+                {
+                    switch2.timeSwitch = Time.time;
+                    switch2.MessageSwitch.text = "Presiona [X] para Encender";
+                    GameManager.PackingMachine = false;
+                    StartCoroutine(TransitionSwitchOff(3f));
+                    switch2.Status = false;
+                }
+            
+                PackingMenu.SetActive(false);
+                GameManager.PackingMenu = false;
+                PackingMaintenanceMenu.SetActive(false);
+                GameManager.MaintenancePackingMenu = false;
+                StartCoroutine("Failure");
+            }
+            else
+            {
+                timeSinceLastFailure = 0f;
+            }
+        }
     }
 
     IEnumerator Failure()
     {
+        GameManager.NeedsMaintenancePacking = false;
+        GameManager.CountDownActivatePacking = false;
+        GameManager.CountDownMaintenanceTimePacking = 150;
+        MessageState2Packing.text = "La Maquina Empaquetadora esta presentando fallas";
+        yield return new WaitForSeconds(10.0f);
         Explosion.SetActive(true);
         yield return new WaitForSeconds(.25f);
+        MessageState2Packing.text = "La Maquina Empaquetadora acaba de explotar";
         Fire.SetActive(true);
         yield return new WaitForSeconds(15f);
         Shower.SetActive(true);
-        yield return new WaitForSeconds(10.25f);
+        MessageState2Packing.text = "Se han encendido los aspersores";
+        yield return new WaitForSeconds(5.0f);
+        MessageState2Packing.text = "Ya se apago el incendio el costo fue de 4000$";
+        yield return new WaitForSeconds(5.25f);
         Fire.SetActive(false);
         Shower.SetActive(false);
         Explosion.SetActive(false);
-        yield return null;
         GameManager.Money -= 4000f;
+        GameManager.CountDownActivatePacking = true;
+        GameManager.FailurePacking = false;
+        timeSinceLastFailure = 0f;
+        Restart();
+        yield return null;
+    }
+
+    private void Restart()
+    {
+        GameManager.MaintenancePacking = false;
+        GameManager.MaintenancePackingMenu = false;
+        GameManager.MessagePacking = 1;
+        textPackingMachine.text = "Presiona [Y] para configurar";
+        GameManager.NeedsMaintenancePacking = false;
+        GameManager.CountDownMaintenanceTimePacking = 150;
+    }
+
+    private float GenerateTimeBetweenFailure()
+    {
+        return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / failureRateExp;
+    }
+
+     private bool GenerateFailureProbability()
+    {
+        //probability that K = 1
+        // float probabilityOfFailure = failureRatePoisson * (timeBetweenFailure) * Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
+        
+        //probability that K >= 1
+        float probabilityOfFailure = 1f - Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
+        return probabilityOfFailure > Random.Range(0f, 1f);
+    }
+
+    IEnumerator TransitionSwitchOff(float lerpDuration)
+    {
+        float timeElapsed = 0f;
+        if (switch2.Status)
+        {
+            while (timeElapsed < lerpDuration)
+            {
+                switch2.SwitchM.transform.rotation = Quaternion.Lerp(switch2.SwitchM.transform.rotation, Quaternion.Euler(35f, 0f, 0f), timeElapsed / lerpDuration);
+                timeElapsed += Time.deltaTime;
+                switch2.Led.gameObject.GetComponent<Renderer>().material = switch2.Grey;
+                yield return null;
+            }
+            switch2.SwitchM.transform.rotation = Quaternion.Euler(35f, 0f, 0f);
+            yield return null;
+        }
     }
     
 }
