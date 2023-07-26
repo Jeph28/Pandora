@@ -92,7 +92,7 @@ public class Manager2 : MonoBehaviour
         if (GameManager.CountDownMaintenancePacking && GameManager.MaintenanceTimePacking > 1)
         {
         GameManager.MaintenanceTimePacking -= Time.deltaTime;
-        MessagePacking.text = "Espera " + GameManager.MaintenanceTimePacking.ToString("F0") + " segundos";
+        MessagePacking.text = "Espera " + GameManager.MaintenanceTimePacking.ToString("F0") + " sg";
         GameManager.MessagePacking = 3;
         }
 

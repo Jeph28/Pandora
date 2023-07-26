@@ -12,6 +12,7 @@ public class MoveH : MonoBehaviour
     public float SensibilityX;
     public float SensibilityY;
     public float mouseSensitivity;
+    public SceneManagerContext sceneManagerContext;
 
 
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class MoveH : MonoBehaviour
         xRotacion -= input.y * SensibilityY;
         xRotacion = Mathf.Clamp(xRotacion,-80,80);
         transform.localRotation = Quaternion.Euler(xRotacion,0,0);
-        if (input == Vector2.zero && !GameManager.DryerMenu && !GameManager.PackingMenu && !GameManager.MaintenanceDryerMenu && !GameManager.MaintenancePackingMenu && !GameManager.ContextCheckPoint1 && !GameManager.ContextCheckPoint2 && !GameManager.RawMaterialMenu)
+        if (input == Vector2.zero && !GameManager.DryerMenu && !GameManager.PackingMenu && !GameManager.MaintenanceDryerMenu && !GameManager.MaintenancePackingMenu && !GameManager.ContextCheckPoint1 && !GameManager.ContextCheckPoint2 && !GameManager.RawMaterialMenu && !sceneManagerContext.Context1.activeSelf && !sceneManagerContext.Context2.activeSelf && !sceneManagerContext.Norm1.activeSelf && !sceneManagerContext.Norm2.activeSelf && !sceneManagerContext.Norm3.activeSelf)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class SceneManagerContext : MonoBehaviour
 {
-    [SerializeField] private GameObject Context1;
-    [SerializeField] private GameObject Context2;
-    [SerializeField] private GameObject Norm1;
-    [SerializeField] private GameObject Norm2;
-    [SerializeField] private GameObject Norm3;
+    public GameObject Context1;
+    public GameObject Context2;
+    public GameObject Norm1;
+    public GameObject Norm2;
+    public GameObject Norm3;
+    public GameObject timeAndMoney;
+    public GameObject panelControl;
+    public GameObject eventSystem;
 
-    void Update()
+    void Start()
     {
-
+        Context1.SetActive(true);
     }
     
     //Context 1
@@ -67,6 +71,11 @@ public class SceneManagerContext : MonoBehaviour
     }
     public void ChangePlayGame()
     {
-        SceneManager.LoadScene("Game");
+        timeAndMoney.SetActive(true);
+        panelControl.SetActive(true);
+        eventSystem.SetActive(false);
+        Norm3.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

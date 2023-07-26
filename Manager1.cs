@@ -7,7 +7,6 @@ using TMPro;
 
 public class Manager1 : MonoBehaviour
 {
-
     [SerializeField] private Transform distanceActivator; 
     private Transform lookAtActivator;
     private Transform activator;
@@ -17,14 +16,12 @@ public class Manager1 : MonoBehaviour
     [SerializeField] private GameObject DryerMenu;
     [SerializeField] private GameObject MaintenanceDryerMenu;
     [SerializeField] private TMP_Text textMaintenanceDryerMenu;
-
     [SerializeField] public TMP_Text MessageDryer;
     //  MessageDryer = 1 "Presiona [Y] para configurar la secaodra"
     //  MessageDryer = 2 "Pulsa [Y] para hacer mantenimiento"
     //  MessageDyer = 3 "Espera x segundos"
     public bool lookAtCamera = true;
     float alpha;
-
     Quaternion originRotation, targetRotation;
 
 
@@ -74,15 +71,6 @@ public class Manager1 : MonoBehaviour
             }
         }
         target.alpha = Mathf.Clamp01(target.alpha + alpha * Time.deltaTime);
-        
-        // if (lookAtCamera)
-        // {
-        //     if (activeState)
-        //         targetRotation = Quaternion.LookRotation(activator.position - transform.position);
-        //     else
-        //         targetRotation = originRotation;
-        //     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
-        // }
 
         if (GameManager.NeedsMaintenanceDryer && GameManager.changeMessageMaintenanceDryer)
         {
@@ -96,7 +84,7 @@ public class Manager1 : MonoBehaviour
         if (GameManager.CountDownMaintenanceDryer && GameManager.MaintenanceTimeDryer > 1)
         {
         GameManager.MaintenanceTimeDryer -= Time.deltaTime;
-        MessageDryer.text = "Espera " + GameManager.MaintenanceTimeDryer.ToString("F0") + " segundos";
+        MessageDryer.text = "Espera " + GameManager.MaintenanceTimeDryer.ToString("F0") + " sg";
         GameManager.MessageDryer = 3;
         }
 

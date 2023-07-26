@@ -22,6 +22,7 @@ public class Switch2 : MonoBehaviour
     private bool activeState = false;
     private Animator animator;
     public PanelControl panelControl;
+    public Money money;
     Quaternion originRotation, targetRotation;
     [SerializeField] public TMP_Text MessageSwitch;
     float alpha;
@@ -110,6 +111,7 @@ public class Switch2 : MonoBehaviour
                 if (GameManager.ChangeValuePacking || GameManager.BatchPacking == 0)
                 {
                     PackingMachine.Instance.SpeedPrice();
+                    money.ChangeMoneyValue();
                     GameManager.ChangeValuePacking = false;
                 }
                 if (GameManager.BatchPacking == 0)

@@ -13,6 +13,7 @@ public class EffectPackingMachine : MonoBehaviour
     [SerializeField] private GameObject PackingMenu;
     [SerializeField] private GameObject PackingMaintenanceMenu;
     public Switch2 switch2;
+    public Money money;
     [SerializeField] private float failureRateExp; // Average failure rate in failures per unit of time
     [SerializeField] private float failureRatePoisson;
     private float timeSinceLastFailure = 0f; // Time elapsed since last failure
@@ -78,9 +79,12 @@ public class EffectPackingMachine : MonoBehaviour
         Shower.SetActive(false);
         Explosion.SetActive(false);
         GameManager.Money -= 4000f;
+        money.ChangeMoneyValue();
         GameManager.CountDownActivatePacking = true;
         GameManager.FailurePacking = false;
         timeSinceLastFailure = 0f;
+        GameManager.failureRateExpPacking = 0.1f;
+        GameManager.failureRatePoissonPacking = 0.1f;
         Restart();
         yield return null;
     }
@@ -97,16 +101,16 @@ public class EffectPackingMachine : MonoBehaviour
 
     private float GenerateTimeBetweenFailure()
     {
-        return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / failureRateExp;
+        return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / GameManager.failureRateExpPacking;
     }
 
      private bool GenerateFailureProbability()
     {
         //probability that K = 1
-        // float probabilityOfFailure = failureRatePoisson * (timeBetweenFailure) * Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
+        // float probabilityOfFailure = GameManager.failureRateExpPacking * (timeBetweenFailure) * Mathf.Exp( - GameManager.failureRateExpPacking * (timeBetweenFailure));
         
         //probability that K >= 1
-        float probabilityOfFailure = 1f - Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
+        float probabilityOfFailure = 1f - Mathf.Exp( - GameManager.failureRatePoissonPacking * (timeBetweenFailure));
         return probabilityOfFailure > Random.Range(0f, 1f);
     }
 

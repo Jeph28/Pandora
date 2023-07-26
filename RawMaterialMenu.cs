@@ -9,16 +9,9 @@ public class RawMaterialMenu : MonoBehaviour
     [SerializeField] private GameObject RawMaterialMenu1;
     [SerializeField] private TMP_Text TextPanelControlDryer;
     [SerializeField] private TMP_Text TextPanelControlPicking;
-    void Start()
-    {
-        
-    }
+    public Money money;
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void CanadianWheat()
     {
         if (Settings.Instance.IsGamePaused())
@@ -26,12 +19,12 @@ public class RawMaterialMenu : MonoBehaviour
 
         GameManager.RawMaterial = 1;
         GameManager.Money -= 2200f;
+        money.ChangeMoneyValue();
         GameManager.Acidity = 0.080f;
         GameManager.Ash = 1f;
         GameManager.Protein = 14f;
 
         TextPanelControlDryer.text = "\n" + "Dirígete a la línea de producción y configura la secadora y empaquetadora, luego enciéndelas";
-        // TextPanelControlPicking.text = "Mantenimiento preventivo de la empaquetadora: No disponible";
         BackToGame();
     }
     public void MexicanWheat()
@@ -41,19 +34,19 @@ public class RawMaterialMenu : MonoBehaviour
             
         GameManager.RawMaterial = 2;
         GameManager.Money -= 1800f;
+        money.ChangeMoneyValue();
         GameManager.Acidity = 0.070f;
         GameManager.Ash = 0.8f;
         GameManager.Protein = 12.8f;
 
         TextPanelControlDryer.text = "\n" + "\n" + "Dirígete a la línea de producción y configura la secadora y empaquetadora, luego enciéndelas";
-        // TextPanelControlPicking.text = "Mantenimiento preventivo de la empaquetadora: No disponible";
         BackToGame();
     }
     public void BackToGame()
     {
         RawMaterialMenu1.SetActive(false);
-        GameManager.RawMaterialMenu = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        GameManager.RawMaterialMenu = false;
     }
 }

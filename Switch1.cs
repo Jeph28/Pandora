@@ -25,6 +25,7 @@ public class Switch1 : MonoBehaviour
     [SerializeField] private GameObject FailureDryer;
     public float timeSwitch = 0f;
     public PanelControl panelControl;
+    public Money money;
     [SerializeField] private float distance;
     Quaternion originRotation, targetRotation;
     [SerializeField] private bool lookAtCamera;
@@ -112,6 +113,7 @@ public class Switch1 : MonoBehaviour
                 if (GameManager.ChangeValueDryer || GameManager.BatchDryer == 0)
                 {
                     DryerMachine.Instance.TemperaturePrice();
+                    money.ChangeMoneyValue();
                     GameManager.ChangeValueDryer = false;
                 }
                 if (GameManager.BatchDryer == 0)
@@ -225,7 +227,6 @@ public class Switch1 : MonoBehaviour
             while (timeElapsed < lerpDuration)
             {
                 SwitchM.transform.rotation = Quaternion.Lerp(SwitchM.transform.rotation, Quaternion.Euler(-25f, 0f, 0f), timeElapsed / lerpDuration);
-                //Quaternion.Lerp(start, target1, timeElapsed / lerpDuration)
                 timeElapsed += Time.deltaTime;
                 Led.gameObject.GetComponent<Renderer>().material = Green;
                 yield return null;

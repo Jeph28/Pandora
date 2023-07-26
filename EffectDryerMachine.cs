@@ -14,11 +14,10 @@ public class EffectDryerMachine : MonoBehaviour
     [SerializeField] private GameObject DryerMenu;
     [SerializeField] private GameObject DryerMaintenanceMenu;
     public Switch1 switch1;
-    [SerializeField] private float failureRateExp; // Average failure rate in failures per unit of time
-    [SerializeField] private float failureRatePoisson;
+    public Money money;
     private float timeSinceLastFailure = 0f; // Time elapsed since last failure
     private float timeBetweenFailure = 0f; // Time between failure
-    // private float lerpDuration = 3f;
+    
 
     
     // Start is called before the first frame update
@@ -81,9 +80,12 @@ public class EffectDryerMachine : MonoBehaviour
         Shower.SetActive(false);
         Explosion.SetActive(false);
         GameManager.Money -= 4000f;
+        money.ChangeMoneyValue();
         GameManager.CountDownActivateDryer = true;
         GameManager.FailureDryer = false;
         timeSinceLastFailure = 0f;
+        GameManager.failureRateExpDryer = 0.1f;
+        GameManager.failureRatePoissonDryer = 0.1f;
         Restart();
         yield return null;
     }
@@ -100,16 +102,16 @@ public class EffectDryerMachine : MonoBehaviour
 
     private float GenerateTimeBetweenFailure()
     {
-        return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / failureRateExp;
+        return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / GameManager.failureRateExpDryer;
     }
 
     private bool GenerateFailureProbability()
     {
-        //probability that K = 1
-        // float probabilityOfFailure = failureRatePoisson * (timeBetweenFailure) * Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
+        // probability that K = 1
+        // float probabilityOfFailure = GameManager.failureRatePoissonDryer * (timeBetweenFailure) * Mathf.Exp( - GameManager.failureRatePoissonDryer * (timeBetweenFailure));
         
         //probability that K >= 1
-        float probabilityOfFailure = 1f - Mathf.Exp(-failureRatePoisson * (timeBetweenFailure));
+        float probabilityOfFailure = 1f - Mathf.Exp(- GameManager.failureRatePoissonDryer * (timeBetweenFailure));
         return probabilityOfFailure > Random.Range(0f, 1f);
     }
     

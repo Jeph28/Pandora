@@ -85,7 +85,6 @@ public static class GameManager
     public static bool MaintenancePacking = false;
     public static int MaintenanceCounterDryer = 0;
     public static int MaintenanceCounterPacking = 0;
-    public static bool FailureInProgressDryer = false;
     public static bool FailureRestartDryer = false;
     public static float CountDownMaintenanceTimeDryer = timeBetweenMaintenanceDryer;
     public static float CountDownMaintenanceTimePacking = timeBetweenMaintenancePacking;
@@ -103,4 +102,9 @@ public static class GameManager
     public static int StdDevWeight;
     public static int UnpackPastaScore = 0;
     public static bool RawMaterialMenu = false;
+    public static float failureRateExpDryer = 0.1f;  // Average failure rate in failures per unit of time
+    public static float failureRatePoissonDryer = 0.1f;  // Average failure rate in failures per unit of time
+    public static float failureRateExpPacking = 0.1f;
+    public static float failureRatePoissonPacking = 0.1f;
+    public static string currentControl;
 }

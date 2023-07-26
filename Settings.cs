@@ -35,17 +35,9 @@ public class Settings : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = -1;
         Application.targetFrameRate = LimitFPS;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true; 
     }
-
-    // public void Quit(InputAction.CallbackContext callbackContext)
-    // {
-    //     if (callbackContext.performed)
-    //     {
-    //         Application.Quit();
-    //     }
-    // }
 
     public void Pause()
     {
@@ -102,12 +94,6 @@ public class Settings : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
-
-    // public void Restart()
-    // {
-    //     UpdateGameState();
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    // }
 
     public void Exit() 
     {

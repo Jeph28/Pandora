@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip footStepSound;
     public float footStepDelay; 
     private float nextFootstep = 0;
+    public SceneManagerContext sceneManagerContext;
 
     void Start()
     {
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
         //Move body
         inputM = playerInput.actions["Move"].ReadValue<Vector2>();
         Vector3 motion = transform.right * inputM.x + transform.forward * inputM.y;
-        if (!GameManager.DryerMenu && !GameManager.PackingMenu && !GameManager.MaintenanceDryerMenu && !GameManager.MaintenancePackingMenu && !GameManager.ContextCheckPoint1 && !GameManager.ContextCheckPoint2 && !GameManager.RawMaterialMenu)
+        if (!GameManager.DryerMenu && !GameManager.PackingMenu && !GameManager.MaintenanceDryerMenu && !GameManager.MaintenancePackingMenu && !GameManager.ContextCheckPoint1 && !GameManager.ContextCheckPoint2 && !GameManager.RawMaterialMenu && !sceneManagerContext.Context1.activeSelf && !sceneManagerContext.Context2.activeSelf && !sceneManagerContext.Norm1.activeSelf && !sceneManagerContext.Norm2.activeSelf && !sceneManagerContext.Norm3.activeSelf)
         {
             controller.Move(motion * speed * Time.deltaTime);
             velocity.y += gravity * Time.deltaTime;

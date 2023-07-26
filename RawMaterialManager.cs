@@ -19,6 +19,7 @@ public class RawMaterialManager : MonoBehaviour
     float alpha;
 
     Quaternion originRotation, targetRotation;
+    public SceneManagerContext sceneManagerContext;
 
 
     void Start()
@@ -50,7 +51,7 @@ public class RawMaterialManager : MonoBehaviour
     {
         if (!activeState)
         {
-            if (IsTargetNear() && GameManager.RawMaterial == 0)
+            if (IsTargetNear() && GameManager.RawMaterial == 0 && !sceneManagerContext.Context1.activeSelf && !sceneManagerContext.Context2.activeSelf && !sceneManagerContext.Norm1.activeSelf && !sceneManagerContext.Norm2.activeSelf && !sceneManagerContext.Norm3.activeSelf)
             {
                 alpha = 1;
                 activeState = true;
@@ -58,7 +59,7 @@ public class RawMaterialManager : MonoBehaviour
         }
         else
         {
-            if (!IsTargetNear() || GameManager.RawMaterial != 0)
+            if (!IsTargetNear() || GameManager.RawMaterial != 0 || sceneManagerContext.Context1.activeSelf || sceneManagerContext.Context2.activeSelf || sceneManagerContext.Norm1.activeSelf || sceneManagerContext.Norm2.activeSelf || sceneManagerContext.Norm3.activeSelf)
             {
                 alpha = -1;
                 activeState = false;
