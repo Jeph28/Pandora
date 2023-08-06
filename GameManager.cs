@@ -10,8 +10,8 @@ public static class GameManager
     public static int MaintenanceExpirationDryer = 60;
     public static int MaintenanceExpirationPacking = 60;
     public static int PastaScore = 0;
-    public static int BatchDryer = 0;
-    public static int BatchPacking = 0;
+    public static int previousUnpackPastaScore = 0;
+    public static int Batch = 0;
     public static bool activeStatePacking = false;
     public static bool activeStateDryer = false;
     public static bool activeStateManager1 = false;
@@ -20,13 +20,14 @@ public static class GameManager
     public static bool hasCollidedPackingMachine;
     public static bool RequestUnpack = false;
     public static int pastaColor;
-    public static List<int> pastaColorList = new List<int>();
+    public static List<string> pastaColorList = new List<string>();
     public static string pastaColorString;
     public static int pastaHumidity;
     public static List<float> pastaHumidityList = new List<float>();
     public static string pastaHumidityPercentageString;
     // public static string pastaHumidityString;
     public static List<float> pastaStdDevWeightList = new List<float>();
+    public static List<float> pastaStdDevHumidity = new List<float>();
     public static float user_previousTemperature = 80;
     public static float user_temperature = 80;
     public static float user_time = 180;
@@ -107,4 +108,7 @@ public static class GameManager
     public static float failureRateExpPacking = 0.1f;
     public static float failureRatePoissonPacking = 0.1f;
     public static string currentControl;
+    public static bool InitialDryer = false;
+    public static bool InitialPacking = false;
+    public static List<int> batchSizeList = new List<int>();
 }

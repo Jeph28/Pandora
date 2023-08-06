@@ -57,28 +57,28 @@ public class DryerMachine : MonoBehaviour
             GameManager.pastaColor = 1;
             GameManager.pastaColorString = " 10B";
         }
-        if ( 20000f < ColorValue && ColorValue <= 25000f)
+        else if (20000f < ColorValue && ColorValue <= 25000f)
         {
             GameManager.pastaColor = 2;
             GameManager.pastaColorString = " 25B";
         }
-        if ( 25000f < ColorValue && ColorValue <= 28000f)
+        else if (25000f < ColorValue && ColorValue <= 28000f)
         {
             GameManager.pastaColor = 3;
             GameManager.pastaColorString = " 35B";
         }
-        if ( 28000f < ColorValue && ColorValue <= 34000f)
+        else if ( 28000f < ColorValue && ColorValue <= 34000f)
         {
             GameManager.pastaColor = 4;
             GameManager.pastaColorString = " -5B";
         }
-        if (ColorValue > 34000f)
+        else if (ColorValue > 34000f)
         {
             GameManager.pastaColor = 5;
             GameManager.pastaColorString = " -10B";
         }
 
-        GameManager.pastaColorList.Add(GameManager.pastaColor);
+        GameManager.pastaColorList.Add(GameManager.pastaColorString);
     }
 
      public void Humidity()
@@ -99,18 +99,25 @@ public class DryerMachine : MonoBehaviour
         {
             GameManager.StdDevHumidity = Random.Range(3,6);
         }
-        if ( HumidityPercentage <= 13.5f && HumidityPercentage >= 12.6)
+        else if ( HumidityPercentage <= 13.5f && HumidityPercentage >= 12.6)
         {
             GameManager.StdDevHumidity = Random.Range(2,4);
         }
-        if (HumidityPercentage < 12.6f)
+        else if (HumidityPercentage < 12.6f)
         {
             GameManager.StdDevHumidity = Random.Range(1,3);
         }
+
+        GameManager.pastaStdDevHumidity.Add(GameManager.StdDevHumidity);
     }
        public void Craking()
     {
-        if (GameManager.user_temperature * GameManager.user_time >= 20000f)
+        if (GameManager.user_temperature > 100f)
+        {
+            GameManager.Craking = true;
+            GameManager.pastaCrakingString = "Si";
+        }
+        else if (GameManager.user_time < 220f)
         {
             GameManager.Craking = true;
             GameManager.pastaCrakingString = "Si";
@@ -148,13 +155,13 @@ public class DryerMachine : MonoBehaviour
             EfficiencyStg = Efficiency.ToString("F2");
             GameManager.DryerMachineEfficiencyString = EfficiencyStg;
         }
-        if (GameManager.user_time > 240f && GameManager.user_time <= 300)
+        else if (GameManager.user_time > 240f && GameManager.user_time <= 300)
         {
             Efficiency = Random.Range(0.6f, 0.7f);
             EfficiencyStg = Efficiency.ToString("F2");
             GameManager.DryerMachineEfficiencyString = EfficiencyStg;
         }
-        if (GameManager.user_time > 300f)
+        else if (GameManager.user_time > 300f)
         {
             Efficiency = Random.Range(0.4f, 0.6f);
             EfficiencyStg = Efficiency.ToString("F2");
@@ -171,14 +178,12 @@ public class DryerMachine : MonoBehaviour
             float cost = 50f * GameManager.user_temperature - 3500f;
             GameManager.Money -= cost;
         }
-
-        if (GameManager.user_temperature > 90f && GameManager.user_temperature <= 100)
+        else if (GameManager.user_temperature > 90f && GameManager.user_temperature <= 100)
         {
             float cost = 100f * GameManager.user_temperature - 8000f;
             GameManager.Money -= cost;
         }
-
-        if (GameManager.user_temperature > 100f)
+        else if (GameManager.user_temperature > 100f)
         {
             float cost = 125f * GameManager.user_temperature - 10500f;
             GameManager.Money -= cost;
@@ -191,17 +196,24 @@ public class DryerMachine : MonoBehaviour
         {
             cost = 50f * GameManager.user_temperature - 3500f;
         }
-
-        if (GameManager.user_temperature > 90f && GameManager.user_temperature <= 100)
+        else if (GameManager.user_temperature > 90f && GameManager.user_temperature <= 100)
         {
             cost = 100f * GameManager.user_temperature - 8000f;
         }
-
-        if (GameManager.user_temperature > 100f)
+        else if (GameManager.user_temperature > 100f)
         {
             cost = 125f * GameManager.user_temperature - 10500f;
         }
 
         return cost;
+    }
+
+    public void BatchSize( int previousUnpackPastaScore, int currentUnpackPastaScore)
+    {
+        int currentBatchSize = currentUnpackPastaScore - previousUnpackPastaScore;
+        GameManager.batchSizeList.Add(currentBatchSize);
+        Debug.Log(currentBatchSize);
+        Debug.Log(currentUnpackPastaScore);
+        Debug.Log(previousUnpackPastaScore);
     }
 }

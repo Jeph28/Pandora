@@ -22,6 +22,7 @@ public class Switch2 : MonoBehaviour
     private bool activeState = false;
     private Animator animator;
     public PanelControl panelControl;
+    public DryerMachine dryerMachine;
     public Money money;
     Quaternion originRotation, targetRotation;
     [SerializeField] public TMP_Text MessageSwitch;
@@ -106,26 +107,40 @@ public class Switch2 : MonoBehaviour
                 Status = true;
                 GameManager.PackingMachine = Status;
                 GameManager.CountDownActivatePacking = true;
-                PackingMachine.Instance.Weight();
-                PackingMachine.Instance.EfficiencyMachine();
-                if (GameManager.ChangeValuePacking || GameManager.BatchPacking == 0)
+                
+                if (GameManager.Batch == 0)
                 {
+                    FailurePacking.SetActive(true);
+                    panelControl.MessageState2Dryer.text = "\n" + "\n" + "Ahora ve a la Secadora configurarla y enciéndela";
+                    GameManager.InitialPacking = true; 
+                    PackingMachine.Instance.SpeedPrice();
+                    PackingMachine.Instance.StdDevWeight();
+                    money.ChangeMoneyValue();
+
+                    if (GameManager.InitialDryer && GameManager.InitialPacking)
+                    {
+                        GameManager.Batch ++;
+                    }
+                }
+                else if(GameManager.ChangeValuePacking)
+                {
+                    dryerMachine.BatchSize(GameManager.previousUnpackPastaScore , GameManager.UnpackPastaScore);
+                    GameManager.previousUnpackPastaScore = GameManager.UnpackPastaScore;
+                    GameManager.Batch ++;
+                    DryerMachine.Instance.Humidity();
+                    DryerMachine.Instance.Color();
+                    DryerMachine.Instance.Craking();
+                    DryerMachine.Instance.Microbiological();
+                    PackingMachine.Instance.StdDevWeight();
                     PackingMachine.Instance.SpeedPrice();
                     money.ChangeMoneyValue();
                     GameManager.ChangeValuePacking = false;
                 }
-                if (GameManager.BatchPacking == 0)
-                {
-                    FailurePacking.SetActive(true);
-                    if (GameManager.BatchDryer == 0)
-                    {
-                        panelControl.MessageState2Dryer.text = "\n" + "\n" + "Ahora ve a la Secadora configurarla y enciéndela";
-                    }
-                }
-                GameManager.BatchPacking ++;
+                
                 MessageSwitch.text = "Presiona [X] para Apagar";
                 StartCoroutine(PackingMachineOn());
             }
+
             if (Status && (Time.time - timeSwitch) > 3.0f)
             {
                 timeSwitch = Time.time;

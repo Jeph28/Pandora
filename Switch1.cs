@@ -25,6 +25,7 @@ public class Switch1 : MonoBehaviour
     [SerializeField] private GameObject FailureDryer;
     public float timeSwitch = 0f;
     public PanelControl panelControl;
+    public DryerMachine dryerMachine;
     public Money money;
     [SerializeField] private float distance;
     Quaternion originRotation, targetRotation;
@@ -104,30 +105,46 @@ public class Switch1 : MonoBehaviour
                 Status = true;
                 GameManager.DryerMachine = true;
                 GameManager.CountDownActivateDryer = true;
-                DryerMachine.Instance.Color();
-                DryerMachine.Instance.Humidity();
-                DryerMachine.Instance.Craking();
-                DryerMachine.Instance.Microbiological();
-                DryerMachine.Instance.EfficiencyMachine();
+                
 
-                if (GameManager.ChangeValueDryer || GameManager.BatchDryer == 0)
+                if (GameManager.Batch == 0)
                 {
+                    Debug.Log("entro en el lote 0");
+                    FailureDryer.SetActive(true);
+                    panelControl.MessageState2Packing.text = "Ahora ve a la Empaquetadora configurarla y enciéndela";                            
+                    GameManager.InitialDryer = true;
+                    DryerMachine.Instance.Humidity();
+                    DryerMachine.Instance.Color();
+                    DryerMachine.Instance.Craking();
+                    DryerMachine.Instance.Microbiological();
+                    DryerMachine.Instance.TemperaturePrice();
+                    money.ChangeMoneyValue();
+
+                    if (GameManager.InitialDryer && GameManager.InitialPacking)
+                    {
+                        GameManager.Batch ++;
+                    }
+                }
+                else if(GameManager.ChangeValueDryer)
+                {
+                    Debug.Log("entro en el cambio de valor");
+                    dryerMachine.BatchSize(GameManager.previousUnpackPastaScore , GameManager.UnpackPastaScore);
+                    GameManager.previousUnpackPastaScore = GameManager.UnpackPastaScore;
+                    GameManager.Batch ++;
+                    DryerMachine.Instance.Humidity();
+                    DryerMachine.Instance.Color();
+                    DryerMachine.Instance.Craking();
+                    DryerMachine.Instance.Microbiological();
+                    PackingMachine.Instance.StdDevWeight();
                     DryerMachine.Instance.TemperaturePrice();
                     money.ChangeMoneyValue();
                     GameManager.ChangeValueDryer = false;
                 }
-                if (GameManager.BatchDryer == 0)
-                {
-                    FailureDryer.SetActive(true);
-                    if (GameManager.BatchPacking == 0)
-                    {
-                        panelControl.MessageState2Packing.text = "Ahora ve a la Empaquetadora configurarla y enciéndela";
-                    }
-                }
-                GameManager.BatchDryer ++;
+
                 MessageSwitch.text = "Presiona [X] para Apagar";
                 StartCoroutine(DryerMachineOn());
             }
+
             if (Status && (Time.time - timeSwitch) > 3.0f)
             {
                 timeSwitch = Time.time;
