@@ -124,8 +124,8 @@ public class Switch2 : MonoBehaviour
                 }
                 else if(GameManager.ChangeValuePacking)
                 {
-                    dryerMachine.BatchSize(GameManager.previousUnpackPastaScore , GameManager.UnpackPastaScore);
-                    GameManager.previousUnpackPastaScore = GameManager.UnpackPastaScore;
+                    dryerMachine.BatchSize(GameManager.previousUnpackPastaScore , GameManager.UnpackPastaScore - GameManager.UnpackOn);
+                    GameManager.previousUnpackPastaScore = GameManager.UnpackPastaScore - GameManager.UnpackOn;
                     GameManager.Batch ++;
                     DryerMachine.Instance.Humidity();
                     DryerMachine.Instance.Color();

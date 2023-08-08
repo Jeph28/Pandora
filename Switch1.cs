@@ -109,7 +109,6 @@ public class Switch1 : MonoBehaviour
 
                 if (GameManager.Batch == 0)
                 {
-                    Debug.Log("entro en el lote 0");
                     FailureDryer.SetActive(true);
                     panelControl.MessageState2Packing.text = "Ahora ve a la Empaquetadora configurarla y enciéndela";                            
                     GameManager.InitialDryer = true;
@@ -127,7 +126,6 @@ public class Switch1 : MonoBehaviour
                 }
                 else if(GameManager.ChangeValueDryer)
                 {
-                    Debug.Log("entro en el cambio de valor");
                     dryerMachine.BatchSize(GameManager.previousUnpackPastaScore , GameManager.UnpackPastaScore);
                     GameManager.previousUnpackPastaScore = GameManager.UnpackPastaScore;
                     GameManager.Batch ++;

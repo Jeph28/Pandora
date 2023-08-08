@@ -27,7 +27,9 @@ public static class GameManager
     public static string pastaHumidityPercentageString;
     // public static string pastaHumidityString;
     public static List<float> pastaStdDevWeightList = new List<float>();
+    public static List<float> pastaWeightList = new List<float>();
     public static List<float> pastaStdDevHumidity = new List<float>();
+    public static List<string> resultTable = new List<string>();
     public static float user_previousTemperature = 80;
     public static float user_temperature = 80;
     public static float user_time = 180;
@@ -100,7 +102,7 @@ public static class GameManager
     public static float OpportunityMaintenanceDryer;
     public static float OpportunityMaintenancePacking;
     public static float StdDevHumidity;
-    public static int StdDevWeight;
+    public static float StdDevWeight;
     public static int UnpackPastaScore = 0;
     public static bool RawMaterialMenu = false;
     public static float failureRateExpDryer = 0.1f;  // Average failure rate in failures per unit of time
@@ -110,5 +112,6 @@ public static class GameManager
     public static string currentControl;
     public static bool InitialDryer = false;
     public static bool InitialPacking = false;
-    public static List<int> batchSizeList = new List<int>();
+    public static List<float> batchSizeList = new List<float>();
+    public static List<int> resultTableBinaryList = new List<int>();
 }

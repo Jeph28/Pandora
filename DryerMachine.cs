@@ -14,6 +14,12 @@ public class DryerMachine : MonoBehaviour
     [SerializeField] private Material SemiBurntPasta;
     [SerializeField] private Material BurntPasta;
     [SerializeField] private TMP_Text Moneytext;
+    public float userResultFinaly = 0f;
+    public bool colorResult;
+    public bool humidityResult;
+    public bool crakingResult;
+    public bool microorganismsResult;
+    public bool weightResult;
     private float cost;
     private static DryerMachine instance;
     public static DryerMachine Instance { get { return instance; } }
@@ -55,27 +61,27 @@ public class DryerMachine : MonoBehaviour
         if ( ColorValue <= 20000f)
         {
             GameManager.pastaColor = 1;
-            GameManager.pastaColorString = " 10B";
+            GameManager.pastaColorString = " 10";
         }
         else if (20000f < ColorValue && ColorValue <= 25000f)
         {
             GameManager.pastaColor = 2;
-            GameManager.pastaColorString = " 25B";
+            GameManager.pastaColorString = " 25";
         }
         else if (25000f < ColorValue && ColorValue <= 28000f)
         {
             GameManager.pastaColor = 3;
-            GameManager.pastaColorString = " 35B";
+            GameManager.pastaColorString = " 35";
         }
         else if ( 28000f < ColorValue && ColorValue <= 34000f)
         {
             GameManager.pastaColor = 4;
-            GameManager.pastaColorString = " -5B";
+            GameManager.pastaColorString = " -5";
         }
         else if (ColorValue > 34000f)
         {
             GameManager.pastaColor = 5;
-            GameManager.pastaColorString = " -10B";
+            GameManager.pastaColorString = " -10";
         }
 
         GameManager.pastaColorList.Add(GameManager.pastaColorString);
@@ -97,15 +103,15 @@ public class DryerMachine : MonoBehaviour
         
         if ( HumidityPercentage > 13.5f)
         {
-            GameManager.StdDevHumidity = Random.Range(3,6);
+            GameManager.StdDevHumidity = Random.Range(0.3f,0.6f);
         }
         else if ( HumidityPercentage <= 13.5f && HumidityPercentage >= 12.6)
         {
-            GameManager.StdDevHumidity = Random.Range(2,4);
+            GameManager.StdDevHumidity = Random.Range(0.2f,0.4f);
         }
         else if (HumidityPercentage < 12.6f)
         {
-            GameManager.StdDevHumidity = Random.Range(1,3);
+            GameManager.StdDevHumidity = Random.Range(0.1f,0.3f);
         }
 
         GameManager.pastaStdDevHumidity.Add(GameManager.StdDevHumidity);
@@ -210,10 +216,78 @@ public class DryerMachine : MonoBehaviour
 
     public void BatchSize( int previousUnpackPastaScore, int currentUnpackPastaScore)
     {
-        int currentBatchSize = currentUnpackPastaScore - previousUnpackPastaScore;
+        float currentBatchSize = currentUnpackPastaScore - previousUnpackPastaScore;
         GameManager.batchSizeList.Add(currentBatchSize);
-        Debug.Log(currentBatchSize);
-        Debug.Log(currentUnpackPastaScore);
-        Debug.Log(previousUnpackPastaScore);
+    }
+
+    public void ResultTable()
+    {
+        for (int i = 1; i <= GameManager.Batch; i++)
+        {
+            if (GameManager.pastaColorList[i-1] == " 25" || GameManager.pastaColorList[i-1] == " 35")
+            {
+                colorResult = true;
+            }
+            else
+            {
+                colorResult = false;
+            }
+
+            if (GameManager.pastaHumidityList[i-1] + GameManager.pastaStdDevHumidity[i-1] <= 13.5f && GameManager.pastaHumidityList[i-1] - GameManager.pastaStdDevHumidity[i-1] >= 11.0f)
+            {
+                humidityResult = true;
+            }
+            else
+            {
+                humidityResult = false;
+            }
+
+            if (GameManager.pastaCrakingList[i-1] == "No")
+            {
+                crakingResult = true;
+            }
+            else
+            {
+                crakingResult = false;
+            }
+
+            if (GameManager.pastaMicroorganismsList[i-1] == "No")
+            {
+                microorganismsResult = true;
+            }
+            else
+            {
+                microorganismsResult = false;
+            }
+
+            if (GameManager.pastaWeightList[i-1] + GameManager.pastaStdDevWeightList[i-1] < 1.06f && GameManager.pastaWeightList[i-1] - GameManager.pastaStdDevWeightList[i-1] > 0.94f)
+            {
+                weightResult = true;
+            }
+            else
+            {
+                weightResult = false;
+            }
+
+            if (colorResult && humidityResult && crakingResult && microorganismsResult && weightResult)
+            {
+                GameManager.resultTable.Add("Aprobado");
+                GameManager.resultTableBinaryList.Add(1);
+            }
+            else
+            {
+                GameManager.resultTable.Add("Rechazado");
+                GameManager.resultTableBinaryList.Add(0);
+            }
+        }        
+    }
+
+    public void userResult()
+    {
+        for (int i = 1; i <= GameManager.Batch; i++)
+        {
+            userResultFinaly += (GameManager.batchSizeList[i-1] / GameManager.UnpackPastaScore) * GameManager.resultTableBinaryList[i-1];    
+        }
+        Debug.Log(userResultFinaly);
     }
 }
