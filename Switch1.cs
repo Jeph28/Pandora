@@ -23,6 +23,7 @@ public class Switch1 : MonoBehaviour
     [SerializeField] private float lerpDuration;
     [SerializeField] public TMP_Text MessageSwitch;
     [SerializeField] private GameObject FailureDryer;
+    [SerializeField] private GameObject Worker;
     public float timeSwitch = 0f;
     public PanelControl panelControl;
     public DryerMachine dryerMachine;
@@ -31,6 +32,7 @@ public class Switch1 : MonoBehaviour
     Quaternion originRotation, targetRotation;
     [SerializeField] private bool lookAtCamera;
     public bool Status = false;
+    private Animator animator;
 
     float alpha;
 
@@ -39,6 +41,8 @@ public class Switch1 : MonoBehaviour
         originRotation = transform.rotation;
         alpha = activeState ? 1 : -1;
         if (activator == null) activator = Camera.main.transform;
+        animator = Worker.GetComponent<Animator>();
+
     }
 
     bool IsTargetNear()
@@ -102,9 +106,12 @@ public class Switch1 : MonoBehaviour
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
+                GameManager.DryerconveyorSpeed = 1f;
                 Status = true;
                 GameManager.DryerMachine = true;
                 GameManager.CountDownActivateDryer = true;
+                animator.SetTrigger("Sleep");
+
                 
 
                 if (GameManager.Batch == 0)

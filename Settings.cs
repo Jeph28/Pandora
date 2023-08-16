@@ -103,7 +103,6 @@ public class Settings : MonoBehaviour
 
     public void Exit() 
     {
-        UpdateGameState();
         Application.Quit();
     }
 

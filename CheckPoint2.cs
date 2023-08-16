@@ -110,7 +110,7 @@ public class CheckPoint2 : MonoBehaviour
         }
 
         MechanicalBreak = (GameManager.PastaScore * MechanicalBreakPorcent)/100;
-        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Se recomienda calcular el cv para analizar la variabilidad de los datos y como esto afecta la calidad del producto." + "\n" + "\n" + "Cantidad empaquetada : " + GameManager.PastaScore.ToString() + "\n" + "\n" + "Peso promedio : 1 Kg" + "\n" + "\n" + "Desviacion del peso : " + GameManager.StdDevWeight.ToString() + "\n" + "\n" + "Ruptura Mecanica : " + Mathf.FloorToInt(MechanicalBreak)+ "\n" + "\n" + "Acidez : " + GameManager.Acidity + "%" + "\n" + "\n" + "Ceniza : " + GameManager.Ash + "%" + "\n" + "\n" + "Proteina : " + GameManager.Protein + "%";
+        Changetext.text = "La prueba de laboratorio fue realizada con éxito. Recuerda comparar la amplitud de su intervalo natural de variación con la fórmula de μ ± 3σ para verificar si tus resultados cumplen con la norma." + "\n" + "\n" + "Cantidad empaquetada : " + GameManager.PastaScore.ToString() + "\n" + "\n" + "Peso promedio : 1 Kg" + "\n" + "\n" + "Desviacion del peso : " + GameManager.StdDevWeight.ToString("F2") + " Kg" + "\n" + "\n" + "Ruptura Mecanica : " + Mathf.FloorToInt(MechanicalBreak)+ "\n" + "\n" + "Acidez : " + GameManager.Acidity + "%" + "\n" + "\n" + "Ceniza : " + GameManager.Ash + "%" + "\n" + "\n" + "Proteina : " + GameManager.Protein + "%";
     }
 
     public void Context(InputAction.CallbackContext callbackContext)

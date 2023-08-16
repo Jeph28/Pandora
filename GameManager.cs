@@ -2,7 +2,7 @@
 
 public static class GameManager 
 {
-    public static float Money = 10000f;
+    public static float Money = 45000f;
     public static bool DryerMachine = false;
     public static bool PackingMachine = false;
     public static int timeBetweenMaintenanceDryer = 150;
@@ -114,4 +114,6 @@ public static class GameManager
     public static bool InitialPacking = false;
     public static List<float> batchSizeList = new List<float>();
     public static List<int> resultTableBinaryList = new List<int>();
+    public static float DryerconveyorSpeed = 0;
+    public static float PackingconveyorSpeed = 0;
 }

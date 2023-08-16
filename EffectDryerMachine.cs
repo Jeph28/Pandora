@@ -17,6 +17,8 @@ public class EffectDryerMachine : MonoBehaviour
     public Money money;
     private float timeSinceLastFailure = 0f; // Time elapsed since last failure
     private float timeBetweenFailure = 0f; // Time between failure
+    private float shape = 7f;
+    private float scale = 2000000f;
     
 
     
@@ -24,6 +26,7 @@ public class EffectDryerMachine : MonoBehaviour
     void Start()
     {
         timeBetweenFailure = GenerateTimeBetweenFailure();
+        Debug.Log(timeBetweenFailure);
     }
 
     // Update is called once per frame
@@ -34,9 +37,7 @@ public class EffectDryerMachine : MonoBehaviour
         if (timeSinceLastFailure/60 >= timeBetweenFailure && !GameManager.FailureDryer)
         {
             timeBetweenFailure = GenerateTimeBetweenFailure();
-            if (GenerateFailureProbability())
-            {
-                GameManager.FailureDryer = true;
+            GameManager.FailureDryer = true;
                 if (switch1.Status)
                 {
                     switch1.timeSwitch = Time.time;
@@ -51,11 +52,6 @@ public class EffectDryerMachine : MonoBehaviour
                 DryerMaintenanceMenu.SetActive(false);
                 GameManager.MaintenanceDryerMenu = false;
                 StartCoroutine("Failure");
-            }
-            else
-            {
-                timeSinceLastFailure = 0f;
-            }
         }
     }
 
@@ -102,18 +98,22 @@ public class EffectDryerMachine : MonoBehaviour
 
     private float GenerateTimeBetweenFailure()
     {
-        return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / GameManager.failureRateExpDryer;
+        //Exponential distribution
+        // return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / GameManager.failureRateExpDryer;
+
+        //Weibull distribution
+        return Mathf.Pow(- scale *(Mathf.Log(1f - Random.Range(0.1f, 0.9f))), 1 / shape);
     }
 
-    private bool GenerateFailureProbability()
-    {
-        // probability that K = 1
-        // float probabilityOfFailure = GameManager.failureRatePoissonDryer * (timeBetweenFailure) * Mathf.Exp( - GameManager.failureRatePoissonDryer * (timeBetweenFailure));
+    // private float GenerateFailureProbability()
+    // {
+    // //     probability that K = 1 Poisson
+    //     float probabilityOfFailure = GameManager.failureRatePoissonDryer * (timeBetweenFailure) * Mathf.Exp( - GameManager.failureRatePoissonDryer * (timeBetweenFailure));
         
-        //probability that K >= 1
-        float probabilityOfFailure = 1f - Mathf.Exp(- GameManager.failureRatePoissonDryer * (timeBetweenFailure));
-        return probabilityOfFailure > Random.Range(0f, 1f);
-    }
+    // //     probability that K >= 1 Poisson
+    //     float probabilityOfFailure = 1f - Mathf.Exp(- GameManager.failureRatePoissonDryer * (timeBetweenFailure));
+    //     return probabilityOfFailure > Random.Range(0f, 1f);
+    // }
     
     IEnumerator TransitionSwitchOff(float lerpDuration)
     {

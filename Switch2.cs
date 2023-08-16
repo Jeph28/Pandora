@@ -104,6 +104,7 @@ public class Switch2 : MonoBehaviour
             {
                 timeSwitch = Time.time;
                 StartCoroutine(TransitionSwitchOn(lerpDuration));
+                GameManager.PackingconveyorSpeed = 1f;
                 Status = true;
                 GameManager.PackingMachine = Status;
                 GameManager.CountDownActivatePacking = true;

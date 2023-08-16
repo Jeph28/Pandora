@@ -103,15 +103,15 @@ public class DryerMachine : MonoBehaviour
         
         if ( HumidityPercentage > 13.5f)
         {
-            GameManager.StdDevHumidity = Random.Range(0.3f,0.6f);
+            GameManager.StdDevHumidity = Random.Range(0.3f,0.6f) / 3;
         }
         else if ( HumidityPercentage <= 13.5f && HumidityPercentage >= 12.6)
         {
-            GameManager.StdDevHumidity = Random.Range(0.2f,0.4f);
+            GameManager.StdDevHumidity = Random.Range(0.2f,0.4f) / 3;
         }
         else if (HumidityPercentage < 12.6f)
         {
-            GameManager.StdDevHumidity = Random.Range(0.1f,0.3f);
+            GameManager.StdDevHumidity = Random.Range(0.1f,0.3f) / 3;
         }
 
         GameManager.pastaStdDevHumidity.Add(GameManager.StdDevHumidity);
@@ -233,7 +233,7 @@ public class DryerMachine : MonoBehaviour
                 colorResult = false;
             }
 
-            if (GameManager.pastaHumidityList[i-1] + GameManager.pastaStdDevHumidity[i-1] <= 13.5f && GameManager.pastaHumidityList[i-1] - GameManager.pastaStdDevHumidity[i-1] >= 11.0f)
+            if (GameManager.pastaHumidityList[i-1] + GameManager.pastaStdDevHumidity[i-1] * 3 <= 13.5f && GameManager.pastaHumidityList[i-1] - GameManager.pastaStdDevHumidity[i-1] * 3 >= 10.5f)
             {
                 humidityResult = true;
             }

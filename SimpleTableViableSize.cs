@@ -24,6 +24,7 @@
         	Cursor.visible = true;
 			dryerMachine.BatchSize(GameManager.previousUnpackPastaScore , GameManager.UnpackPastaScore);
 			dryerMachine.ResultTable();
+			Add();
 		}
 
 		public void Add()

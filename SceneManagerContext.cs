@@ -15,6 +15,7 @@ public class SceneManagerContext : MonoBehaviour
     public GameObject panelControl;
     public GameObject eventSystem;
 
+
     void Start()
     {
         Context1.SetActive(true);
@@ -33,6 +34,7 @@ public class SceneManagerContext : MonoBehaviour
         Context2.SetActive(false);
         Context1.SetActive(true);
     }
+    
     public void ChangeNorm1()
     {
         Norm1.SetActive(true);
@@ -57,6 +59,7 @@ public class SceneManagerContext : MonoBehaviour
         Norm1.SetActive(true);
         Norm2.SetActive(false);
     }
+
     public void ChangeNorm3()
     {
         Norm3.SetActive(true);
@@ -69,6 +72,7 @@ public class SceneManagerContext : MonoBehaviour
         Norm2.SetActive(true);
         Norm3.SetActive(false);
     }
+
     public void ChangePlayGame()
     {
         timeAndMoney.SetActive(true);
