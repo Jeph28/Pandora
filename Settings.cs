@@ -17,6 +17,21 @@ public class Settings : MonoBehaviour
     [SerializeField] private GameObject ContextCheckPoint1;
     [SerializeField] private GameObject ContextCheckPoint2;
     [SerializeField] private GameObject RawMaterialMenu;
+    [SerializeField] private GameObject gameOver;
+    [SerializeField] private GameObject eventSystem;
+    [SerializeField] private GameObject floor;
+    [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject ceilings;
+    [SerializeField] private GameObject corridors;
+    [SerializeField] private GameObject buttons;
+    [SerializeField] private GameObject packing;
+    [SerializeField] private GameObject worker;
+    [SerializeField] private GameObject failure;
+    [SerializeField] private GameObject officeThings;
+    [SerializeField] private GameObject productionLine;
+    [SerializeField] private GameObject Capsule;
+    public Switch1 switch1;
+    public Switch2 switch2;
     private static Settings instance;
     public static Settings Instance { get { return instance; } }
    
@@ -115,5 +130,24 @@ public class Settings : MonoBehaviour
     public bool IsGamePaused()
     {
         return isPaused;
+    }
+
+    public void GameOver()
+    {
+        wall.SetActive(false);
+        ceilings.SetActive(false);
+        corridors.SetActive(false);
+        buttons.SetActive(false);
+        packing.SetActive(false);
+        worker.SetActive(false);
+        failure.SetActive(false);
+        officeThings.SetActive(false);
+        productionLine.SetActive(false);
+        switch1.Status = false;
+        switch2.Status = false;
+        gameOver.SetActive(true);
+        eventSystem.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

@@ -7,9 +7,10 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private TMP_Text Timertext;
     [SerializeField, Tooltip("Tiempo en sg")] private float timeTimer;
+    private float minutes, seconds;
     [SerializeField] GameObject gameOver;
     [SerializeField] private GameObject eventSystem;
-    private float minutes, seconds;
+    public Settings settings;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +32,7 @@ public class Timer : MonoBehaviour
         if (timeTimer <= 0)
         {
             Destroy(this);
-            gameOver.SetActive(true);
-            eventSystem.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            settings.GameOver();
         }
-    }
+    }   
 }

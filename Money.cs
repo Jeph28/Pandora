@@ -6,6 +6,7 @@ using TMPro;
 public class Money : MonoBehaviour
 {
     public TMP_Text Moneytext;
+    public Settings settings;
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +23,9 @@ public class Money : MonoBehaviour
     public void ChangeMoneyValue()
     {
         Moneytext.text = GameManager.Money.ToString() + "$";
+        if (GameManager.Money <= 0)
+        {
+            settings.GameOver();    
+        }
     }
 }
