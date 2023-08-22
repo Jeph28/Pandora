@@ -282,12 +282,14 @@ public class DryerMachine : MonoBehaviour
         }        
     }
 
-    public void userResult()
+    public float userResult()
     {
         for (int i = 1; i <= GameManager.Batch; i++)
         {
             userResultFinaly += (GameManager.batchSizeList[i-1] / GameManager.UnpackPastaScore) * GameManager.resultTableBinaryList[i-1];    
+            Debug.Log(userResultFinaly);
         }
-        Debug.Log(userResultFinaly);
+
+        return userResultFinaly * 100;
     }
 }

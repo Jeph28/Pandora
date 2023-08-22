@@ -7,6 +7,7 @@ public class GameOver : MonoBehaviour
     public GameObject tableResult;
     public GameObject gameOver;
     public GameObject cp;
+    public GameObject qualificationObtained;
     public GameObject ishikawa;
     public GameObject ishikawa2;
     // Start is called before the first frame update
@@ -47,13 +48,25 @@ public class GameOver : MonoBehaviour
     
     public void BackResultTable()
     {
-        ishikawa.SetActive(false);
+        qualificationObtained.SetActive(false);
         tableResult.SetActive(true);
+    }
+
+    public void QualificationObtained()
+    {
+        qualificationObtained.SetActive(true);
+        tableResult.SetActive(false);
+    }
+
+    public void BackQualificationObtained()
+    {
+        qualificationObtained.SetActive(true);
+        ishikawa.SetActive(false);
     }
 
     public void Ishikawa()
     {
-        tableResult.SetActive(false);
+        qualificationObtained.SetActive(false);
         ishikawa.SetActive(true);
     }
 

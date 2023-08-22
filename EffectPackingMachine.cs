@@ -18,11 +18,12 @@ public class EffectPackingMachine : MonoBehaviour
     [SerializeField] private float failureRatePoisson;
     private float timeSinceLastFailure = 0f; // Time elapsed since last failure
     private float timeBetweenFailure = 0f; // Time between failure
-    
+
     // Start is called before the first frame update
     void Start()
     {
         timeBetweenFailure = GenerateTimeBetweenFailure();
+        Debug.Log(timeBetweenFailure);
     }
 
     // Update is called once per frame
@@ -33,9 +34,8 @@ public class EffectPackingMachine : MonoBehaviour
         if (timeSinceLastFailure/60 >= timeBetweenFailure && !GameManager.FailurePacking)
         {
             timeBetweenFailure = GenerateTimeBetweenFailure();
-            if (GenerateFailureProbability())
-            {
-                GameManager.FailurePacking = true;
+            Debug.Log(timeBetweenFailure);
+            GameManager.FailurePacking = true;
                 if (switch2.Status)
                 {
                     switch2.timeSwitch = Time.time;
@@ -44,17 +44,13 @@ public class EffectPackingMachine : MonoBehaviour
                     StartCoroutine(TransitionSwitchOff(3f));
                     switch2.Status = false;
                 }
+
+            PackingMenu.SetActive(false);
+            GameManager.PackingMenu = false;
+            PackingMaintenanceMenu.SetActive(false);
+            GameManager.MaintenancePackingMenu = false;
+            StartCoroutine("Failure");
             
-                PackingMenu.SetActive(false);
-                GameManager.PackingMenu = false;
-                PackingMaintenanceMenu.SetActive(false);
-                GameManager.MaintenancePackingMenu = false;
-                StartCoroutine("Failure");
-            }
-            else
-            {
-                timeSinceLastFailure = 0f;
-            }
         }
     }
 
@@ -83,8 +79,7 @@ public class EffectPackingMachine : MonoBehaviour
         GameManager.CountDownActivatePacking = true;
         GameManager.FailurePacking = false;
         timeSinceLastFailure = 0f;
-        GameManager.failureRateExpPacking = 0.1f;
-        GameManager.failureRatePoissonPacking = 0.1f;
+        GameManager.ScaleFailurePacking = 6000000f;
         Restart();
         yield return null;
     }
@@ -101,18 +96,18 @@ public class EffectPackingMachine : MonoBehaviour
 
     private float GenerateTimeBetweenFailure()
     {
-        return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / GameManager.failureRateExpPacking;
+        return Mathf.Pow(- Mathf.Clamp(GameManager.ScaleFailurePacking, 1000000f, 10000000f) * (Mathf.Log(1f - Random.Range(0.1f, 0.9f))), 1f / 7f);
     }
 
-     private bool GenerateFailureProbability()
-    {
-        //probability that K = 1
-        // float probabilityOfFailure = GameManager.failureRateExpPacking * (timeBetweenFailure) * Mathf.Exp( - GameManager.failureRateExpPacking * (timeBetweenFailure));
-        
-        //probability that K >= 1
-        float probabilityOfFailure = 1f - Mathf.Exp( - GameManager.failureRatePoissonPacking * (timeBetweenFailure));
-        return probabilityOfFailure > Random.Range(0f, 1f);
-    }
+    //  private bool GenerateFailureProbability()
+    // {
+    //     //probability that K = 1
+    //     // float probabilityOfFailure = GameManager.failureRateExpPacking * (timeBetweenFailure) * Mathf.Exp( - GameManager.failureRateExpPacking * (timeBetweenFailure));
+
+    //     //probability that K >= 1
+    //     float probabilityOfFailure = 1f - Mathf.Exp( - GameManager.failureRatePoissonPacking * (timeBetweenFailure));
+    //     return probabilityOfFailure > Random.Range(0f, 1f);
+    // }
 
     IEnumerator TransitionSwitchOff(float lerpDuration)
     {
@@ -130,5 +125,5 @@ public class EffectPackingMachine : MonoBehaviour
             yield return null;
         }
     }
-    
+
 }

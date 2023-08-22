@@ -25,7 +25,7 @@ public class Money : MonoBehaviour
         Moneytext.text = GameManager.Money.ToString() + "$";
         if (GameManager.Money <= 0)
         {
-            settings.GameOver();    
+            settings.GameOver();   
         }
     }
 }

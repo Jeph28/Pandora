@@ -17,8 +17,6 @@ public class EffectDryerMachine : MonoBehaviour
     public Money money;
     private float timeSinceLastFailure = 0f; // Time elapsed since last failure
     private float timeBetweenFailure = 0f; // Time between failure
-    private float shape = 7f;
-    private float scale = 2000000f;
     
 
     
@@ -37,6 +35,7 @@ public class EffectDryerMachine : MonoBehaviour
         if (timeSinceLastFailure/60 >= timeBetweenFailure && !GameManager.FailureDryer)
         {
             timeBetweenFailure = GenerateTimeBetweenFailure();
+            Debug.Log(timeBetweenFailure);
             GameManager.FailureDryer = true;
                 if (switch1.Status)
                 {
@@ -47,11 +46,11 @@ public class EffectDryerMachine : MonoBehaviour
                     switch1.Status = false;
                 }
             
-                DryerMenu.SetActive(false);
-                GameManager.DryerMenu = false;
-                DryerMaintenanceMenu.SetActive(false);
-                GameManager.MaintenanceDryerMenu = false;
-                StartCoroutine("Failure");
+            DryerMenu.SetActive(false);
+            GameManager.DryerMenu = false;
+            DryerMaintenanceMenu.SetActive(false);
+            GameManager.MaintenanceDryerMenu = false;
+            StartCoroutine("Failure");
         }
     }
 
@@ -80,8 +79,7 @@ public class EffectDryerMachine : MonoBehaviour
         GameManager.CountDownActivateDryer = true;
         GameManager.FailureDryer = false;
         timeSinceLastFailure = 0f;
-        GameManager.failureRateExpDryer = 0.1f;
-        GameManager.failureRatePoissonDryer = 0.1f;
+        GameManager.ScaleFailureDryer = 1000000f;
         Restart();
         yield return null;
     }
@@ -102,7 +100,7 @@ public class EffectDryerMachine : MonoBehaviour
         // return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / GameManager.failureRateExpDryer;
 
         //Weibull distribution
-        return Mathf.Pow(- scale *(Mathf.Log(1f - Random.Range(0.1f, 0.9f))), 1 / shape);
+        return Mathf.Pow(- Mathf.Clamp(GameManager.ScaleFailureDryer, 100000f, 5000000f)  * (Mathf.Log(1f - Random.Range(0.1f, 0.9f))), 1f / 7f);
     }
 
     // private float GenerateFailureProbability()

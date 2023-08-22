@@ -52,9 +52,6 @@ public class Settings : MonoBehaviour
         Application.targetFrameRate = LimitFPS;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        // Cursor.lockState = CursorLockMode.Locked;
-        // Cursor.visible = false;
     }
 
     public void Pause(InputAction.CallbackContext callbackContext)

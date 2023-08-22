@@ -105,10 +105,8 @@ public static class GameManager
     public static float StdDevWeight;
     public static int UnpackPastaScore = 0;
     public static bool RawMaterialMenu = false;
-    public static float failureRateExpDryer = 0.1f;  // Average failure rate in failures per unit of time
-    public static float failureRatePoissonDryer = 0.1f;  // Average failure rate in failures per unit of time
-    public static float failureRateExpPacking = 0.1f;
-    public static float failureRatePoissonPacking = 0.1f;
+    public static float ScaleFailureDryer = 2000000f;
+    public static float ScaleFailurePacking = 12000000f;
     public static string currentControl;
     public static bool InitialDryer = false;
     public static bool InitialPacking = false;

@@ -29,7 +29,7 @@ public class Timer : MonoBehaviour
 
         Timertext.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        if (timeTimer <= 0)
+        if (timeTimer <= 1)
         {
             Destroy(this);
             settings.GameOver();
