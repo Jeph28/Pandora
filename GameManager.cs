@@ -114,4 +114,5 @@ public static class GameManager
     public static List<int> resultTableBinaryList = new List<int>();
     public static float DryerconveyorSpeed = 0;
     public static float PackingconveyorSpeed = 0;
+    public static float pastaWeight;
 }

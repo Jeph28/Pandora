@@ -49,7 +49,8 @@ public class PackingMachine : MonoBehaviour
             GameManager.StdDevWeight = Random.Range(0.04f, 0.05f);
         }
 
-        GameManager.pastaWeightList.Add(1 + Random.Range(-0.02f,0.02f));
+        GameManager.pastaWeight = 1f + Random.Range(-0.02f,0.02f);
+        GameManager.pastaWeightList.Add(GameManager.pastaWeight);
         GameManager.pastaStdDevWeightList.Add(GameManager.StdDevWeight);
     }
 
