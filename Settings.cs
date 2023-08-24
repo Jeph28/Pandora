@@ -9,7 +9,6 @@ public class Settings : MonoBehaviour
     private int LimitFPS = 60;
     private bool isPaused = false;
     public GameObject PauseMenu;
-    // Start is called before the first frame update
     [SerializeField] private GameObject DryerMenu;
     [SerializeField] private GameObject PackingMenu;
     [SerializeField] private GameObject MaintenanceDryerMenu;
@@ -142,6 +141,14 @@ public class Settings : MonoBehaviour
         productionLine.SetActive(false);
         switch1.Status = false;
         switch2.Status = false;
+        DryerMenu.SetActive(false);
+        PackingMenu.SetActive(false);
+        MaintenanceDryerMenu.SetActive(false);
+        MaintenancePackingMenu.SetActive(false);
+        ContextCheckPoint1.SetActive(false);
+        ContextCheckPoint2.SetActive(false);
+        RawMaterialMenu.SetActive(false);
+
         gameOver.SetActive(true);
         eventSystem.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
