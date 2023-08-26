@@ -25,7 +25,7 @@ public class PackingMenu : MonoBehaviour
 
         }
 
-        Context.text = "Desliza para elegir el valor correspondiente a la velocidad de empaquetado expresado en unidades por minuto, recuerda que cada decisión tomada afectará directamente la calidad del producto final, así que recuerda tomar tus decisiones pensando como un Ingeniero Industrial. Esto tendra un costo de " + "<b>" + PackingMachine.Instance.speedPriceInquiry().ToString() + "$</b>";
+        Context.text = "Desliza para elegir el valor correspondiente a la velocidad de empaquetado expresado en unidades por minuto, recuerda que cada decisión tomada afectará directamente la calidad del producto final, así que recuerda tomar tus decisiones pensando como un Ingeniero Industrial. Esto tendra un costo de " + "<b>" + PackingMachine.Instance.speedPriceInquiry().ToString("F0") + "$</b>";
     }
     public void Accept()
     {

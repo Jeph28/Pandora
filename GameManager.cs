@@ -5,8 +5,8 @@ public static class GameManager
     public static float Money = 45000f;
     public static bool DryerMachine = false;
     public static bool PackingMachine = false;
-    public static int timeBetweenMaintenanceDryer = 150;
-    public static int timeBetweenMaintenancePacking = 120;
+    public static int timeBetweenMaintenanceDryer = 180;
+    public static int timeBetweenMaintenancePacking = 240;
     public static int MaintenanceExpirationDryer = 60;
     public static int MaintenanceExpirationPacking = 60;
     public static int PastaScore = 0;
@@ -115,4 +115,9 @@ public static class GameManager
     public static float DryerconveyorSpeed = 0;
     public static float PackingconveyorSpeed = 0;
     public static float pastaWeight;
+    public static float failureEffectDryer = 0f;
+    public static float failureEffectPacking = 0f;
+    public static bool failureEffectDryerRestart = false;
+    public static bool failureEffectPackingRestart = false;
+
 }

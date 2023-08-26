@@ -14,6 +14,7 @@ public class EffectDryerMachine : MonoBehaviour
     [SerializeField] private GameObject DryerMenu;
     [SerializeField] private GameObject DryerMaintenanceMenu;
     public Switch1 switch1;
+    public DryerMachine dryerMachine;
     public Money money;
     private float timeSinceLastFailure = 0f; // Time elapsed since last failure
     private float timeBetweenFailure = 0f; // Time between failure
@@ -24,7 +25,7 @@ public class EffectDryerMachine : MonoBehaviour
     void Start()
     {
         timeBetweenFailure = GenerateTimeBetweenFailure();
-        Debug.Log(timeBetweenFailure);
+        // timeBetweenFailure = 1f;
     }
 
     // Update is called once per frame
@@ -35,7 +36,6 @@ public class EffectDryerMachine : MonoBehaviour
         if (timeSinceLastFailure/60 >= timeBetweenFailure && !GameManager.FailureDryer)
         {
             timeBetweenFailure = GenerateTimeBetweenFailure();
-            Debug.Log(timeBetweenFailure);
             GameManager.FailureDryer = true;
                 if (switch1.Status)
                 {
@@ -80,7 +80,9 @@ public class EffectDryerMachine : MonoBehaviour
         GameManager.FailureDryer = false;
         timeSinceLastFailure = 0f;
         GameManager.ScaleFailureDryer = 1000000f;
+        GameManager.failureEffectDryerRestart = true;
         Restart();
+        dryerMachine.MethodFailureEffectDryer();
         yield return null;
     }
 

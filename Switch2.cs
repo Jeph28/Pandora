@@ -115,7 +115,7 @@ public class Switch2 : MonoBehaviour
                     panelControl.MessageState2Dryer.text = "\n" + "\n" + "Ahora ve a la Secadora configurarla y enciéndela";
                     GameManager.InitialPacking = true; 
                     PackingMachine.Instance.SpeedPrice();
-                    PackingMachine.Instance.StdDevWeight();
+                    PackingMachine.Instance.Weight();
                     money.ChangeMoneyValue();
 
                     if (GameManager.InitialDryer && GameManager.InitialPacking)
@@ -123,7 +123,7 @@ public class Switch2 : MonoBehaviour
                         GameManager.Batch ++;
                     }
                 }
-                else if(GameManager.ChangeValuePacking)
+                else if(GameManager.ChangeValuePacking || GameManager.failureEffectPackingRestart)
                 {
                     dryerMachine.BatchSize(GameManager.previousUnpackPastaScore , GameManager.UnpackPastaScore - GameManager.UnpackOn);
                     GameManager.previousUnpackPastaScore = GameManager.UnpackPastaScore - GameManager.UnpackOn;
@@ -132,10 +132,11 @@ public class Switch2 : MonoBehaviour
                     DryerMachine.Instance.Color();
                     DryerMachine.Instance.Craking();
                     DryerMachine.Instance.Microbiological();
-                    PackingMachine.Instance.StdDevWeight();
+                    PackingMachine.Instance.Weight();
                     PackingMachine.Instance.SpeedPrice();
                     money.ChangeMoneyValue();
                     GameManager.ChangeValuePacking = false;
+                    GameManager.failureEffectPackingRestart = false;
                 }
                 
                 MessageSwitch.text = "Presiona [X] para Apagar";

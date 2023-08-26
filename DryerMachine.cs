@@ -57,6 +57,8 @@ public class DryerMachine : MonoBehaviour
             ColorValue = ColorValue * 0.8f;
         }
 
+        ColorValue = ColorValue + (GameManager.failureEffectDryer * ColorValue / 100f);
+
         //Physical appearance
         if ( ColorValue <= 20000f)
         {
@@ -83,7 +85,6 @@ public class DryerMachine : MonoBehaviour
             GameManager.pastaColor = 5;
             GameManager.pastaColorString = " -10";
         }
-
         GameManager.pastaColorList.Add(GameManager.pastaColorString);
     }
 
@@ -98,6 +99,7 @@ public class DryerMachine : MonoBehaviour
             HumidityPercentage = HumidityPercentage * 0.9f;
         }
 
+        HumidityPercentage = HumidityPercentage + (GameManager.failureEffectDryer * HumidityPercentage / 100f); 
         GameManager.pastaHumidityPercentageString = HumidityPercentage.ToString("F2") + "%";
         GameManager.pastaHumidityList.Add(HumidityPercentage);
         
@@ -118,12 +120,18 @@ public class DryerMachine : MonoBehaviour
     }
        public void Craking()
     {
-        if (GameManager.user_temperature > 100f)
+        float CrakingTemperature = GameManager.user_temperature;
+        float CrakingTime = GameManager.user_time;
+
+        CrakingTemperature = CrakingTemperature + (GameManager.failureEffectDryer * CrakingTemperature / 100f); 
+        CrakingTime = CrakingTime + (GameManager.failureEffectDryer * CrakingTime / 100f);
+
+        if (CrakingTemperature > 100f)
         {
             GameManager.Craking = true;
             GameManager.pastaCrakingString = "Si";
         }
-        else if (GameManager.user_time < 220f)
+        else if (CrakingTime < 220f)
         {
             GameManager.Craking = true;
             GameManager.pastaCrakingString = "Si";
@@ -139,7 +147,13 @@ public class DryerMachine : MonoBehaviour
 
     public void Microbiological()
     {
-        if (GameManager.user_temperature <= 85f && GameManager.user_time >= 350f)
+        float MicroorganismsTemperature = GameManager.user_temperature;
+        float MicroorganismsTime = GameManager.user_time;
+
+        MicroorganismsTemperature = MicroorganismsTemperature + (GameManager.failureEffectDryer * MicroorganismsTemperature / 100f);
+        MicroorganismsTime = MicroorganismsTime + (GameManager.failureEffectDryer * MicroorganismsTime / 100f);
+
+        if (MicroorganismsTemperature <= 85f && MicroorganismsTime >= 350f)
         {
             GameManager.Microorganisms = true;
             GameManager.pastaMicroorganismsString = "Si";
@@ -153,29 +167,29 @@ public class DryerMachine : MonoBehaviour
         GameManager.pastaMicroorganismsList.Add(GameManager.pastaMicroorganismsString);
     }
 
-    public void EfficiencyMachine()
-    {
-        if (GameManager.user_time <= 240f)
-        {
-            Efficiency = Random.Range(0.7f,0.8f);
-            EfficiencyStg = Efficiency.ToString("F2");
-            GameManager.DryerMachineEfficiencyString = EfficiencyStg;
-        }
-        else if (GameManager.user_time > 240f && GameManager.user_time <= 300)
-        {
-            Efficiency = Random.Range(0.6f, 0.7f);
-            EfficiencyStg = Efficiency.ToString("F2");
-            GameManager.DryerMachineEfficiencyString = EfficiencyStg;
-        }
-        else if (GameManager.user_time > 300f)
-        {
-            Efficiency = Random.Range(0.4f, 0.6f);
-            EfficiencyStg = Efficiency.ToString("F2");
-            GameManager.DryerMachineEfficiencyString = EfficiencyStg;
-        }
+    // public void EfficiencyMachine()
+    // {
+    //     if (GameManager.user_time <= 240f)
+    //     {
+    //         Efficiency = Random.Range(0.7f,0.8f);
+    //         EfficiencyStg = Efficiency.ToString("F2");
+    //         GameManager.DryerMachineEfficiencyString = EfficiencyStg;
+    //     }
+    //     else if (GameManager.user_time > 240f && GameManager.user_time <= 300)
+    //     {
+    //         Efficiency = Random.Range(0.6f, 0.7f);
+    //         EfficiencyStg = Efficiency.ToString("F2");
+    //         GameManager.DryerMachineEfficiencyString = EfficiencyStg;
+    //     }
+    //     else if (GameManager.user_time > 300f)
+    //     {
+    //         Efficiency = Random.Range(0.4f, 0.6f);
+    //         EfficiencyStg = Efficiency.ToString("F2");
+    //         GameManager.DryerMachineEfficiencyString = EfficiencyStg;
+    //     }
 
-        GameManager.DryerMachineEfficiencyList.Add(Efficiency);
-    }
+    //     GameManager.DryerMachineEfficiencyList.Add(Efficiency);
+    // }
 
     public void TemperaturePrice()
     {
@@ -287,9 +301,17 @@ public class DryerMachine : MonoBehaviour
         for (int i = 1; i <= GameManager.Batch; i++)
         {
             userResultFinaly += (GameManager.batchSizeList[i-1] / GameManager.UnpackPastaScore) * GameManager.resultTableBinaryList[i-1];    
-            Debug.Log(userResultFinaly);
         }
 
         return userResultFinaly * 100;
+    }
+
+    public void MethodFailureEffectDryer()
+    {
+        GameManager.failureEffectDryer = Random.Range(5, 16);
+        if (Random.Range(1,11) >= 6)
+        {
+            GameManager.failureEffectDryer = - GameManager.failureEffectDryer;
+        }
     }
 }

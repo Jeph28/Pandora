@@ -13,6 +13,7 @@ public class EffectPackingMachine : MonoBehaviour
     [SerializeField] private GameObject PackingMenu;
     [SerializeField] private GameObject PackingMaintenanceMenu;
     public Switch2 switch2;
+    public PackingMachine packingMachine;
     public Money money;
     [SerializeField] private float failureRateExp; // Average failure rate in failures per unit of time
     [SerializeField] private float failureRatePoisson;
@@ -22,8 +23,8 @@ public class EffectPackingMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeBetweenFailure = GenerateTimeBetweenFailure();
-        Debug.Log(timeBetweenFailure);
+        // timeBetweenFailure = GenerateTimeBetweenFailure();
+        timeBetweenFailure = 1f;
     }
 
     // Update is called once per frame
@@ -34,7 +35,6 @@ public class EffectPackingMachine : MonoBehaviour
         if (timeSinceLastFailure/60 >= timeBetweenFailure && !GameManager.FailurePacking)
         {
             timeBetweenFailure = GenerateTimeBetweenFailure();
-            Debug.Log(timeBetweenFailure);
             GameManager.FailurePacking = true;
                 if (switch2.Status)
                 {
@@ -81,6 +81,8 @@ public class EffectPackingMachine : MonoBehaviour
         timeSinceLastFailure = 0f;
         GameManager.ScaleFailurePacking = 6000000f;
         Restart();
+        GameManager.failureEffectPackingRestart = true;
+        packingMachine.MethodFailureEffectPacking();
         yield return null;
     }
 

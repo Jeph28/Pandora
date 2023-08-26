@@ -42,7 +42,6 @@ public class Switch1 : MonoBehaviour
         alpha = activeState ? 1 : -1;
         if (activator == null) activator = Camera.main.transform;
         animator = Worker.GetComponent<Animator>();
-
     }
 
     bool IsTargetNear()
@@ -131,7 +130,7 @@ public class Switch1 : MonoBehaviour
                         GameManager.Batch ++;
                     }
                 }
-                else if(GameManager.ChangeValueDryer)
+                else if(GameManager.ChangeValueDryer || GameManager.failureEffectDryerRestart)
                 {
                     dryerMachine.BatchSize(GameManager.previousUnpackPastaScore , GameManager.UnpackPastaScore);
                     GameManager.previousUnpackPastaScore = GameManager.UnpackPastaScore;
@@ -140,10 +139,11 @@ public class Switch1 : MonoBehaviour
                     DryerMachine.Instance.Color();
                     DryerMachine.Instance.Craking();
                     DryerMachine.Instance.Microbiological();
-                    PackingMachine.Instance.StdDevWeight();
+                    PackingMachine.Instance.Weight();
                     DryerMachine.Instance.TemperaturePrice();
                     money.ChangeMoneyValue();
                     GameManager.ChangeValueDryer = false;
+                    GameManager.failureEffectDryerRestart = false;
                 }
 
                 MessageSwitch.text = "Presiona [X] para Apagar";
@@ -256,7 +256,6 @@ public class Switch1 : MonoBehaviour
             SwitchM.transform.rotation = Quaternion.Euler(-25f, 0f, 0f);
             yield return null;
         }
-
     }
         
     IEnumerator TransitionSwitchOff(float lerpDuration)

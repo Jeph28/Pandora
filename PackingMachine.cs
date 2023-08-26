@@ -34,17 +34,24 @@ public class PackingMachine : MonoBehaviour
         }
     }
 
-    public void StdDevWeight()
+    public void Weight()
     {
-        if (GameManager.user_speed <= 30f)
+        float WeightSpeed = GameManager.user_speed;
+        WeightSpeed = WeightSpeed + (GameManager.failureEffectPacking * WeightSpeed / 100f);
+
+        if (WeightSpeed <= 30f)
         {
             GameManager.StdDevWeight = Random.Range(0.01f, 0.02f);
         }
-        else if (GameManager.user_speed > 30f && GameManager.user_speed <= 45f)
+        else if (WeightSpeed > 30f && WeightSpeed <= 40f)
         {
             GameManager.StdDevWeight = Random.Range(0.02f, 0.03f);
         }
-        else if (GameManager.user_speed > 45f)
+        else if (WeightSpeed > 40 || WeightSpeed <= 45f)
+        {
+            GameManager.StdDevWeight = Random.Range(0.03f, 0.04f);
+        }
+        else if (WeightSpeed > 45f)
         {
             GameManager.StdDevWeight = Random.Range(0.04f, 0.05f);
         }
@@ -54,63 +61,69 @@ public class PackingMachine : MonoBehaviour
         GameManager.pastaStdDevWeightList.Add(GameManager.StdDevWeight);
     }
 
-    public void EfficiencyMachine()
-    {
-        if (GameManager.user_speed <= 30f)
-        {
-            Efficiency = Random.Range(0.7f, 0.8f);
-            EfficiencyStg = Efficiency.ToString("F2");
-            GameManager.PackingMachineEfficiencyString = EfficiencyStg;
+    // public void EfficiencyMachine()
+    // {
+    //     if (GameManager.user_speed <= 30f)
+    //     {
+    //         Efficiency = Random.Range(0.7f, 0.8f);
+    //         EfficiencyStg = Efficiency.ToString("F2");
+    //         GameManager.PackingMachineEfficiencyString = EfficiencyStg;
 
-        }
-        else if (GameManager.user_speed > 30f && GameManager.user_speed <= 40)
-        {
-            Efficiency = Random.Range(0.6f, 0.7f);
-            EfficiencyStg = Efficiency.ToString("F2");
-            GameManager.PackingMachineEfficiencyString = EfficiencyStg;
-        }
-        else if (GameManager.user_speed > 40f)
-        {
-            Efficiency = Random.Range(0.4f, 0.6f);
-            EfficiencyStg = Efficiency.ToString("F2");
-            GameManager.PackingMachineEfficiencyString = EfficiencyStg;
-        }
+    //     }
+    //     else if (GameManager.user_speed > 30f && GameManager.user_speed <= 40)
+    //     {
+    //         Efficiency = Random.Range(0.6f, 0.7f);
+    //         EfficiencyStg = Efficiency.ToString("F2");
+    //         GameManager.PackingMachineEfficiencyString = EfficiencyStg;
+    //     }
+    //     else if (GameManager.user_speed > 40f)
+    //     {
+    //         Efficiency = Random.Range(0.4f, 0.6f);
+    //         EfficiencyStg = Efficiency.ToString("F2");
+    //         GameManager.PackingMachineEfficiencyString = EfficiencyStg;
+    //     }
 
-        GameManager.PackingMachineEfficiencyList.Add(Efficiency);
-    }
+    //     GameManager.PackingMachineEfficiencyList.Add(Efficiency);
+    // }
 
     public void SpeedPrice()
     {
-        if (GameManager.user_speed <= 30f)
+        float WeightSpeed = GameManager.user_speed;
+        WeightSpeed = WeightSpeed + (GameManager.failureEffectPacking * WeightSpeed / 100f);
+
+        if (WeightSpeed <= 30f)
         {
-            float cost = 15f * GameManager.user_speed - 50f;
+            float cost = 15f * WeightSpeed - 50f;
             GameManager.Money -= cost;
         }
-        else if (GameManager.user_speed > 30f && GameManager.user_speed <= 40f)
+        else if (WeightSpeed > 30f && WeightSpeed <= 40f)
         {
-            float cost = 45f * GameManager.user_speed - 800f;
+            float cost = 45f * WeightSpeed - 800f;
             GameManager.Money -= cost;
         }
-        else if (GameManager.user_speed > 40f )
+        else if (WeightSpeed > 40f )
         {
-            float cost = 50f * GameManager.user_speed - 1000f;
+            float cost = 50f * WeightSpeed - 1000f;
             GameManager.Money -= cost;
         }
     }
 
     public float speedPriceInquiry()
     {
-        if (GameManager.user_speed <= 30f)
+        float WeightSpeed = GameManager.user_speed;
+        WeightSpeed = WeightSpeed + (GameManager.failureEffectPacking * WeightSpeed / 100f);
+
+        if (WeightSpeed <= 30f)
         {
-            cost = 15f * GameManager.user_speed - 50f;
+            cost = 15f * WeightSpeed - 50f;
         }
-        else if (GameManager.user_speed > 30f && GameManager.user_speed <= 40f)
+        else if (WeightSpeed > 30f && WeightSpeed <= 40f)
         {
-            cost = 45f * GameManager.user_speed - 800f;
+            cost = 45f * WeightSpeed - 800f;
         }
-        else if (GameManager.user_speed > 40f )
+        else if (WeightSpeed > 40f )
         {
-            cost = 50f * GameManager.user_speed - 1000f;
+            cost = 50f * WeightSpeed - 1000f;
         }
 
         return cost;
@@ -123,5 +136,10 @@ public class PackingMachine : MonoBehaviour
         {
             GameManager.hasCollidedPackingMachine = true;
         }
+    }
+
+    public void MethodFailureEffectPacking()
+    {
+        GameManager.failureEffectPacking = Random.Range(25, 51);
     }
 }
