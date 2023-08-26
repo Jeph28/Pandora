@@ -23,8 +23,8 @@ public class EffectPackingMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // timeBetweenFailure = GenerateTimeBetweenFailure();
-        timeBetweenFailure = 1f;
+        timeBetweenFailure = GenerateTimeBetweenFailure();
+        // timeBetweenFailure = 1f;
     }
 
     // Update is called once per frame
