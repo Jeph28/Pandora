@@ -18,7 +18,7 @@ public class RawMaterialMenu : MonoBehaviour
             return;
 
         GameManager.RawMaterial = 1;
-        GameManager.Money -= 2200f;
+        GameManager.Money -= 6000f;
         money.ChangeMoneyValue();
         GameManager.Acidity = 0.080f;
         GameManager.Ash = 1f;
@@ -33,7 +33,7 @@ public class RawMaterialMenu : MonoBehaviour
             return;
             
         GameManager.RawMaterial = 2;
-        GameManager.Money -= 1800f;
+        GameManager.Money -= 5000f;
         money.ChangeMoneyValue();
         GameManager.Acidity = 0.070f;
         GameManager.Ash = 0.8f;
