@@ -41,19 +41,19 @@ public class PackingMachine : MonoBehaviour
 
         if (WeightSpeed <= 30f)
         {
-            GameManager.StdDevWeight = Random.Range(0.01f, 0.02f);
+            GameManager.StdDevWeight = Random.Range(0.01f, 0.02f) / 3f;
         }
         else if (WeightSpeed > 30f && WeightSpeed <= 40f)
         {
-            GameManager.StdDevWeight = Random.Range(0.02f, 0.03f);
+            GameManager.StdDevWeight = Random.Range(0.02f, 0.03f) / 3f;
         }
         else if (WeightSpeed > 40 || WeightSpeed <= 45f)
         {
-            GameManager.StdDevWeight = Random.Range(0.03f, 0.04f);
+            GameManager.StdDevWeight = Random.Range(0.03f, 0.04f) / 3f;
         }
         else if (WeightSpeed > 45f)
         {
-            GameManager.StdDevWeight = Random.Range(0.04f, 0.05f);
+            GameManager.StdDevWeight = Random.Range(0.04f, 0.05f) / 3f;
         }
 
         GameManager.pastaWeight = 1f + Random.Range(-0.02f,0.02f);

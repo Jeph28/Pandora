@@ -29,6 +29,8 @@ public class Settings : MonoBehaviour
     [SerializeField] private GameObject officeThings;
     [SerializeField] private GameObject productionLine;
     [SerializeField] private GameObject Capsule;
+    [SerializeField] private GameObject Context1, Context2, Norm1, Norm2, Norm3;
+    [SerializeField] private GameObject Gameover, Cp, Table, Qualification, Ishikawa;
     public Switch1 switch1;
     public Switch2 switch2;
     private static Settings instance;
@@ -55,7 +57,7 @@ public class Settings : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.performed)
+        if (callbackContext.performed && !Context1.activeSelf && !Context2.activeSelf && !Norm1.activeSelf && !Norm2.activeSelf && !Norm3.activeSelf && !Gameover.activeSelf && !Cp.activeSelf && !Table.activeSelf && !Qualification.activeSelf && !Ishikawa.activeSelf)
         {
             UpdateGameState();
         }

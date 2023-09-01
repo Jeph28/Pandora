@@ -153,7 +153,7 @@ public class DryerMachine : MonoBehaviour
         MicroorganismsTemperature = MicroorganismsTemperature + (GameManager.failureEffectDryer * MicroorganismsTemperature / 100f);
         MicroorganismsTime = MicroorganismsTime + (GameManager.failureEffectDryer * MicroorganismsTime / 100f);
 
-        if (MicroorganismsTemperature <= 85f && MicroorganismsTime >= 350f)
+        if (MicroorganismsTemperature <= 85f || MicroorganismsTime >= 350f)
         {
             GameManager.Microorganisms = true;
             GameManager.pastaMicroorganismsString = "Si";

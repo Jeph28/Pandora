@@ -31,7 +31,10 @@
 		{
 			for (int i = 1; i <= GameManager.Batch; i++)
 			{
-				Table.DataSource.Add(new SimpleTableItem() { Field1 = i.ToString(), Field2 = GameManager.batchSizeList[i-1].ToString(), Field3 = GameManager.pastaHumidityList[i-1].ToString("F2") + " " + MoreLess + " " + GameManager.StdDevHumidity.ToString("F2"), Field4 = GameManager.pastaColorList[i-1], Field5 = GameManager.pastaCrakingList[i-1], Field6 = GameManager.pastaMicroorganismsList[i-1], Field7 = GameManager.pastaWeightList[i-1].ToString("F2") + " " + MoreLess + " " + GameManager.pastaStdDevWeightList[i-1].ToString("F2") , Field8 = GameManager.resultTable[i-1]});
+				if (GameManager.batchSizeList[i-1] >= 1)
+				{
+					Table.DataSource.Add(new SimpleTableItem() { Field1 = i.ToString(), Field2 = GameManager.batchSizeList[i-1].ToString(), Field3 = GameManager.pastaHumidityList[i-1].ToString("F2") + " " + MoreLess + " " + GameManager.StdDevHumidity.ToString("F2"), Field4 = GameManager.pastaColorList[i-1], Field5 = GameManager.pastaCrakingList[i-1], Field6 = GameManager.pastaMicroorganismsList[i-1], Field7 = GameManager.pastaWeightList[i-1].ToString("F2") + " " + MoreLess + " " + GameManager.pastaStdDevWeightList[i-1].ToString("F4") , Field8 = GameManager.resultTable[i-1]});
+				}
 			}
 		}
 
