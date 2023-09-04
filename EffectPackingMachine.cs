@@ -58,7 +58,6 @@ public class EffectPackingMachine : MonoBehaviour
     {
         GameManager.NeedsMaintenancePacking = false;
         GameManager.CountDownActivatePacking = false;
-        GameManager.CountDownMaintenanceTimePacking = 150;
         MessageState2Packing.text = "La Máquina Empaquetadora esta presentando fallas";
         yield return new WaitForSeconds(10.0f);
         Explosion.SetActive(true);
@@ -93,7 +92,7 @@ public class EffectPackingMachine : MonoBehaviour
         GameManager.MessagePacking = 1;
         textPackingMachine.text = "Presiona [Y] para configurar";
         GameManager.NeedsMaintenancePacking = false;
-        GameManager.CountDownMaintenanceTimePacking = 150;
+        GameManager.CountDownMaintenanceTimePacking = 240;
     }
 
     private float GenerateTimeBetweenFailure()
