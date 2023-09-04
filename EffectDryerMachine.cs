@@ -58,7 +58,6 @@ public class EffectDryerMachine : MonoBehaviour
     {
         GameManager.NeedsMaintenanceDryer = false;
         GameManager.CountDownActivateDryer = false;
-        GameManager.CountDownMaintenanceTimeDryer = 150;
         MessageState2Dryer.text = "\n" + "\n" + "La Máquina Secadora esta presentando fallas";
         yield return new WaitForSeconds(10.0f);
         Explosion.SetActive(true);
