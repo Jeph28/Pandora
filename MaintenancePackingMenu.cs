@@ -33,7 +33,7 @@ public class MaintenancePackingMenu : MonoBehaviour
         GameManager.MessagePacking = 1;
         textPackingMachine.text = "Presiona [Y] para configurar";
         GameManager.NeedsMaintenancePacking = false;
-        GameManager.CountDownMaintenanceTimePacking = 50;
+        GameManager.CountDownMaintenanceTimePacking = 240;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
