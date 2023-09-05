@@ -116,7 +116,7 @@ public class Switch1 : MonoBehaviour
                 if (GameManager.Batch == 0)
                 {
                     FailureDryer.SetActive(true);
-                    panelControl.MessageState2Packing.text = "Ahora ve a la Empaquetadora configurarla y enciéndela";                            
+                    panelControl.MessageState2Packing.text = "Ahora ve a la Empaquetadora configúrala y enciéndela";                            
                     GameManager.InitialDryer = true;
                     DryerMachine.Instance.Humidity();
                     DryerMachine.Instance.Color();

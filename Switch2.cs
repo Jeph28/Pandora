@@ -112,7 +112,7 @@ public class Switch2 : MonoBehaviour
                 if (GameManager.Batch == 0)
                 {
                     FailurePacking.SetActive(true);
-                    panelControl.MessageState2Dryer.text = "\n" + "\n" + "Ahora ve a la Secadora configurarla y enciéndela";
+                    panelControl.MessageState2Dryer.text = "\n" + "\n" + "Ahora ve a la Secadora configúrala y enciéndela";
                     GameManager.InitialPacking = true; 
                     PackingMachine.Instance.SpeedPrice();
                     PackingMachine.Instance.Weight();
