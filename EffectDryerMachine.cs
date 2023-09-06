@@ -25,7 +25,6 @@ public class EffectDryerMachine : MonoBehaviour
     void Start()
     {
         timeBetweenFailure = GenerateTimeBetweenFailure();
-        // timeBetweenFailure = 1f;
     }
 
     // Update is called once per frame
@@ -78,7 +77,7 @@ public class EffectDryerMachine : MonoBehaviour
         GameManager.CountDownActivateDryer = true;
         GameManager.FailureDryer = false;
         timeSinceLastFailure = 0f;
-        GameManager.ScaleFailureDryer = 1000000f;
+        GameManager.ScaleFailureDryer = 0.12f;
         GameManager.failureEffectDryerRestart = true;
         Restart();
         dryerMachine.MethodFailureEffectDryer();
@@ -101,7 +100,7 @@ public class EffectDryerMachine : MonoBehaviour
         // return -Mathf.Log(1f - Random.Range(0.3f, 0.5f)) / GameManager.failureRateExpDryer;
 
         //Weibull distribution
-        return Mathf.Pow(- Mathf.Clamp(GameManager.ScaleFailureDryer, 100000f, 5000000f)  * (Mathf.Log(1f - Random.Range(0.1f, 0.9f))), 1f / 7f);
+        return (1 / Mathf.Clamp(GameManager.ScaleFailureDryer, 0.04f, 0.2f)) * Mathf.Pow(-Mathf.Log(1f - Random.Range(0.1f, 0.9f)),1f / 5f);
     }
 
     // private float GenerateFailureProbability()

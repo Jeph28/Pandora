@@ -17,7 +17,7 @@ public class MaintenanceDryerMenu : MonoBehaviour
         GameManager.MaintenanceDryer = true;
         GameManager.MaintenanceDryerMenu = false;
         GameManager.CountDownMaintenanceDryer = true;
-        GameManager.ScaleFailureDryer += 250000f;
+        GameManager.ScaleFailureDryer -= 0.01f;
         GameManager.Money -= GameManager.MaintenanceCostDryer;
         money.ChangeMoneyValue();
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,7 +30,7 @@ public class MaintenanceDryerMenu : MonoBehaviour
         MaintenanceDryer.SetActive(false);
         GameManager.MaintenanceDryer = false;
         GameManager.MaintenanceDryerMenu = false;
-        GameManager.ScaleFailureDryer -= 500000f;
+        GameManager.ScaleFailureDryer += 0.02f;
         GameManager.MessageDryer = 1;
         textDryerMachine.text = "Presiona [Y] para configurar";
         GameManager.NeedsMaintenanceDryer = false;

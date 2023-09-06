@@ -105,8 +105,8 @@ public static class GameManager
     public static float StdDevWeight;
     public static int UnpackPastaScore = 0;
     public static bool RawMaterialMenu = false;
-    public static float ScaleFailureDryer = 2000000f;
-    public static float ScaleFailurePacking = 12000000f;
+    public static float ScaleFailureDryer = 0.1f;
+    public static float ScaleFailurePacking = 0.08f;
     public static string currentControl;
     public static bool InitialDryer = false;
     public static bool InitialPacking = false;

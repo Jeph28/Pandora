@@ -24,7 +24,6 @@ public class EffectPackingMachine : MonoBehaviour
     void Start()
     {
         timeBetweenFailure = GenerateTimeBetweenFailure();
-        // timeBetweenFailure = 1f;
     }
 
     // Update is called once per frame
@@ -78,7 +77,7 @@ public class EffectPackingMachine : MonoBehaviour
         GameManager.CountDownActivatePacking = true;
         GameManager.FailurePacking = false;
         timeSinceLastFailure = 0f;
-        GameManager.ScaleFailurePacking = 6000000f;
+        GameManager.ScaleFailurePacking = 0.10f;
         Restart();
         GameManager.failureEffectPackingRestart = true;
         packingMachine.MethodFailureEffectPacking();
@@ -97,7 +96,7 @@ public class EffectPackingMachine : MonoBehaviour
 
     private float GenerateTimeBetweenFailure()
     {
-        return Mathf.Pow(- Mathf.Clamp(GameManager.ScaleFailurePacking, 1000000f, 10000000f) * (Mathf.Log(1f - Random.Range(0.1f, 0.9f))), 1f / 7f);
+        return (1 / Mathf.Clamp(GameManager.ScaleFailureDryer, 0.04f, 0.2f)) * Mathf.Pow(-Mathf.Log(1f - Random.Range(0.1f, 0.9f)), 1f / 5f);
     }
 
     //  private bool GenerateFailureProbability()

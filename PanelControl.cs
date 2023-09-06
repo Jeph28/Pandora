@@ -81,7 +81,7 @@ public class PanelControl : MonoBehaviour
             GameManager.MaintenanceDryer = false;
             GameManager.MessageDryer = 1;
             GameManager.NeedsMaintenanceDryer = false;
-            GameManager.ScaleFailureDryer -= 500000f;
+            GameManager.ScaleFailureDryer += 0.02f;
             textDryerMachine.text = "Presiona [Y] para configurar";
             GameManager.CountDownMaintenanceTimeDryer = GameManager.timeBetweenMaintenanceDryer;
             GameManager.MaintenanceCounterDryer ++;
@@ -112,7 +112,7 @@ public class PanelControl : MonoBehaviour
             GameManager.MaintenancePacking = false;
             GameManager.MessagePacking = 1;
             GameManager.NeedsMaintenancePacking = false;
-            GameManager.ScaleFailurePacking -= 1000000f;
+            GameManager.ScaleFailurePacking += 0.02f;
             textPackingMachine.text = "Presiona [Y] para configurar";
             GameManager.CountDownMaintenanceTimePacking = GameManager.timeBetweenMaintenancePacking;
         }

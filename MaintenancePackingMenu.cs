@@ -16,7 +16,7 @@ public class MaintenancePackingMenu : MonoBehaviour
         GameManager.MaintenancePacking = true;
         GameManager.MaintenancePackingMenu = false;
         GameManager.CountDownMaintenancePacking = true;
-        GameManager.ScaleFailurePacking += 50000f;
+        GameManager.ScaleFailurePacking -= 0.01f;
         GameManager.Money -= GameManager.MaintenanceCostPacking;
         money.ChangeMoneyValue();
         Cursor.lockState = CursorLockMode.Locked;
@@ -29,7 +29,7 @@ public class MaintenancePackingMenu : MonoBehaviour
         MaintenancePacking.SetActive(false);
         GameManager.MaintenancePacking = false;
         GameManager.MaintenancePackingMenu = false;
-        GameManager.ScaleFailurePacking -= 1000000f;
+        GameManager.ScaleFailurePacking += 0.02f;
         GameManager.MessagePacking = 1;
         textPackingMachine.text = "Presiona [Y] para configurar";
         GameManager.NeedsMaintenancePacking = false;
